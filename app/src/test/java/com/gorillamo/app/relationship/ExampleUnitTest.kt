@@ -1,4 +1,4 @@
-package com.gorillamo.tester
+package com.gorillamo.app.relationship
 
 import org.junit.Test
 

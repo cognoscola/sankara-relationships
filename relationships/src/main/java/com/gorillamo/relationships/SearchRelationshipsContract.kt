@@ -1,5 +1,7 @@
 package com.gorillamo.relationships
 
+import com.gorillamo.relationships.model.Relationship
+
 interface SearchRelationshipsContract {
 
     /**
@@ -11,6 +13,16 @@ interface SearchRelationshipsContract {
          * Display the following relationships
          */
         fun displayRelationships(relationships:List<Relationship>)
+
+        /**
+         * Display no relationships
+         */
+        fun displayNoRelationships()
+
+        /**
+         * Display error
+         */
+        fun displayError()
 
     }
 
