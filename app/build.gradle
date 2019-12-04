@@ -32,6 +32,11 @@ android {
             enableSplit = true
         }
     }
+
+
+    dynamicFeatures = [":RelationshipList"]
+
+
 }
 
 
@@ -69,4 +74,5 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         force "androidx.test:monitor:1.1.0"
-    }}
+    }
+}
