@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".RelationshipListActivity"
+            android:name=".ItemListActivity"
             android:label="@string/title_relationship_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,22 +25,11 @@
         <activity
             android:name=".RelationshipDetailActivity"
             android:label="@string/title_relationship_detail"
-            android:parentActivityName=".RelationshipListActivity"
+            android:parentActivityName=".ItemListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.gorillamo.app.relationship.RelationshipListActivity" />
-        </activity>
-        <activity
-            android:name="com.gorillamo.com.gorillamoa.relationships.tester.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                android:value="com.gorillamo.app.relationship.ItemListActivity" />
         </activity>
     </application>
-
 </manifest>

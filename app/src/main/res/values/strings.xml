@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Relationships</string>
     <string name="action_settings">Settings</string>
-    <string name="title_relationship_list">Relationships</string>
+    <string name="title_relationship_list">Instant Relationship</string>
+        <string name="title_relationship_instant">Instant Relationship</string>
     <string name="title_relationship_detail">Relationship Detail</string>
     <string name="title_relationshiplist">Relationships Reminder</string>
 </resources>

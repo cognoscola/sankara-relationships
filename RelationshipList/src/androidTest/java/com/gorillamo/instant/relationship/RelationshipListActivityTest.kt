@@ -1,4 +1,4 @@
-package com.gorillamo.app.relationship
+package com.gorillamo.instant.relationship
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -23,9 +23,10 @@ import org.junit.Rule
 class RelationshipListActivityTest {
 
 
+
     @get:Rule
     val mActivityRule = InjectedBaseActivityTest(
-        ItemListActivity::class.java,
+        RelationshipListActivity::class.java,
         initialTouchMode = true,
         launchActivity = false
     )

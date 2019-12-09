@@ -1,7 +1,5 @@
 package com.gorillamo.relationships
 
-import com.gorillamo.relationships.model.Relationship
-
 interface SearchRelationshipsContract {
 
     /**

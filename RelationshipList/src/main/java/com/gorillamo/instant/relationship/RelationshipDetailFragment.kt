@@ -1,17 +1,17 @@
-package com.gorillamo.app.relationship
+package com.gorillamo.instant.relationship
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gorillamo.app.relationship.dummy.DummyContent
+import com.gorillamo.instant.relationship.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_relationship_detail.*
 import kotlinx.android.synthetic.main.relationship_detail.view.*
 
 /**
  * A fragment representing a single Relationship detail screen.
- * This fragment is either contained in a [ItemListActivity]
+ * This fragment is either contained in a [RelationshipListActivity]
  * in two-pane mode (on tablets) or a [RelationshipDetailActivity]
  * on handsets.
  */

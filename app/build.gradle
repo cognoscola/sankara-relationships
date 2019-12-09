@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -20,6 +21,11 @@ android {
         }
     }
 
+    // FOR ROOM TO WORK
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+
 
     bundle {
         language {
@@ -36,8 +42,9 @@ android {
 
     dynamicFeatures = [":RelationshipList"]
 
-
 }
+
+
 
 
 dependencies {
@@ -47,14 +54,26 @@ dependencies {
     def applicationDependencies = rootProject.ext.mainApplication
     def compilerDependencies = rootProject.ext.compilers
 
+    api applicationDependencies.material
+    api applicationDependencies.legacy
+    api applicationDependencies.kotlin
+    api applicationDependencies.recycler
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation applicationDependencies.kotlin
+
     implementation applicationDependencies.appCompat
     implementation applicationDependencies.coreKtx
     implementation applicationDependencies.constrainstLayout
-    implementation applicationDependencies.material
-    implementation applicationDependencies.legacy
-    implementation applicationDependencies.recycler
+    implementation applicationDependencies.lifecycleExtensions
+    //Remember that we added these here because for some reason they don't work from the other module
+    //even though thats where our classes reside
+//    implementation applicationDependencies.room
+//    implementation applicationDependencies.roomRuntime
+
+    implementation applicationDependencies.room
+    implementation applicationDependencies.roomRuntime
+    kapt applicationDependencies.roomCompiler
+
 
 
     testImplementation unitTestDependencies.junit
@@ -69,6 +88,8 @@ dependencies {
     androidTestImplementation acceptanceTestDependencies.espressoCore
     androidTestImplementation acceptanceTestDependencies.espressoContrib
     debugImplementation acceptanceTestDependencies.androidMockito
+    implementation project(path: ':relationships')
+
 }
 
 configurations.all {

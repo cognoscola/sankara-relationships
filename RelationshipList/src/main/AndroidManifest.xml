@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.gorillamo.instant.relationship">
@@ -8,7 +9,42 @@
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>
+
         <dist:fusing dist:include="false" />
     </dist:module>
-</manifest>
 
+    <application>
+        <activity
+            android:name=".RelationshipListActivity"
+            android:label="@string/title_relationship_instant"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="relationship.instant.gorillamo.com"
+                    android:pathPattern="/catalog" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".RelationshipDetailActivity"
+            android:label="@string/title_relationship_detail"
+            android:parentActivityName=".RelationshipListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gorillamo.instant.relationship.RelationshipListActivity" />
+        </activity>
+    </application>
+
+</manifest>

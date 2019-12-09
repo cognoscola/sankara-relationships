@@ -1,4 +1,4 @@
-package com.gorillamo.relationships.model
+package com.gorillamo.relationships
 
 data class Relationship(
 

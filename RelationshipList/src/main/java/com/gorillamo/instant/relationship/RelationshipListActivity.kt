@@ -1,7 +1,8 @@
-package com.gorillamo.app.relationship
+package com.gorillamo.instant.relationship
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -10,8 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-import com.gorillamo.app.relationship.dummy.DummyContent
-import com.gorillamo.app.relationship.R
+import com.gorillamo.instant.relationship.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_relationship_list.*
 import kotlinx.android.synthetic.main.relationship_list_content.view.*
 import kotlinx.android.synthetic.main.relationship_list.*
@@ -31,6 +31,10 @@ class RelationshipListActivity : AppCompatActivity() {
      * device.
      */
     private var twoPane: Boolean = false
+
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,8 +114,8 @@ class RelationshipListActivity : AppCompatActivity() {
         override fun getItemCount() = values.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.nameTextView
-            val contentView: TextView = view.lastContactTextView
+            val idView: TextView = view.id_text
+            val contentView: TextView = view.content
         }
     }
 }

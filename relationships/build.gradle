@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+//need this Kapt for annotation processor required by room
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -25,6 +27,8 @@ android {
 
 }
 
+
+
 dependencies {
     def applicationDependencies = rootProject.ext.mainApplication
     def unitTestDependencies = rootProject.ext.unitTesting
@@ -33,7 +37,21 @@ dependencies {
     implementation applicationDependencies.kotlin
     implementation applicationDependencies.coreKtx
 
+    implementation applicationDependencies.liveData
+    implementation applicationDependencies.lifecycleExtensions
+    implementation applicationDependencies.lifecycleViewModel
+
+    implementation applicationDependencies.room
+    implementation applicationDependencies.roomRuntime
+    kapt applicationDependencies.roomCompiler
+//    annotationProcessor applicationDependencies.roomCompiler
+
+
     testImplementation unitTestDependencies.junit
     testImplementation unitTestDependencies.mockito
+    testImplementation unitTestDependencies.coreTesting
+    testImplementation unitTestDependencies.roomTesting
+
+
 
 }
