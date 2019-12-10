@@ -1,2 +1,2 @@
-include ':app', ':relationships', ':RelationshipList'
+include ':app', ':relationshiprepo'
 rootProject.name='Relationships'

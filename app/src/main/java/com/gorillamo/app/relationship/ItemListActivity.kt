@@ -12,13 +12,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
 
 import com.gorillamo.app.relationship.dummy.DummyContent
-import com.gorillamo.relationships.entity.RelationshipDatabaseObject
-import com.gorillamo.relationships.entity.RelationshipViewModel
+import com.gorillamo.repository.entity.RelationshipDatabaseObject
+import com.gorillamo.repository.entity.RelationshipViewModel
 import kotlinx.android.synthetic.main.activity_relationship_list.*
 import kotlinx.android.synthetic.main.relationship_list_content.view.*
 import kotlinx.android.synthetic.main.relationship_list.*
@@ -46,30 +45,28 @@ class ItemListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_relationship_list)
 
-
         relationshipViewModel = ViewModelProviders.of(this@ItemListActivity).get(RelationshipViewModel::class.java)
-        relationshipViewModel.loadTasks().observe(this, Observer {
+        relationshipViewModel.loadAllRelationships().observe(this, Observer {
             (relationship_list.adapter as SimpleItemRecyclerViewAdapter).replaceItems(it)
         })
-
-/*
-        for(i in 0..10){
-          relationshipViewModel.insert(
-              RelationshipDatabaseObject(
-                  name = "Name $i",
-                  timeLastContacted =  System.currentTimeMillis()
-              )
-          )
-        }
-*/
-
 
         setSupportActionBar(toolbar)
         toolbar.title = title
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Add 10 to DB", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+
+            //for now just insert all that shit in here
+
+            for(i in 0..10){
+                relationshipViewModel.insert(
+                    RelationshipDatabaseObject(
+                        name = "Name $i",
+                        timeLastContacted =  System.currentTimeMillis()
+                    )
+                )
+            }
         }
 
         if (relationship_detail_container != null) {

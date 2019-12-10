@@ -25,23 +25,6 @@ android {
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
-
-
-    bundle {
-        language {
-            enableSplit = true
-        }
-        density {
-            enableSplit = true
-        }
-        abi {
-            enableSplit = true
-        }
-    }
-
-
-    dynamicFeatures = [":RelationshipList"]
-
 }
 
 
@@ -88,7 +71,7 @@ dependencies {
     androidTestImplementation acceptanceTestDependencies.espressoCore
     androidTestImplementation acceptanceTestDependencies.espressoContrib
     debugImplementation acceptanceTestDependencies.androidMockito
-    implementation project(path: ':relationships')
+    implementation project(path: ':relationshiprepo')
 
 }
 
