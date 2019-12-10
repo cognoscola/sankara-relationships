@@ -1,0 +1,9 @@
+apply from: "$rootDir/buildsystem/template-android-library.gradle"
+
+dependencies {
+    def applicationDependencies = rootProject.ext.mainApplication
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation applicationDependencies.appCompat
+
+
+}

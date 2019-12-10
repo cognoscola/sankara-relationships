@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/abstraction" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/persistence" />
           </set>
         </option>

@@ -28,8 +28,6 @@ android {
 }
 
 
-
-
 dependencies {
 
     def unitTestDependencies = rootProject.ext.unitTesting
@@ -66,6 +64,9 @@ dependencies {
     androidTestImplementation acceptanceTestDependencies.espressoContrib
     debugImplementation acceptanceTestDependencies.androidMockito
     implementation project(path: ':persistence')
+    implementation project(path:':domain')
+    implementation project(path:':navigation')
+
 
 }
 
