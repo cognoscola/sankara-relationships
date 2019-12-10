@@ -6,8 +6,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.gorillamo.app.relationship.InjectedBaseActivityTest
-import com.gorillamo.app.relationship.R
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,11 +22,12 @@ class RelationshipListActivityTest {
 
 
     @get:Rule
-    val mActivityRule = InjectedBaseActivityTest(
-        ItemListActivity::class.java,
-        initialTouchMode = true,
-        launchActivity = false
-    )
+    val mActivityRule =
+        com.gorillamo.relationship.catalog.InjectedBaseActivityTest(
+            com.gorillamo.relationship.catalog.ItemListActivity::class.java,
+            initialTouchMode = true,
+            launchActivity = false
+        )
 
 
     /**

@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ItemListActivity"
+            android:name="com.gorillamo.relationship.catalog.ItemListActivity"
             android:label="@string/title_relationship_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -31,13 +31,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RelationshipDetailActivity"
+            android:name="com.gorillamo.relationship.catalog.RelationshipDetailActivity"
             android:label="@string/title_relationship_detail"
-            android:parentActivityName=".ItemListActivity"
+            android:parentActivityName="com.gorillamo.relationship.catalog.ItemListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.gorillamo.app.relationship.ItemListActivity" />
+                android:value="com.gorillamo.app.relationship.com.gorillamo.relationship.catalog.ItemListActivity" />
         </activity>
     </application>
 

@@ -1,0 +1,13 @@
+apply from: "$rootDir/buildsystem/template-dynamic-feature.gradle"
+
+
+dependencies {
+
+    def unitTestDependencies = rootProject.ext.unitTesting
+    def applicationDependencies = rootProject.ext.mainApplication
+
+    api applicationDependencies.material
+    api applicationDependencies.legacy
+    api applicationDependencies.recycler
+    implementation applicationDependencies.lifecycleExtensions
+}

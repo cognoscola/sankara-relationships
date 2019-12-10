@@ -25,47 +25,43 @@ android {
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
+
+    // Instead, use the bundle block to control which types of configuration APKs
+    // you want your app bundle to support.
+    bundle {
+        language {
+            // Specifies that the app bundle should not support
+            // configuration APKs for language resources. These
+            // resources are instead packaged with each base and
+            // dynamic feature APK.
+            enableSplit = false
+        }
+        density {
+            // This property is set to true by default.
+            enableSplit = true
+        }
+        abi {
+            // This property is set to true by default.
+            enableSplit = true
+        }
+    }
+
+    dynamicFeatures = [":ui_catalog"]
 }
 
 
 dependencies {
 
-    def unitTestDependencies = rootProject.ext.unitTesting
-    def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
     def applicationDependencies = rootProject.ext.mainApplication
-    def compilerDependencies = rootProject.ext.compilers
 
-    api applicationDependencies.material
-    api applicationDependencies.legacy
-    api applicationDependencies.kotlin
-    api applicationDependencies.recycler
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation applicationDependencies.appCompat
-    implementation applicationDependencies.coreKtx
-    implementation applicationDependencies.constrainstLayout
-    implementation applicationDependencies.lifecycleExtensions
-    implementation applicationDependencies.room
-    implementation applicationDependencies.roomRuntime
-    kapt applicationDependencies.roomCompiler
 
-
-    testImplementation unitTestDependencies.junit
-    testImplementation unitTestDependencies.mockito
-    testImplementation unitTestDependencies.mockitoBinding
-
-    //Acceptance Testing
-    debugImplementation acceptanceTestDependencies.rules
-
-    androidTestImplementation acceptanceTestDependencies.rules
-    androidTestImplementation acceptanceTestDependencies.androidJUnit
-    androidTestImplementation acceptanceTestDependencies.espressoCore
-    androidTestImplementation acceptanceTestDependencies.espressoContrib
-    debugImplementation acceptanceTestDependencies.androidMockito
     implementation project(path: ':persistence')
-    implementation project(path:':domain')
-    implementation project(path:':navigation')
+    implementation project(path: ':domain')
+    implementation project(path: ':navigation')
 
 
 }

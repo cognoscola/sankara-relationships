@@ -1,2 +1,2 @@
-include ':app', ':persistence', ':domain', ':abstraction', ':navigation'
+include ':app', ':persistence', ':domain', ':abstraction', ':navigation', ':shared', ':ui_catalog'
 rootProject.name='Relationships'

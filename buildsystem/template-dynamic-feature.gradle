@@ -1,0 +1,51 @@
+apply plugin: 'com.android.dynamic-feature'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 29
+    }
+}
+
+dependencies {
+
+    def applicationDependencies = rootProject.ext.mainApplication
+    def unitTestDependencies = rootProject.ext.unitTesting
+    def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':app')
+    implementation project(':abstraction')
+    implementation project(':shared')
+
+    implementation applicationDependencies.appCompat
+    implementation applicationDependencies.coreKtx
+    //TODO rename the constrainst to constraint!
+    implementation applicationDependencies.constrainstLayout
+    implementation applicationDependencies.kotlin
+
+
+//    implementation Libraries.koinXcore
+//    implementation Libraries.koinXscope
+//    implementation Libraries.koinXviewModel
+
+//    implementation Libraries.coroutines
+//    implementation Libraries.coroutinesAndroid
+
+    testImplementation unitTestDependencies.junit
+//    testImplementation Libraries.koinTest
+
+    debugImplementation acceptanceTestDependencies.rules
+    debugImplementation acceptanceTestDependencies.androidMockito
+
+    androidTestImplementation acceptanceTestDependencies.rules
+    androidTestImplementation acceptanceTestDependencies.androidJUnit
+    androidTestImplementation acceptanceTestDependencies.espressoCore
+    androidTestImplementation acceptanceTestDependencies.espressoContrib
+}

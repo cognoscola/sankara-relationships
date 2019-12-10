@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/persistence" />
+            <option value="$PROJECT_DIR$/shared" />
+            <option value="$PROJECT_DIR$/ui_catalog" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
