@@ -1,34 +1,18 @@
 apply from: "$rootDir/buildsystem/template-android-library.gradle"
 
-/*
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
-
-
-    defaultConfig {
-        minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-}
-*/
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //In Hexagonal Architecture,
+    //We need to include an external module that will serve as
+    //an abstraction layer. It will contain our Ports and DTOs. Which will
+    //be accessible to other modules through here. Domain will implement the Adaptors to the ports
+    //of the other modules, which those other ports will inherit
+
+    //make sure we include abstraction layer
+    api project(":abstraction")
+
+    def applicationDependencies = rootProject.ext.mainApplication
+    implementation applicationDependencies.liveData
+
 }
