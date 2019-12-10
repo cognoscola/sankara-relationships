@@ -48,15 +48,9 @@ dependencies {
     implementation applicationDependencies.coreKtx
     implementation applicationDependencies.constrainstLayout
     implementation applicationDependencies.lifecycleExtensions
-    //Remember that we added these here because for some reason they don't work from the other module
-    //even though thats where our classes reside
-//    implementation applicationDependencies.room
-//    implementation applicationDependencies.roomRuntime
-
     implementation applicationDependencies.room
     implementation applicationDependencies.roomRuntime
     kapt applicationDependencies.roomCompiler
-
 
 
     testImplementation unitTestDependencies.junit
@@ -71,7 +65,7 @@ dependencies {
     androidTestImplementation acceptanceTestDependencies.espressoCore
     androidTestImplementation acceptanceTestDependencies.espressoContrib
     debugImplementation acceptanceTestDependencies.androidMockito
-    implementation project(path: ':relationshiprepo')
+    implementation project(path: ':persistence')
 
 }
 
