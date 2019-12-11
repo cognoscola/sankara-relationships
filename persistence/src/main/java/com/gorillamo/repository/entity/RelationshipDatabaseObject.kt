@@ -2,12 +2,13 @@ package com.gorillamo.repository.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.gorillamo.relationship.abstraction.dto.Relationship
 
 @Entity(tableName = "RelationshipsTable")
-data class RelationshipDatabaseObject(
+data class  RelationshipDatabaseObject(
 
     @PrimaryKey(autoGenerate = true)
     var id:Int? = null,
-    val name: String = "",
-    val timeLastContacted:Long = 0L
-)
+    override val name: String = "",
+    override val timeLastContacted:Long = 0L
+):Relationship

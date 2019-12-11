@@ -27,6 +27,8 @@ ext {
     gson_version ="2.8.6"
     room_version ="2.2.1"
 
+    koin_version = "2.0.1"
+
     //Unit testing
     junit_version ="4.12"
     mockito_version = "2.8.9"
@@ -43,6 +45,9 @@ ext {
     //compiler
     allopen_version = "1.0.1"
 
+
+
+
     mainApplication = [
 
             kotlin:             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -52,8 +57,17 @@ ext {
             recycler:           "androidx.recyclerview:recyclerview:$recycler_version",
             material:           "com.google.android.material:material:$material_version",
             picasso:            "com.squareup.picasso:picasso:$picasso_version",
+
+            //Injection Options
             dagger:             "com.google.dagger:dagger:$dagger_version",
             daggerCompiler:     "com.google.dagger:dagger-compiler:$dagger_version",
+
+            koinCore:           "org.koin:koin-core:$koin_version",
+            koinScope:           "org.koin:koin-androidx-scope:$koin_version",
+            koinViewModel:       "org.koin:koin-androidx-viewmodel:$koin_version",
+
+
+
             constrainstLayout:  "androidx.constraintlayout:constraintlayout:$constraints_version",
             okhttp:             "com.squareup.okhttp:okhttp:$okhttp_version",
             converterGson:      "com.squareup.retrofit2:converter-gson:$retrofit_version",
@@ -89,7 +103,9 @@ ext {
             coroutinesTest:     "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
             mockwebserver:      "com.squareup.okhttp3:mockwebserver:$server_version",
             coreTesting:         "androidx.arch.core:core-testing:$coreTesting_version",
-            roomTesting:        "androidx.room:room-testing:$room_version"
+            roomTesting:        "androidx.room:room-testing:$room_version",
+            koinTest:            "org.koin:koin-test:$koin_version"
+
     ]
 
     compilers = [

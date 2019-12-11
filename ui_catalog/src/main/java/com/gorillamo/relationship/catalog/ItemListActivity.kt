@@ -3,6 +3,7 @@ package com.gorillamo.relationship.catalog
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -12,14 +13,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.gorillamo.relationship.abstraction.dto.Relationship
 
 import com.gorillamo.relationship.catalog.dummy.DummyContent
 import com.gorillamo.relationship.shared.EntryActivity
 import kotlinx.android.synthetic.main.activity_relationship_list.*
 import kotlinx.android.synthetic.main.relationship_list.*
-//import com.gorillamo.repository.entity.RelationshipDatabaseObject
-//import com.gorillamo.repository.entity.RelationshipViewModel
 import kotlinx.android.synthetic.main.relationship_list_content.view.*
+import org.koin.android.ext.android.inject
 
 /**
  * An activity representing a list of Pings. This activity
@@ -30,6 +31,8 @@ import kotlinx.android.synthetic.main.relationship_list_content.view.*
  * item details side-by-side using two vertical panes.
  */
 class ItemListActivity : EntryActivity() {
+@Suppress("unused")
+private val tag:String = ItemListActivity::class.java.name
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -39,8 +42,11 @@ class ItemListActivity : EntryActivity() {
 
 //    private lateinit var relationshipViewModel: RelationshipViewModel
 
+    private val relationshipViewModel: RelationshipViewModel by inject()
+
     override fun loadModules() {
 
+        CatalogueModule.load()
         //TODO override thise
     }
 
@@ -50,13 +56,26 @@ class ItemListActivity : EntryActivity() {
 
 /*
         relationshipViewModel = ViewModelProviders.of(this@ItemListActivity).get(RelationshipViewModel::class.java)
-        relationshipViewModel.loadAllRelationships().observe(this, Observer {
-            (relationship_list.adapter as SimpleItemRecyclerViewAdapter).replaceItems(it)
-        })
 */
+
+        Log.d("$tag onCreate","Now Observing")
+
 
         setSupportActionBar(toolbar)
         toolbar.title = title
+
+        show.setOnClickListener{view ->
+            relationshipViewModel.loadAllRelationships()?.observe(this, Observer {
+                Log.d("$tag onCreate","Observing Change")
+                it?.let {
+                    (relationship_list.adapter as SimpleItemRecyclerViewAdapter).replaceItems(it)
+                }?:run{
+
+                    Log.d("$tag onCreate","List appears null")
+                }
+            })
+
+        }
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Add 10 to DB", Snackbar.LENGTH_LONG)
@@ -64,16 +83,16 @@ class ItemListActivity : EntryActivity() {
 
             //for now just insert all that shit in here
 
-/*
-            for(i in 0..10){
+
+//            for(i in 0..10){
                 relationshipViewModel.insert(
-                    RelationshipDatabaseObject(
-                        name = "Name $i",
-                        timeLastContacted =  System.currentTimeMillis()
+
+                    ViewHolderValue(
+                        "Name 0",
+                        System.currentTimeMillis()
                     )
                 )
-            }
-*/
+//            }
         }
 
         if (relationship_detail_container != null) {
@@ -84,23 +103,21 @@ class ItemListActivity : EntryActivity() {
             twoPane = true
         }
 
-//        setupRecyclerView(relationship_list)
+        setupRecyclerView(relationship_list)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-/*
         recyclerView.adapter =
             SimpleItemRecyclerViewAdapter(
                 this,
                 java.util.ArrayList(),
                 twoPane
             )
-*/
     }
 
     class SimpleItemRecyclerViewAdapter(
         private val parentActivity: ItemListActivity,
-//        private val values: ArrayList<RelationshipDatabaseObject>,
+        private val values: ArrayList<Relationship>,
         private val twoPane: Boolean
     ) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
@@ -137,28 +154,33 @@ class ItemListActivity : EntryActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            /*val item = values[position]
+            val item = values[position]
             holder.idView.text = item.name
             holder.contentView.text = "${item.timeLastContacted}"
 
             with(holder.itemView) {
                 tag = item
                 setOnClickListener(onClickListener)
-            }*/
+            }
         }
 
-     /*   fun replaceItems(inList:List<RelationshipDatabaseObject>){
+       fun replaceItems(inList:List<Relationship>){
             this.values.clear()
             inList.forEach { this.values.add(it) }
             notifyDataSetChanged()
         }
-*/
-        override fun getItemCount() = 0
-//        override fun getItemCount() = values.size
+
+//        override fun getItemCount() = 0
+        override fun getItemCount() = values.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val idView: TextView = view.nameTextView
             val contentView: TextView = view.lastContactTextView
         }
     }
+
+    data class ViewHolderValue(
+        override val name: String?,
+        override val timeLastContacted: Long?
+    ):Relationship
 }

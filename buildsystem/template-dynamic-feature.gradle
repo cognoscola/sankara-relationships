@@ -26,20 +26,21 @@ dependencies {
 
     implementation applicationDependencies.appCompat
     implementation applicationDependencies.coreKtx
+
     //TODO rename the constrainst to constraint!
     implementation applicationDependencies.constrainstLayout
     implementation applicationDependencies.kotlin
 
+    implementation applicationDependencies.koinCore
+    implementation applicationDependencies.koinScope
+    implementation applicationDependencies.koinViewModel
 
-//    implementation Libraries.koinXcore
-//    implementation Libraries.koinXscope
-//    implementation Libraries.koinXviewModel
 
-//    implementation Libraries.coroutines
-//    implementation Libraries.coroutinesAndroid
+    implementation applicationDependencies.coroutines
+    implementation applicationDependencies.coroutinesCore
 
+    testImplementation unitTestDependencies.koinTest
     testImplementation unitTestDependencies.junit
-//    testImplementation Libraries.koinTest
 
     debugImplementation acceptanceTestDependencies.rules
     debugImplementation acceptanceTestDependencies.androidMockito

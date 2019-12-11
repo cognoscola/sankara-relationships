@@ -10,4 +10,6 @@ interface RelationshipRepository {
 
     fun getRelationshipsLive(): LiveData<out List<Relationship>?>
 
+    suspend fun insertOrUpdateRelationship(relationship: Relationship)
+
 }

@@ -9,11 +9,11 @@ import com.gorillamo.repository.entity.RelationshipDatabaseObject
  * The implementation of the repository class. Its job is to provide a "single source of truth"
  * to the app. It will try and fetch info from the data source now.
  */
-class RelationshipRepositoryImpl constructor(val dao: RelationshipDao):
-    RelationshipRepository {
+class RelationshipRepositoryImpl constructor(val dao: RelationshipDao)
+     {
 
 
-    @WorkerThread
+    /*@WorkerThread
     override fun getAllRelationships(): List<RelationshipDatabaseObject> {
 
         return dao.getAllRelationship()
@@ -26,19 +26,19 @@ class RelationshipRepositoryImpl constructor(val dao: RelationshipDao):
     @WorkerThread
     override fun insert(relationship: RelationshipDatabaseObject) {
         dao.insertTask(relationship)
-    }
+    }*/
 
 
     companion object{
 
         private var INSTANCE: RelationshipRepositoryImpl? = null
 
-        fun getInstance(dao: RelationshipDao): RelationshipRepository {
+       /* fun getInstance(dao: RelationshipDao): RelationshipRepository {
             return INSTANCE
                 ?: RelationshipRepositoryImpl(
                     dao
                 )
-        }
+        }*/
     }
 
 }

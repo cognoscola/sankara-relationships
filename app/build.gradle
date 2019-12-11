@@ -63,6 +63,9 @@ dependencies {
     implementation project(path: ':domain')
     implementation project(path: ':navigation')
 
+    implementation applicationDependencies.koinCore
+    implementation applicationDependencies.koinScope
+    implementation applicationDependencies.koinViewModel
 
 }
 

@@ -1,6 +1,5 @@
 apply from: "$rootDir/buildsystem/template-dynamic-feature.gradle"
 
-
 dependencies {
 
     def unitTestDependencies = rootProject.ext.unitTesting

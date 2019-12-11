@@ -1,4 +1,4 @@
-package com.gorillamo.repository.core
+package com.gorillamo.relationship.catalog
 
 import kotlinx.coroutines.*
 

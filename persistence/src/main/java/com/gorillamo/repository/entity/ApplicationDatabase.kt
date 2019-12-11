@@ -7,6 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 
+object DatabaseMetaData {
+    const val NAME = "RelationShipData_database"
+    const val VERSION = 1
+}
+
+
 @Database(entities = [RelationshipDatabaseObject::class], version = 1, exportSchema = false)
 abstract class ApplicationDatabase :RoomDatabase() {
 

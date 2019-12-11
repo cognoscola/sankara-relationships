@@ -26,12 +26,12 @@ dependencies {
     def unitTestDependencies = rootProject.ext.unitTesting
 
     implementation applicationDependencies.kotlin
-//    implementation Libraries.koinXcore
-//    implementation Libraries.koinXscope
-//    implementation Libraries.koinXviewModel
+    implementation applicationDependencies.koinCore
+    implementation applicationDependencies.koinScope
+    implementation applicationDependencies.koinViewModel
 
-//    implementation Libraries.coroutines
-//    implementation Libraries.coroutinesAndroid
+    implementation applicationDependencies.coroutines
+    implementation applicationDependencies.coroutinesCore
 
 
     testImplementation unitTestDependencies.junit
