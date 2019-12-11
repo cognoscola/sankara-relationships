@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.gorillamo.app.relationship.com.gorillamo.relationship.catalog.ItemListActivity">
+    tools:context="com.gorillamo.relationship.catalog.ItemListActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"

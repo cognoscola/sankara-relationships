@@ -3,7 +3,7 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.gorillamo.app.relationship">
 
-    <dist:module dist:instant="true" />
+    <dist:module dist:instant="false" />
 
     <application
         android:allowBackup="true"
@@ -16,29 +16,10 @@
             android:label="Hex Relationship">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.gorillamo.relationship.catalog.ItemListActivity"
-            android:label="@string/title_relationship_list"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.gorillamo.relationship.catalog.RelationshipDetailActivity"
-            android:label="@string/title_relationship_detail"
-            android:parentActivityName="com.gorillamo.relationship.catalog.ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.gorillamo.app.relationship.com.gorillamo.relationship.catalog.ItemListActivity" />
-        </activity>
     </application>
 
 </manifest>

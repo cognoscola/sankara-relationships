@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gorillamo.app.relationship.R
+
 import com.gorillamo.relationship.catalog.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_relationship_detail.*
 import kotlinx.android.synthetic.main.relationship_detail.view.*

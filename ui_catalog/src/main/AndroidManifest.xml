@@ -10,5 +10,26 @@
         </dist:delivery>
         <dist:fusing dist:include="false" />
     </dist:module>
+
+    <application>
+
+        <activity
+            android:name="com.gorillamo.relationship.catalog.ItemListActivity"
+            android:label="@string/title_relationship_list"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name="com.gorillamo.relationship.catalog.RelationshipDetailActivity"
+            android:label="@string/title_relationship_detail"
+            android:parentActivityName="com.gorillamo.relationship.catalog.ItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gorillamo.relationship.catalog.ItemListActivity" />
+        </activity>
+
+    </application>
+
 </manifest>
 

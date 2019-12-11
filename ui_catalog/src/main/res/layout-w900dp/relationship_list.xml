@@ -9,7 +9,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="com.gorillamo.app.relationship.com.gorillamo.relationship.catalog.ItemListActivity">
+    tools:context="com.gorillamo.relationship.catalog.ItemListActivity">
 
     <!--
     This layout is a two-pane layout for the Relationships

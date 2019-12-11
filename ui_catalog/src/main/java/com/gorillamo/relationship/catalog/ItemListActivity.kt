@@ -37,7 +37,7 @@ class ItemListActivity : EntryActivity() {
      */
     private var twoPane: Boolean = false
 
-    private lateinit var relationshipViewModel: RelationshipViewModel
+//    private lateinit var relationshipViewModel: RelationshipViewModel
 
     override fun loadModules() {
 
@@ -48,10 +48,12 @@ class ItemListActivity : EntryActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_relationship_list)
 
+/*
         relationshipViewModel = ViewModelProviders.of(this@ItemListActivity).get(RelationshipViewModel::class.java)
         relationshipViewModel.loadAllRelationships().observe(this, Observer {
             (relationship_list.adapter as SimpleItemRecyclerViewAdapter).replaceItems(it)
         })
+*/
 
         setSupportActionBar(toolbar)
         toolbar.title = title
@@ -62,6 +64,7 @@ class ItemListActivity : EntryActivity() {
 
             //for now just insert all that shit in here
 
+/*
             for(i in 0..10){
                 relationshipViewModel.insert(
                     RelationshipDatabaseObject(
@@ -70,6 +73,7 @@ class ItemListActivity : EntryActivity() {
                     )
                 )
             }
+*/
         }
 
         if (relationship_detail_container != null) {
@@ -80,21 +84,23 @@ class ItemListActivity : EntryActivity() {
             twoPane = true
         }
 
-        setupRecyclerView(relationship_list)
+//        setupRecyclerView(relationship_list)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
+/*
         recyclerView.adapter =
             SimpleItemRecyclerViewAdapter(
                 this,
                 java.util.ArrayList(),
                 twoPane
             )
+*/
     }
 
     class SimpleItemRecyclerViewAdapter(
         private val parentActivity: ItemListActivity,
-        private val values: ArrayList<RelationshipDatabaseObject>,
+//        private val values: ArrayList<RelationshipDatabaseObject>,
         private val twoPane: Boolean
     ) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
@@ -131,23 +137,24 @@ class ItemListActivity : EntryActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = values[position]
+            /*val item = values[position]
             holder.idView.text = item.name
             holder.contentView.text = "${item.timeLastContacted}"
 
             with(holder.itemView) {
                 tag = item
                 setOnClickListener(onClickListener)
-            }
+            }*/
         }
 
-        fun replaceItems(inList:List<RelationshipDatabaseObject>){
+     /*   fun replaceItems(inList:List<RelationshipDatabaseObject>){
             this.values.clear()
             inList.forEach { this.values.add(it) }
             notifyDataSetChanged()
         }
-
-        override fun getItemCount() = values.size
+*/
+        override fun getItemCount() = 0
+//        override fun getItemCount() = values.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val idView: TextView = view.nameTextView
