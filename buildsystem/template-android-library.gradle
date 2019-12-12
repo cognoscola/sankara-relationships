@@ -33,7 +33,7 @@ dependencies {
     implementation applicationDependencies.coroutines
     implementation applicationDependencies.coroutinesCore
 
-
+    testImplementation unitTestDependencies.coroutinesTest
     testImplementation unitTestDependencies.junit
     testImplementation unitTestDependencies.mockito
     testImplementation unitTestDependencies.mockitoBinding

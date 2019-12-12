@@ -12,7 +12,6 @@ object DatabaseMetaData {
     const val VERSION = 1
 }
 
-
 @Database(entities = [RelationshipDatabaseObject::class], version = 1, exportSchema = false)
 abstract class ApplicationDatabase :RoomDatabase() {
 

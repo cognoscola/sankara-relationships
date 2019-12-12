@@ -19,8 +19,8 @@ internal class RelationshipRepositoryAdapter(
 
     override fun getRelationshipsLive(): LiveData<out List<Relationship>?>  = relationshipDaoPort.getBooksLive()
 
-    override suspend fun insertOrUpdateRelationship(relationship: Relationship){
-        relationshipDaoPort.insertOrUpdate(relationship)
+    override suspend fun insertOrUpdateRelationship(relationship: Relationship):Long{
+        return relationshipDaoPort.insertOrUpdate(relationship)
     }
 
 }

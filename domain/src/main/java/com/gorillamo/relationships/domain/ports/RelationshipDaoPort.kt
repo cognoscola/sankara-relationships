@@ -8,7 +8,7 @@ import com.gorillamo.relationship.abstraction.dto.Relationship
  */
 interface RelationshipDaoPort{
 
-    suspend fun insertOrUpdate(relationship: Relationship)
+    suspend fun insertOrUpdate(relationship: Relationship):Long
 
 
     fun getBooksLive(): LiveData<out List<Relationship>?>
