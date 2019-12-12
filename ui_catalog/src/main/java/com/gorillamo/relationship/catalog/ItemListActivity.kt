@@ -1,6 +1,5 @@
 package com.gorillamo.relationship.catalog
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -40,8 +39,6 @@ private val tag:String = ItemListActivity::class.java.name
      */
     private var twoPane: Boolean = false
 
-//    private lateinit var relationshipViewModel: RelationshipViewModel
-
     private val relationshipViewModel: RelationshipViewModel by inject()
 
     override fun loadModules() {
@@ -53,10 +50,6 @@ private val tag:String = ItemListActivity::class.java.name
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_relationship_list)
-
-/*
-        relationshipViewModel = ViewModelProviders.of(this@ItemListActivity).get(RelationshipViewModel::class.java)
-*/
 
         Log.d("$tag onCreate","Now Observing")
 
@@ -80,8 +73,6 @@ private val tag:String = ItemListActivity::class.java.name
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Add 10 to DB", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-
-            //for now just insert all that shit in here
 
 
 //            for(i in 0..10){
@@ -170,7 +161,6 @@ private val tag:String = ItemListActivity::class.java.name
             notifyDataSetChanged()
         }
 
-//        override fun getItemCount() = 0
         override fun getItemCount() = values.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
