@@ -13,6 +13,12 @@ dependencies {
     api project(":abstraction")
 
     def applicationDependencies = rootProject.ext.mainApplication
+    def unitTestDependencies = rootProject.ext.unitTesting
+
+
     implementation applicationDependencies.liveData
+
+    testImplementation applicationDependencies.lifecycleRuntime
+    testImplementation unitTestDependencies.lifeCycleTest
 
 }

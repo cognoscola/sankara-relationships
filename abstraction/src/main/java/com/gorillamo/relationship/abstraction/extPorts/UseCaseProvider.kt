@@ -10,4 +10,6 @@ interface UseCaseProvider {
     val saveRelationship:UseCaseWithParams<Relationship,Long>
 
     val loadRelationship:UseCaseSync<LiveData<out List<Relationship>>>
+
+    val deleteRelationShip:UseCaseWithParams<Relationship,Int>
 }

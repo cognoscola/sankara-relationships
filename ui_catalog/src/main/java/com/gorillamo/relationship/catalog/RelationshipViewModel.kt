@@ -12,7 +12,6 @@ import com.gorillamo.relationship.catalog.Coroutines.io
 import com.gorillamo.relationship.catalog.Coroutines.ioThenMain
 
 public class RelationshipViewModel(
-//    val repository:RelationshipRepository,
 
     val useCaseProvider: UseCaseProvider
 
@@ -22,16 +21,20 @@ public class RelationshipViewModel(
     fun loadAllRelationships(): LiveData<out List<Relationship>?>? {
 
         return useCaseProvider.loadRelationship.execute()
-//        return useCaseProvider.showAllRelationships()
-//        return repository.getRelationshipsLive()
     }
 
     fun insert(relationship: Relationship){
        io{
            Log.d("Inserting","${relationship.name} @ ${relationship.timeLastContacted}")
            useCaseProvider.saveRelationship.execute(relationship)
+        }
+    }
 
-//            useCaseProvider.insertOrUpdateRelationship(relationship)
+    //TODO change to delete one!
+    fun deleteRelationship(relationship: Relationship){
+        io{
+            useCaseProvider.deleteRelationShip.execute(relationship)
+
         }
     }
 

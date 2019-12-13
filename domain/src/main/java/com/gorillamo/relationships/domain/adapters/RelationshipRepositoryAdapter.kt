@@ -1,6 +1,5 @@
 package com.gorillamo.relationships.domain.adapters
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
@@ -17,10 +16,19 @@ internal class RelationshipRepositoryAdapter(
     @Suppress("unused")
     private val tag:String = RelationshipRepositoryAdapter::class.java.name
 
-    override fun getRelationshipsLive(): LiveData<out List<Relationship>?>  = relationshipDaoPort.getBooksLive()
+    override fun getRelationshipsLive(): LiveData<out List<Relationship>?>  = relationshipDaoPort.getRelationshipsLive()
+
 
     override suspend fun insertOrUpdateRelationship(relationship: Relationship):Long{
         return relationshipDaoPort.insertOrUpdate(relationship)
+    }
+
+    override fun getTodaysRelationship(): LiveData<out List<Relationship>?> {
+        return relationshipDaoPort.getTodaysRelationshipLive()
+    }
+
+    override suspend fun deleteRelationship(relationship: Relationship):Int {
+        return relationshipDaoPort.deleteRelationship(relationship)
     }
 
 }

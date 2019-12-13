@@ -10,6 +10,10 @@ interface RelationshipRepository {
 
     fun getRelationshipsLive(): LiveData<out List<Relationship>?>
 
+    fun getTodaysRelationship(): LiveData<out List<Relationship>?>
+
     suspend fun insertOrUpdateRelationship(relationship: Relationship):Long
+
+    suspend fun deleteRelationship(relationship: Relationship):Int
 
 }

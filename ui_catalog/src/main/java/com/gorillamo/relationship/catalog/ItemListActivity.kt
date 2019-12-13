@@ -86,6 +86,14 @@ private val tag:String = ItemListActivity::class.java.name
 //            }
         }
 
+        delete.setOnClickListener {
+
+            relationshipViewModel.deleteRelationship(ViewHolderValue(
+                "Name 0",
+                System.currentTimeMillis()
+            ))
+        }
+
         if (relationship_detail_container != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).

@@ -24,11 +24,20 @@ internal class RelationshipDaoAdapter(
                 relationship.name!!, relationship.timeLastContacted!!))
     }
 
-    override fun getBooksLive():LiveData<out List<Relationship>?>{
+    override fun getRelationshipsLive():LiveData<out List<Relationship>?>{
 
         Log.d("$tag getBooksLive","DaoAdapter received fetch command")
-
         return relationshipDao.getAllRelationship()
     }
 
+
+    override fun getTodaysRelationshipLive(): LiveData<out List<Relationship>?> {
+        return relationshipDao.getTodaysRelationship()
+    }
+
+    override suspend fun deleteRelationship(relationship: Relationship):Int {
+        return relationship.name?.let {  relationshipDao.delete() }?:0
+//        relationship.name?.let {  relationshipDao.delete(relationship.name!!) }
+
+    }
 }

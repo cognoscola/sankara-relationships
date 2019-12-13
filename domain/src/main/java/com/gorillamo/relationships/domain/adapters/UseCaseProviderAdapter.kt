@@ -7,6 +7,7 @@ import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
 import com.gorillamo.relationship.abstraction.extPorts.UseCaseProvider
 import com.gorillamo.relationship.abstraction.extPorts.UseCaseSync
 import com.gorillamo.relationship.abstraction.extPorts.UseCaseWithParams
+import com.gorillamo.relationships.domain.usecase.DeleteRelationshipUseCase
 import com.gorillamo.relationships.domain.usecase.LoadRelationshipsUseCase
 import com.gorillamo.relationships.domain.usecase.SaveRelationshipUseCase
 
@@ -25,5 +26,8 @@ internal class UseCaseProviderAdapter(
 
     override val loadRelationship: UseCaseSync<LiveData<out List<Relationship>>>
         get() = LoadRelationshipsUseCase(repository)
+
+    override val deleteRelationShip: UseCaseWithParams<Relationship, Int>
+        get() = DeleteRelationshipUseCase(repository)
 
 }
