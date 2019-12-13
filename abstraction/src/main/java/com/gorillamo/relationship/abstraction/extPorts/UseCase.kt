@@ -1,4 +1,4 @@
-package com.gorillamo.relationships.domain.usecase
+package com.gorillamo.relationship.abstraction.extPorts
 
 abstract class UseCase<out R> {
     /**
@@ -7,6 +7,7 @@ abstract class UseCase<out R> {
      * @return result [R] of the use case.
      */
     protected abstract suspend fun buildUseCase() : R
+
 
     /**
      * Execute the use case.

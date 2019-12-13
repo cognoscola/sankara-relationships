@@ -15,9 +15,9 @@ internal class RelationshipDaoAdapter(
     @Suppress("unused")
     private val tag:String = RelationshipDaoAdapter::class.java.name
 
-    override suspend fun insertOrUpdate(relationship: Relationship) {
+    override suspend fun insertOrUpdate(relationship: Relationship):Long {
 
-        if (relationship is RelationshipDatabaseObject)
+        return if (relationship is RelationshipDatabaseObject)
             relationshipDao.insertOrReplace(relationship)
         else
             relationshipDao.insertOrReplace(RelationshipDatabaseObject( null,

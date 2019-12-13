@@ -31,7 +31,6 @@ class UsecasesTest {
     fun setUP(){
 
         insert = SaveRelationshipUseCase(repo)
-
     }
 
     @Test

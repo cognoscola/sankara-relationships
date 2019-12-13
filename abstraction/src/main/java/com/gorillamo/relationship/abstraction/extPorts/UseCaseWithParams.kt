@@ -1,4 +1,4 @@
-package com.gorillamo.relationships.domain.usecase
+package com.gorillamo.relationship.abstraction.extPorts
 
 abstract class UseCaseWithParams<in Params, out R> {
     /**
