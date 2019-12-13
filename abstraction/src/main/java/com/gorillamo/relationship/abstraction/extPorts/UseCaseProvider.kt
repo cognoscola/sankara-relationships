@@ -12,4 +12,5 @@ interface UseCaseProvider {
     val loadRelationship:UseCaseSync<LiveData<out List<Relationship>>>
 
     val deleteRelationShip:UseCaseWithParams<Relationship,Int>
+
 }

@@ -17,7 +17,7 @@ public class RelationshipViewModel(
 
 ): ViewModel() {
 
-    @UiThread
+
     fun loadAllRelationships(): LiveData<out List<Relationship>?>? {
 
         return useCaseProvider.loadRelationship.execute()

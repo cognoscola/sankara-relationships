@@ -1,17 +1,13 @@
-package com.gorillamo.app.relationship
+package com.gorillamo.relationship.catalog
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Rule
-
 
 /**
  * Test that the Relationship list is displaying correctly
@@ -19,7 +15,6 @@ import org.junit.Rule
  */
 @RunWith(AndroidJUnit4::class)
 class RelationshipListActivityTest {
-
 
     @get:Rule
     val mActivityRule =
@@ -29,13 +24,11 @@ class RelationshipListActivityTest {
             launchActivity = false
         )
 
-
     /**
      * Displays a Search Bar
      */
     @Test
     fun completelyDisplaysRecyclerView(){
-
 
         mActivityRule.launchActivity(null)
         onView(withId(R.id.relationship_list)).check(matches(isDisplayed()))

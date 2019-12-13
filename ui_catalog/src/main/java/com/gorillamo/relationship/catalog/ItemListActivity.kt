@@ -51,22 +51,17 @@ private val tag:String = ItemListActivity::class.java.name
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_relationship_list)
 
-        Log.d("$tag onCreate","Now Observing")
-
-
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        show.setOnClickListener{view ->
-            relationshipViewModel.loadAllRelationships()?.observe(this, Observer {
-                Log.d("$tag onCreate","Observing Change")
-                it?.let {
-                    (relationship_list.adapter as SimpleItemRecyclerViewAdapter).replaceItems(it)
-                }?:run{
+        relationshipViewModel.loadAllRelationships()?.observe(this, Observer {
+            it?.let {
+                (relationship_list.adapter as SimpleItemRecyclerViewAdapter).replaceItems(it)
+            }
+        })
 
-                    Log.d("$tag onCreate","List appears null")
-                }
-            })
+
+        show.setOnClickListener{view ->
 
         }
 

@@ -9,6 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 29
+
+        testInstrumentationRunner "com.gorillamo.relationship.catalog.TestAppJUnitRunner"
     }
 }
 
@@ -39,12 +41,12 @@ dependencies {
     implementation applicationDependencies.coroutines
     implementation applicationDependencies.coroutinesCore
 
-    testImplementation unitTestDependencies.koinTest
     testImplementation unitTestDependencies.junit
 
     debugImplementation acceptanceTestDependencies.rules
     debugImplementation acceptanceTestDependencies.androidMockito
 
+    androidTestImplementation unitTestDependencies.koinTest
     androidTestImplementation acceptanceTestDependencies.rules
     androidTestImplementation acceptanceTestDependencies.androidJUnit
     androidTestImplementation acceptanceTestDependencies.espressoCore

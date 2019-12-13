@@ -1,4 +1,7 @@
 apply from: "$rootDir/buildsystem/template-dynamic-feature.gradle"
+android {
+    buildToolsVersion = buildToolsVersion
+}
 
 dependencies {
 
