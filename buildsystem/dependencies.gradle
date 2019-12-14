@@ -27,8 +27,8 @@ ext {
     lifecycleTest_version = '2.1.0'
     gson_version ="2.8.6"
     room_version ="2.2.1"
-
     koin_version = "2.0.1"
+    byteBuddy_version = "1.9.7"
 
     //Unit testing
     junit_version ="4.12"
@@ -67,8 +67,6 @@ ext {
             koinScope:           "org.koin:koin-androidx-scope:$koin_version",
             koinViewModel:       "org.koin:koin-androidx-viewmodel:$koin_version",
 
-
-
             constrainstLayout:  "androidx.constraintlayout:constraintlayout:$constraints_version",
             okhttp:             "com.squareup.okhttp:okhttp:$okhttp_version",
             converterGson:      "com.squareup.retrofit2:converter-gson:$retrofit_version",
@@ -94,7 +92,8 @@ ext {
             runner:            "androidx.test:runner:$testRunner_version",
             rules:             "androidx.test:rules:$testRunner_version",
             androidMockito:    "org.mockito:mockito-android:$mockito_android_version",
-            mockitoInline:     "org.mockito:mockito-inline:$mockito_android_version"
+            mockitoInline:     "org.mockito:mockito-inline:$mockito_android_version",
+            byteBuddyAgent:         "net.bytebuddy:byte-buddy-agent:$byteBuddy_version"
     ]
 
     unitTesting = [

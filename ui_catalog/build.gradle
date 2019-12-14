@@ -12,4 +12,6 @@ dependencies {
     api applicationDependencies.legacy
     api applicationDependencies.recycler
     implementation applicationDependencies.lifecycleExtensions
+
+
 }

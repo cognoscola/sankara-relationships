@@ -1,0 +1,12 @@
+<lint>
+    <issue id="InvalidPackage">
+        <!--<ignore path="**/androidannotations*.jar"/>
+        <ignore path="**/cling-support*.jar"/>
+        <ignore path="**/javax.servlet*.jar"/>
+        <ignore path="**/jetty-server*.jar"/>
+        <ignore path="**/jetty-servlet*.jar"/>
+        <ignore path="**/jetty-util*.jar"/>-->
+        <ignore path="**/byte-buddy-agent*.jar"/>
+        <ignore path="**/mockito-core*.jar"/>
+    </issue>
+</lint>

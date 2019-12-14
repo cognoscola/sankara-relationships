@@ -12,6 +12,11 @@ android {
 
         testInstrumentationRunner "com.gorillamo.relationship.catalog.TestAppJUnitRunner"
     }
+
+    lintOptions {
+        abortOnError false
+        lintConfig file("./lint.xml")
+    }
 }
 
 dependencies {
@@ -45,6 +50,8 @@ dependencies {
 
     debugImplementation acceptanceTestDependencies.rules
     debugImplementation acceptanceTestDependencies.androidMockito
+
+//    debugImplementation acceptanceTestDependencies.byteBuddyAgent
 
     androidTestImplementation unitTestDependencies.koinTest
     androidTestImplementation acceptanceTestDependencies.rules

@@ -40,5 +40,4 @@ class RelationshipListActivityTest {
         mActivityRule.launchActivity(null)
         onView(withText("1")).check(matches(isDisplayed()))
         onView(withText("Item 1")).check(matches(isDisplayed()))}
-
 }
