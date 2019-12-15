@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.gorillamo.app.relationship.com.gorillamo.relationship.catalog.RelationshipDetailActivity"
+    tools:context="com.gorillamo.relationship.apps.com.gorillamo.relationship.catalog.RelationshipDetailActivity"
     tools:ignore="MergeRootFrame">
 
     <com.google.android.material.appbar.AppBarLayout

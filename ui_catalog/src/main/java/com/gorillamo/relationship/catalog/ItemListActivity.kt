@@ -10,12 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.gorillamo.relationship.abstraction.dto.Relationship
 
+import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.catalog.dummy.DummyContent
 import com.gorillamo.relationship.shared.EntryActivity
+
 import kotlinx.android.synthetic.main.activity_relationship_list.*
 import kotlinx.android.synthetic.main.relationship_list.*
 import kotlinx.android.synthetic.main.relationship_list_content.view.*
@@ -29,6 +30,7 @@ import org.koin.android.ext.android.inject
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
+//class ItemListActivity : AppCompatActivity() {
 class ItemListActivity : EntryActivity() {
 @Suppress("unused")
 private val tag:String = ItemListActivity::class.java.name
@@ -44,7 +46,6 @@ private val tag:String = ItemListActivity::class.java.name
     override fun loadModules() {
 
         CatalogueModule.load()
-        //TODO override thise
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +55,9 @@ private val tag:String = ItemListActivity::class.java.name
         setSupportActionBar(toolbar)
         toolbar.title = title
 
+
+//        CatalogueModule.load()
+
         relationshipViewModel.loadAllRelationships()?.observe(this, Observer {
             it?.let {
                 (relationship_list.adapter as SimpleItemRecyclerViewAdapter).replaceItems(it)
@@ -61,7 +65,7 @@ private val tag:String = ItemListActivity::class.java.name
         })
 
 
-        show.setOnClickListener{view ->
+        show.setOnClickListener{_ ->
 
         }
 

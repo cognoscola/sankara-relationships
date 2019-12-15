@@ -1,12 +1,13 @@
 package com.gorillamo.relationship.catalog
 
 import android.app.Activity
-import androidx.test.rule.ActivityTestRule
+//import androidx.test.rule.ActivityTestRule
 
 
 /**
  * allows our test class to access the injected mock objects
  */
+/*
 class InjectedBaseActivityTest<T : Activity?>(
     activityClass: Class<T>?,
     initialTouchMode: Boolean,
@@ -25,14 +26,16 @@ class InjectedBaseActivityTest<T : Activity?>(
     override fun beforeActivityLaunched() {
         super.beforeActivityLaunched()
 
-       /* val instrumentation = getInstrumentation()
+       */
+/* val instrumentation = getInstrumentation()
         app = instrumentation.targetContext.applicationContext as App
 
         mocks = InjectUtility()
 
         app.setMockMode(true)
         app.component.inject(mocks)
-*/
+*//*
+
         if (beforeOnCreateCallback != null) {
             beforeOnCreateCallback!!.beforeOnCreate()
         }
@@ -45,4 +48,4 @@ class InjectedBaseActivityTest<T : Activity?>(
     fun tearDown() {
 //        app.setMockMode(false)
     }
-}
+}*/

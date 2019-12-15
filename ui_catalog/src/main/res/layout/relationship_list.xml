@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.gorillamo.app.relationship.com.gorillamo.relationship.catalog.ItemListActivity"
+    tools:context="com.gorillamo.relationship.apps.com.gorillamo.relationship.catalog.ItemListActivity"
     tools:listitem="@layout/relationship_list_content" />

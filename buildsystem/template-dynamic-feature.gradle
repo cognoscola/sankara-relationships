@@ -12,7 +12,6 @@ android {
 
         testInstrumentationRunner "com.gorillamo.relationship.catalog.TestAppJUnitRunner"
     }
-
     lintOptions {
         abortOnError false
         lintConfig file("./lint.xml")
@@ -41,8 +40,6 @@ dependencies {
     implementation applicationDependencies.koinCore
     implementation applicationDependencies.koinScope
     implementation applicationDependencies.koinViewModel
-
-
     implementation applicationDependencies.coroutines
     implementation applicationDependencies.coroutinesCore
 
@@ -50,8 +47,6 @@ dependencies {
 
     debugImplementation acceptanceTestDependencies.rules
     debugImplementation acceptanceTestDependencies.androidMockito
-
-//    debugImplementation acceptanceTestDependencies.byteBuddyAgent
 
     androidTestImplementation unitTestDependencies.koinTest
     androidTestImplementation acceptanceTestDependencies.rules

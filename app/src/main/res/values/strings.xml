@@ -6,4 +6,5 @@
     <string name="title_relationship_detail">Relationship Detail</string>
     <string name="title_relationshiplist">Relationships Reminder</string>
     <string name="title_ui_catalog">Relationships</string>
+    <string name="title_ui_catalogue">Relationships</string>
 </resources>

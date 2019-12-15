@@ -1,12 +1,18 @@
 apply from: "$rootDir/buildsystem/template-dynamic-feature.gradle"
 android {
     buildToolsVersion = buildToolsVersion
+
+    defaultConfig{
+        testInstrumentationRunner "com.gorillamo.relationship.catalog.TestAppJUnitRunner"
+    }
 }
 
 dependencies {
 
     def unitTestDependencies = rootProject.ext.unitTesting
     def applicationDependencies = rootProject.ext.mainApplication
+
+
 
     api applicationDependencies.material
     api applicationDependencies.legacy
