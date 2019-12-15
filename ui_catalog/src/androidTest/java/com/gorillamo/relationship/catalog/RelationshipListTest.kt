@@ -19,7 +19,7 @@ class RelationshipListActivityTest {
     @get:Rule
     val mActivityRule =
         com.gorillamo.relationship.catalog.InjectedBaseActivityTest(
-            com.gorillamo.relationship.catalog.ItemListActivity::class.java,
+            ItemListActivity::class.java,
             initialTouchMode = true,
             launchActivity = false
         )
