@@ -57,16 +57,20 @@ private val tag:String = ItemListActivity::class.java.name
 
 //        CatalogueModule.load()
 
+        //TODO pass the viewmodel to the adapter
         relationshipViewModel.loadAllRelationships()?.observe(this, Observer {
             it?.let {
-                (relationship_list.adapter as SimpleItemRecyclerViewAdapter).replaceItems(it)
+
+                val items = it.map {
+                    SimpleItemRecyclerViewAdapter.RelationshipItem(
+                        name = it.name,
+                        timeLastContacted = it.timeLastContacted
+                    )
+                }
+                (relationship_list.adapter as SimpleItemRecyclerViewAdapter).replaceItems(items)
             }
         })
 
-
-        show.setOnClickListener{_ ->
-
-        }
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Add 10 to DB", Snackbar.LENGTH_LONG)
@@ -76,7 +80,7 @@ private val tag:String = ItemListActivity::class.java.name
 //            for(i in 0..10){
                 relationshipViewModel.insert(
 
-                    ViewHolderValue(
+                    SimpleItemRecyclerViewAdapter.RelationshipItem(
                         "Name 0",
                         System.currentTimeMillis()
                     )
@@ -87,7 +91,7 @@ private val tag:String = ItemListActivity::class.java.name
         delete.setOnClickListener {
 
             relationshipViewModel.deleteRelationship(
-                ViewHolderValue(
+                SimpleItemRecyclerViewAdapter.RelationshipItem(
                     "Name 0",
                     System.currentTimeMillis()
                 )
@@ -116,7 +120,7 @@ private val tag:String = ItemListActivity::class.java.name
 
     class SimpleItemRecyclerViewAdapter(
         private val parentActivity: ItemListActivity,
-        private val values: ArrayList<Relationship>,
+        private val values: ArrayList<RelationshipItem>,
         private val twoPane: Boolean
     ) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
@@ -164,7 +168,7 @@ private val tag:String = ItemListActivity::class.java.name
             }
         }
 
-       fun replaceItems(inList:List<Relationship>){
+       fun replaceItems(inList:List<RelationshipItem>){
             this.values.clear()
             inList.forEach { this.values.add(it) }
             notifyDataSetChanged()
@@ -176,10 +180,11 @@ private val tag:String = ItemListActivity::class.java.name
             val idView: TextView = view.nameTextView
             val contentView: TextView = view.lastContactTextView
         }
+
+        data class RelationshipItem(
+            override val name: String?,
+            override val timeLastContacted: Long?
+        ):Relationship
     }
 
-    data class ViewHolderValue(
-        override val name: String?,
-        override val timeLastContacted: Long?
-    ):Relationship
 }

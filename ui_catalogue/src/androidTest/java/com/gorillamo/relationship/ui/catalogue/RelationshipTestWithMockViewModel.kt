@@ -1,9 +1,6 @@
 package com.gorillamo.relationship.ui.catalogue
 
-import android.os.SystemClock
-import androidx.lifecycle.MutableLiveData
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -30,7 +27,7 @@ class RelationshipTestWithMockViewModel {
 
     @Rule
     @JvmField
-    val rule = ActivityTestRule(MainActivity::class.java, true, false)
+    val rule = ActivityTestRule(RelationshipListActivity::class.java, true, false)
 
 //    lateinit var mockVm: RelationshipViewModel
 

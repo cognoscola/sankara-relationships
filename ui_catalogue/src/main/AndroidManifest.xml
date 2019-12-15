@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name=".MainActivity"
+            android:name=".RelationshipListActivity"
             android:label="Catalogue"
             android:theme="@style/AppTheme.NoActionBar">
 
