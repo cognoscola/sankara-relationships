@@ -12,12 +12,11 @@ dependencies {
     def unitTestDependencies = rootProject.ext.unitTesting
     def applicationDependencies = rootProject.ext.mainApplication
 
-
+    implementation project(path: ':ui_catalogue')
 
     api applicationDependencies.material
     api applicationDependencies.legacy
     api applicationDependencies.recycler
     implementation applicationDependencies.lifecycleExtensions
-
 
 }
