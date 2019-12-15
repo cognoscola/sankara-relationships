@@ -27,7 +27,7 @@ class RelationshipTestWithMockViewModel {
 
     @Rule
     @JvmField
-    val rule = ActivityTestRule(RelationshipListActivity::class.java, true, false)
+    val rule = ActivityTestRule(CatalogueTestActivity::class.java, true, false)
 
 //    lateinit var mockVm: RelationshipViewModel
 
@@ -68,12 +68,12 @@ class RelationshipTestWithMockViewModel {
         // 2. start activity
         rule.launchActivity(null)
 
-        onView(withId(R.id.fab)).perform(click())
+        onView(withText("name 0")).check(matches(isDisplayed()))
 
-        Thread.sleep(1000)
+//        Thread.sleep(1000)
 
         // 3. test
-        onView(withText("Replace with your own action")).check(matches(isDisplayed()))
+//        onView(withText("Replace with your own action")).check(matches(isDisplayed()))
 
 
     }

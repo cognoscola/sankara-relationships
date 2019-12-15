@@ -14,7 +14,7 @@
     <application>
 
         <activity
-            android:name="com.gorillamo.relationship.catalog"
+            android:name="com.gorillamo.relationship.catalog.RelationshipListActivity"
             android:label="@string/title_relationship_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,7 +25,7 @@
         <activity
             android:name="com.gorillamo.relationship.catalog.RelationshipDetailActivity"
             android:label="@string/title_relationship_detail"
-            android:parentActivityName="com.gorillamo.relationship.catalog.ItemListActivity"
+            android:parentActivityName="com.gorillamo.relationship.catalog.RelationshipListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

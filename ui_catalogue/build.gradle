@@ -5,7 +5,6 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
-
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 29
@@ -23,21 +22,46 @@ android {
         }
     }
 
+    // This is needed because of MOCKMAKER problem
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {
+    def applicationDependencies = rootProject.ext.mainApplication
+    def unitTestDependencies = rootProject.ext.unitTesting
     def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    androidTestImplementation acceptanceTestDependencies.rules
+    implementation applicationDependencies.appCompat
+    implementation applicationDependencies.coreKtx
+    implementation applicationDependencies.kotlin
+    implementation applicationDependencies.constrainstLayout
+    implementation applicationDependencies.material
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation unitTestDependencies.junit
+
+    debugImplementation acceptanceTestDependencies.rules
+//    debugImplementation acceptanceTestDependencies.androidMockito
+
+    androidTestImplementation (unitTestDependencies.koinTest) {exclude group: 'mockito.org' }
+    androidTestImplementation acceptanceTestDependencies.rules
+    androidTestImplementation acceptanceTestDependencies.androidJUnit
+    androidTestImplementation acceptanceTestDependencies.espressoCore
+    androidTestImplementation acceptanceTestDependencies.espressoContrib
+}
+configurations.all {
+    resolutionStrategy {
+        force "androidx.test:monitor:1.1.0"
+    }
 }

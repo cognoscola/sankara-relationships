@@ -1,8 +1,5 @@
 package com.gorillamo.relationship.ui.catalogue
 
-import android.content.Intent
-import android.os.Bundle
-import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.relationship_list_content.view.*
 
-class SimpleItemRecyclerViewAdapter(
+class RelationshipItemAdapter(
     private val values: ArrayList<RelationshipItem>
-) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<RelationshipItemAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
 

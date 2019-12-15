@@ -48,7 +48,7 @@ dependencies {
     debugImplementation acceptanceTestDependencies.rules
     debugImplementation acceptanceTestDependencies.androidMockito
 
-    androidTestImplementation unitTestDependencies.koinTest
+    androidTestImplementation (unitTestDependencies.koinTest)  {exclude group: 'mockito.org' }
     androidTestImplementation acceptanceTestDependencies.rules
     androidTestImplementation acceptanceTestDependencies.androidJUnit
     androidTestImplementation acceptanceTestDependencies.espressoCore

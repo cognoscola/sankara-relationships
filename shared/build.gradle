@@ -1,5 +1,8 @@
 apply from: "$rootDir/buildsystem/template-android-library.gradle"
 
+/**
+ * These modules and classes will be shared by our features!
+ */
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

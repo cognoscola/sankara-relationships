@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.relationship_detail.view.*
 
 /**
  * A fragment representing a single Relationship detail screen.
- * This fragment is either contained in a [ItemListActivity]
+ * This fragment is either contained in a [RelationshipListActivity]
  * in two-pane mode (on tablets) or a [RelationshipDetailActivity]
  * on handsets.
  */

@@ -93,7 +93,8 @@ ext {
             rules:             "androidx.test:rules:$testRunner_version",
             androidMockito:    "org.mockito:mockito-android:$mockito_android_version",
             mockitoInline:     "org.mockito:mockito-inline:$mockito_android_version",
-            byteBuddyAgent:         "net.bytebuddy:byte-buddy-agent:$byteBuddy_version"
+            byteBuddyAgent:         "net.bytebuddy:byte-buddy-agent:$byteBuddy_version",
+            testMonitor:        "androidx.test:monitor:1.1.0"
     ]
 
     unitTesting = [
