@@ -1,17 +1,26 @@
 package com.gorillamo.relationship.ui.catalogue
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.math.MathUtils
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.relationship_list_content.view.*
+import java.util.*
+import kotlin.collections.ArrayList
+
+const val DAY_MILLIS = 8640000
 
 class RelationshipItemAdapter(
     private val values: ArrayList<RelationshipItem>
 ) : RecyclerView.Adapter<RelationshipItemAdapter.ViewHolder>() {
+    @Suppress("unused")
+    private val tag:String = RelationshipItemAdapter::class.java.name
 
     private val onClickListener: View.OnClickListener
+    private val cal = Calendar.getInstance()
 
     init {
         onClickListener = View.OnClickListener { v ->
@@ -31,11 +40,25 @@ class RelationshipItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.idView.text = item.name
-        holder.contentView.text = "${item.timeLastContacted}"
+        holder.contentView.text = getTimeDifferenceString(item.timeLastContacted)
 
         with(holder.itemView) {
             tag = item
             setOnClickListener(onClickListener)
+        }
+    }
+
+    fun getTimeDifferenceString(time: Long):String{
+
+        val diff = System.currentTimeMillis() - time
+        val day = (diff / (DAY_MILLIS)).toInt()
+
+        Log.d("$tag getTimeDifferenceString","$day")
+        return when(day){
+            0 -> "Today"
+            1 -> "Yesterday"
+            else -> "$day days ago"
+
         }
     }
 
@@ -53,7 +76,7 @@ class RelationshipItemAdapter(
     }
 
     data class RelationshipItem(
-        val name: String?,
-        val timeLastContacted: Long?
+        val name: String,
+        val timeLastContacted: Long
     )
 }

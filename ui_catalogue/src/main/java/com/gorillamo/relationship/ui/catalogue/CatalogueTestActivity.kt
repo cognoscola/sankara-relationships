@@ -25,7 +25,7 @@ class CatalogueTestActivity : AppCompatActivity() {
         setupRecyclerView(relationship_list)
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
+    fun setupRecyclerView(recyclerView: RecyclerView) {
 
         val list = ArrayList<RelationshipItemAdapter.RelationshipItem>()
         for(i in 0..9){
@@ -40,4 +40,9 @@ class CatalogueTestActivity : AppCompatActivity() {
             )
     }
 
+    fun replaceItems(inList:List<RelationshipItemAdapter.RelationshipItem>){
+        runOnUiThread {
+            (relationship_list.adapter as RelationshipItemAdapter).replaceItems(inList)
+        }
+    }
 }

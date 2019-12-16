@@ -1,5 +1,7 @@
 package com.gorillamo.relationship.ui.catalogue
 
+import android.provider.Settings
+import android.util.Log
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -13,6 +15,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.*
+
 //import org.koin.androidx.viewmodel.dsl.viewModel
 //import org.koin.core.context.loadKoinModules
 //import org.koin.core.context.stopKoin
@@ -24,6 +28,8 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class RelationshipTestWithMockViewModel {
 //class RelationshipTestWithMockViewModel: KoinTest {
+    @Suppress("unused")
+    private val tag:String = RelationshipTestWithMockViewModel::class.java.name
 
     @Rule
     @JvmField
@@ -57,41 +63,45 @@ class RelationshipTestWithMockViewModel {
 
     @Test
     fun should_display_relationships_when_activity_loads() {
-        // 1. declare mock method
-      /*  val MOCK_LIST = generateRelationshipList()
-        val MOCK_LIVEDATA = MutableLiveData<List<Relationship>>()
-        MOCK_LIVEDATA.value = MOCK_LIST
+        val activity = rule.launchActivity(null)
 
-        Mockito.`when`(mockVm.loadAllRelationships())
-            .thenReturn(MOCK_LIVEDATA)*/
-
-        // 2. start activity
-        rule.launchActivity(null)
+        activity.replaceItems(generateRelationshipList())
 
         onView(withText("name 0")).check(matches(isDisplayed()))
-
-//        Thread.sleep(1000)
-
-        // 3. test
-//        onView(withText("Replace with your own action")).check(matches(isDisplayed()))
-
-
     }
 
-/*
-    private fun generateRelationshipList():List<Relationship>{
+    @Test
+    fun should_display_last_contacted_in_terms_of_days(){
 
-        return List(5){
+        val activity = rule.launchActivity(null)
 
-            object : Relationship {
-                override val name: String?
-                    get() = "name $it"
-                override val timeLastContacted: Long?
-                    get() = System.currentTimeMillis()
-            }
+        activity.replaceItems(generateRelationshipList())
+
+        Thread.sleep(5000)
+
+        onView(withText("Today")).check(matches(isDisplayed()))
+        onView(withText("Yesterday")).check(matches(isDisplayed()))
+        onView(withText("2 days ago")).check(matches(isDisplayed()))
+        onView(withText("3 days ago")).check(matches(isDisplayed()))
+    }
+
+    private fun generateRelationshipList():List<RelationshipItemAdapter.RelationshipItem>{
+
+
+        return List(5) { i ->
+
+            val time = System.currentTimeMillis() - oneDayInMillis() * i
+            val item = RelationshipItemAdapter.RelationshipItem(
+                name = "name $i",
+                timeLastContacted = time
+            )
+            Log.d("$tag generateRelationshipList","$time")
+            item
         }
-
     }
-*/
+
+    private fun oneDayInMillis():Long{
+        return 1000 * 60 * 60 * 24
+    }
 
 }
