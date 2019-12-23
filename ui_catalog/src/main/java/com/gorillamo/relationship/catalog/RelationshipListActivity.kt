@@ -53,8 +53,8 @@ private val tag:String = RelationshipListActivity::class.java.name
 
                     val items = it.map {
                         RelationshipItemAdapter.RelationshipItem(
-                            name = it.name,
-                            timeLastContacted = it.timeLastContacted
+                            name = it.name?:"",
+                            timeLastContacted = it.timeLastContacted?:0L
                         )
                     }
                     (fragment as RelationshipListFragment).updateContent(items)
@@ -62,28 +62,24 @@ private val tag:String = RelationshipListActivity::class.java.name
             }
         })
 
-
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Add 10 to DB", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
 
-/*
             for(i in 0..10){
                 relationshipViewModel.insert(
                     object: Relationship{
                         override val name: String?
                             get() = "name $i"
                         override val timeLastContacted: Long?
-                            get() = System.currentTimeMillis()
+                            get() = today() - days(i)
                     }
                 )
             }
-*/
         }
 
         delete.setOnClickListener {
 
-/*
             relationshipViewModel.deleteRelationship(
                 object: Relationship{
                     override val name: String?
@@ -92,13 +88,21 @@ private val tag:String = RelationshipListActivity::class.java.name
                         get() = System.currentTimeMillis()
                 }
             )
-*/
         }
 
         //Set up the fragment
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(),FRAGMENT_TAG)
+               .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(),FRAGMENT_TAG)
             .commit()
 
+    }
+
+    private fun today() = System.currentTimeMillis()
+
+    private fun days(day:Int) = oneDayInMillis() * day
+
+
+    private fun oneDayInMillis():Long{
+        return 1000 * 60 * 60 * 24
     }
 }

@@ -46,7 +46,7 @@ dependencies {
     implementation applicationDependencies.appCompat
     implementation applicationDependencies.coreKtx
     implementation applicationDependencies.kotlin
-    implementation applicationDependencies.constrainstLayout
+    implementation applicationDependencies.constraintLayout
     implementation applicationDependencies.material
 
     testImplementation unitTestDependencies.junit

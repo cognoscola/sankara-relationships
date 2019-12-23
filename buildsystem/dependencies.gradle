@@ -67,7 +67,7 @@ ext {
             koinScope:           "org.koin:koin-androidx-scope:$koin_version",
             koinViewModel:       "org.koin:koin-androidx-viewmodel:$koin_version",
 
-            constrainstLayout:  "androidx.constraintlayout:constraintlayout:$constraints_version",
+            constraintLayout:  "androidx.constraintlayout:constraintlayout:$constraints_version",
             okhttp:             "com.squareup.okhttp:okhttp:$okhttp_version",
             converterGson:      "com.squareup.retrofit2:converter-gson:$retrofit_version",
             retrofit:           "com.squareup.retrofit2:retrofit:$retrofit_version",

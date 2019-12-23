@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.relationship_list_content.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-const val DAY_MILLIS = 8640000
+const val DAY_MILLIS = 86400000
 
 class RelationshipItemAdapter(
     private val values: ArrayList<RelationshipItem>
@@ -53,7 +53,6 @@ class RelationshipItemAdapter(
         val diff = System.currentTimeMillis() - time
         val day = (diff / (DAY_MILLIS)).toInt()
 
-        Log.d("$tag getTimeDifferenceString","$day")
         return when(day){
             0 -> "Today"
             1 -> "Yesterday"

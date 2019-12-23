@@ -33,8 +33,7 @@ dependencies {
     implementation applicationDependencies.appCompat
     implementation applicationDependencies.coreKtx
 
-    //TODO rename the constrainst to constraint!
-    implementation applicationDependencies.constrainstLayout
+    implementation applicationDependencies.constraintLayout
     implementation applicationDependencies.kotlin
 
     implementation applicationDependencies.koinCore

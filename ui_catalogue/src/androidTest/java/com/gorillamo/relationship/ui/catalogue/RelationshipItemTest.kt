@@ -1,9 +1,7 @@
 package com.gorillamo.relationship.ui.catalogue
 
-import android.provider.Settings
 import android.util.Log
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -15,7 +13,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.*
 
 //import org.koin.androidx.viewmodel.dsl.viewModel
 //import org.koin.core.context.loadKoinModules
@@ -26,10 +23,10 @@ import java.util.*
 //import org.mockito.Mockito.mock
 
 @RunWith(AndroidJUnit4::class)
-class RelationshipTestWithMockViewModel {
+class RelationshipItemTest {
 //class RelationshipTestWithMockViewModel: KoinTest {
     @Suppress("unused")
-    private val tag:String = RelationshipTestWithMockViewModel::class.java.name
+    private val tag:String = RelationshipItemTest::class.java.name
 
     @Rule
     @JvmField
@@ -83,6 +80,7 @@ class RelationshipTestWithMockViewModel {
         onView(withText("Yesterday")).check(matches(isDisplayed()))
         onView(withText("2 days ago")).check(matches(isDisplayed()))
         onView(withText("3 days ago")).check(matches(isDisplayed()))
+        onView(withText("4 days ago")).check(matches(isDisplayed()))
     }
 
     private fun generateRelationshipList():List<RelationshipItemAdapter.RelationshipItem>{
@@ -90,15 +88,19 @@ class RelationshipTestWithMockViewModel {
 
         return List(5) { i ->
 
-            val time = System.currentTimeMillis() - oneDayInMillis() * i
+            val time = today() - days(i)
             val item = RelationshipItemAdapter.RelationshipItem(
                 name = "name $i",
                 timeLastContacted = time
             )
-            Log.d("$tag generateRelationshipList","$time")
+            System.out.println("Time is $time");
             item
         }
     }
+
+    private fun today() = System.currentTimeMillis()
+
+    private fun days(day:Int) = oneDayInMillis() * day
 
     private fun oneDayInMillis():Long{
         return 1000 * 60 * 60 * 24
