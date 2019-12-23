@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ui_catalogue</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_bottom_tab">BottomTabActivity</string>
+    <string name="title_today">Today</string>
+    <string name="title_all">All Relationships</string>
 </resources>

@@ -43,18 +43,27 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //TODO clean this gradle file: remove the extra dependencies and move the numbers to the
+    //other files
     implementation applicationDependencies.appCompat
     implementation applicationDependencies.coreKtx
     implementation applicationDependencies.kotlin
     implementation applicationDependencies.constraintLayout
     implementation applicationDependencies.material
 
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.navigation:navigation-fragment:2.0.0'
+    implementation 'androidx.navigation:navigation-ui:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
     testImplementation unitTestDependencies.junit
 
     debugImplementation acceptanceTestDependencies.rules
 //    debugImplementation acceptanceTestDependencies.androidMockito
 
-    androidTestImplementation (unitTestDependencies.koinTest) {exclude group: 'mockito.org' }
+    androidTestImplementation(unitTestDependencies.koinTest) { exclude group: 'mockito.org' }
     androidTestImplementation acceptanceTestDependencies.rules
     androidTestImplementation acceptanceTestDependencies.androidJUnit
     androidTestImplementation acceptanceTestDependencies.espressoCore

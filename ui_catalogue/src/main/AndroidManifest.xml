@@ -4,12 +4,23 @@
 
     <application>
         <activity
-            android:name=".CatalogueTestActivity"
-            android:label="Cat. Test"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".BottomTabActivity"
+            android:label="BottomTabActivity"
+            android:theme="@style/AppTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".CatalogueTestActivity"
+            android:label="Cat. Test"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

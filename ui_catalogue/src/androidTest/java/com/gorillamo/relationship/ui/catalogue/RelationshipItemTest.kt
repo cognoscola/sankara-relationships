@@ -73,14 +73,26 @@ class RelationshipItemTest {
         val activity = rule.launchActivity(null)
 
         activity.replaceItems(generateRelationshipList())
+        Thread.sleep(500)
 
-        Thread.sleep(5000)
-
-        onView(withText("Today")).check(matches(isDisplayed()))
         onView(withText("Yesterday")).check(matches(isDisplayed()))
         onView(withText("2 days ago")).check(matches(isDisplayed()))
         onView(withText("3 days ago")).check(matches(isDisplayed()))
         onView(withText("4 days ago")).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun should_show_bottom_navigation_with_two_tabs(){
+        val activity = rule.launchActivity(null)
+
+        activity.replaceItems(generateRelationshipList())
+
+        Thread.sleep(500)
+
+        onView(withText("Today")).check(matches(isCompletelyDisplayed()))
+        onView(withText("All Relationships")).check(matches(isCompletelyDisplayed()))
+
+
     }
 
     private fun generateRelationshipList():List<RelationshipItemAdapter.RelationshipItem>{

@@ -9,6 +9,7 @@ import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.shared.EntryActivity
 import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter
 import com.gorillamo.relationship.ui.catalogue.RelationshipListFragment
+import com.gorillamo.relationship.ui.catalogue.RelationshipView
 
 import kotlinx.android.synthetic.main.activity_relationship_list.*
 import org.koin.android.ext.android.inject
@@ -45,7 +46,6 @@ private val tag:String = RelationshipListActivity::class.java.name
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-
         relationshipViewModel.loadAllRelationships()?.observe(this, Observer { list ->
             list?.let {
 
@@ -62,47 +62,10 @@ private val tag:String = RelationshipListActivity::class.java.name
             }
         })
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Add 10 to DB", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-
-            for(i in 0..10){
-                relationshipViewModel.insert(
-                    object: Relationship{
-                        override val name: String?
-                            get() = "name $i"
-                        override val timeLastContacted: Long?
-                            get() = today() - days(i)
-                    }
-                )
-            }
-        }
-
-        delete.setOnClickListener {
-
-            relationshipViewModel.deleteRelationship(
-                object: Relationship{
-                    override val name: String?
-                        get() = "name 0"
-                    override val timeLastContacted: Long?
-                        get() = System.currentTimeMillis()
-                }
-            )
-        }
-
         //Set up the fragment
         supportFragmentManager.beginTransaction()
-               .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(),FRAGMENT_TAG)
+               .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(relationshipViewModel),FRAGMENT_TAG)
             .commit()
 
-    }
-
-    private fun today() = System.currentTimeMillis()
-
-    private fun days(day:Int) = oneDayInMillis() * day
-
-
-    private fun oneDayInMillis():Long{
-        return 1000 * 60 * 60 * 24
     }
 }
