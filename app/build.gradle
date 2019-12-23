@@ -49,8 +49,7 @@ android {
         }
     }
 
-    dynamicFeatures = [":ui_catalog"]
-
+    dynamicFeatures = [":feature_catalogue"]
 
 }
 

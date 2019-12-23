@@ -11,10 +11,10 @@
             <option value="$PROJECT_DIR$/abstraction" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/feature_catalogue" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/persistence" />
             <option value="$PROJECT_DIR$/shared" />
-            <option value="$PROJECT_DIR$/ui_catalog" />
             <option value="$PROJECT_DIR$/ui_catalogue" />
           </set>
         </option>
