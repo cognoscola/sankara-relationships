@@ -4,4 +4,10 @@
     <string name="title_activity_bottom_tab">BottomTabActivity</string>
     <string name="title_today">Today</string>
     <string name="title_all">All Relationships</string>
+
+
+    <!--    Dialog-->
+    <string name="dialog_frequency">How often? (days)</string>
+    <string name="dialog_delete">Delete</string>
+    <string name="dialog_save">Save</string>
 </resources>

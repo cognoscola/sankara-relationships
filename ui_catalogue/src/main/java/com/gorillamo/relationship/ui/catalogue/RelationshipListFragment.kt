@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.relationship_list.*
-import kotlinx.android.synthetic.main.relationship_list_fragment.*
+import kotlinx.android.synthetic.main.fragment_relationship_list.*
 import java.util.ArrayList
 
 class RelationshipListFragment :Fragment(){
@@ -19,7 +19,7 @@ class RelationshipListFragment :Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.relationship_list_fragment,container,false)
+        return inflater.inflate(R.layout.fragment_relationship_list,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,6 +39,11 @@ class RelationshipListFragment :Fragment(){
                 }
                 else -> false
             }
+        }
+
+        addFab.setOnClickListener {
+
+            RelationshipDialogFragment.newInstance().show(fragmentManager!!.beginTransaction(),"Dialog!")
         }
     }
 

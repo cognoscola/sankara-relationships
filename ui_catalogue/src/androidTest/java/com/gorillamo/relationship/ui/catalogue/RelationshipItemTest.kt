@@ -2,10 +2,12 @@ package com.gorillamo.relationship.ui.catalogue
 
 import android.util.Log
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
+import org.hamcrest.CoreMatchers.startsWith
 //import androidx.test.rule.ActivityTestRule
 //import com.gorillamo.relationship.abstraction.dto.Relationship
 import org.junit.After
@@ -94,6 +96,18 @@ class RelationshipItemTest {
 
 
     }
+
+    @Test
+    fun shows_dialog_fragment_when_new_item_clicked(){
+        val activity = rule.launchActivity(null)
+        onView(withId(R.id.addFab)).perform(click())
+        Thread.sleep(500)
+        onView(withText(startsWith("How often"))).check(matches(isDisplayed()))
+
+    }
+
+
+
 
     private fun generateRelationshipList():List<RelationshipItemAdapter.RelationshipItem>{
 
