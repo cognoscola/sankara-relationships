@@ -6,8 +6,8 @@ import com.gorillamo.relationship.abstraction.extPorts.UseCaseWithParams
 
 class DeleteRelationshipUseCase (
     val repository: RelationshipRepository
-):UseCaseWithParams<Relationship, Int>(){
-    override suspend fun buildUseCase(params: Relationship):Int {
+):UseCaseWithParams<String, Int>(){
+    override suspend fun buildUseCase(params: String):Int {
 
         return repository.deleteRelationship(params)
     }

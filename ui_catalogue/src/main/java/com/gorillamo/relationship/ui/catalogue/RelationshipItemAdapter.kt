@@ -14,7 +14,8 @@ import kotlin.collections.ArrayList
 const val DAY_MILLIS = 86400000
 
 class RelationshipItemAdapter(
-    private val values: ArrayList<RelationshipItem>
+    private val values: ArrayList<RelationshipItem>,
+    private val onItemClickCallback:(RelationshipItem)->Any?
 ) : RecyclerView.Adapter<RelationshipItemAdapter.ViewHolder>() {
     @Suppress("unused")
     private val tag:String = RelationshipItemAdapter::class.java.name
@@ -22,12 +23,10 @@ class RelationshipItemAdapter(
     private val onClickListener: View.OnClickListener
     private val cal = Calendar.getInstance()
 
+
     init {
         onClickListener = View.OnClickListener { v ->
-
-            /* val intent = Intent(v.context, com.gorillamo.relationship.catalog.RelationshipDetailActivity::class.java).apply {
-                    putExtra(com.gorillamo.relationship.catalog.RelationshipDetailFragment.ARG_ITEM_ID, item.id)
-                }*/
+            onItemClickCallback(v.tag as RelationshipItem)
         }
     }
 
@@ -41,6 +40,7 @@ class RelationshipItemAdapter(
         val item = values[position]
         holder.idView.text = item.name
         holder.contentView.text = getTimeDifferenceString(item.timeLastContacted)
+
 
         with(holder.itemView) {
             tag = item
@@ -57,7 +57,6 @@ class RelationshipItemAdapter(
             0 -> "Today"
             1 -> "Yesterday"
             else -> "$day days ago"
-
         }
     }
 
@@ -76,6 +75,8 @@ class RelationshipItemAdapter(
 
     data class RelationshipItem(
         val name: String,
-        val timeLastContacted: Long
+        val timeLastContacted: Long,
+        val frequency:Float
+
     )
 }

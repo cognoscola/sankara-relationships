@@ -6,11 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gorillamo.relationship.abstraction.dto.Relationship
-//import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
 import com.gorillamo.relationship.abstraction.extPorts.UseCaseProvider
 import com.gorillamo.relationship.catalog.Coroutines.io
 import com.gorillamo.relationship.catalog.Coroutines.ioThenMain
 import com.gorillamo.relationship.ui.catalogue.RelationshipView
+
 
 public class RelationshipViewModel(
 
@@ -32,9 +32,9 @@ public class RelationshipViewModel(
     }
 
     //TODO change to delete one!
-    fun deleteRelationship(relationship: Relationship){
+    fun deleteRelationship(name:String){
         io{
-            useCaseProvider.deleteRelationShip.execute(relationship)
+            useCaseProvider.deleteRelationShip.execute(name)
         }
     }
 
@@ -42,10 +42,9 @@ public class RelationshipViewModel(
         for(i in 0..10){
             insert(
                 object: Relationship{
-                    override val name: String?
-                        get() = "name $i"
-                    override val timeLastContacted: Long?
-                        get() = today() - days(i)
+                    override val name: String? get() = "name $i"
+                    override val timeLastContacted: Long? get() = today() - days(i)
+                    override val frequency: Float? get() = 0F
                 }
             )
         }
@@ -62,14 +61,27 @@ public class RelationshipViewModel(
     }
 
     override fun todayClicked() {
-        deleteRelationship(
+        /*deleteRelationship(
             object: Relationship{
-                override val name: String?
-                    get() = "name 0"
-                override val timeLastContacted: Long?
-                    get() = System.currentTimeMillis()
+                override val name: String? get() = "name 0"
+                override val timeLastContacted: Long? get() = System.currentTimeMillis()
+                override val frequency: Float? get() = 0F
+            }
+        )*/
+    }
+
+    override fun addClicked(name: String, frequency: Float) {
+        insert(
+            object: Relationship{
+                override val name: String? get() = name
+                override val timeLastContacted: Long? get() = 0
+                override val frequency: Float? get() = frequency
             }
         )
+    }
+
+    override fun deleteClicked(name: String) {
+        deleteRelationship(name)
     }
 
 }

@@ -1,5 +1,6 @@
 package com.gorillamo.relationship.ui.catalogue
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,17 @@ import java.util.ArrayList
 class RelationshipListFragment :Fragment(){
 
     lateinit var relationshipView:RelationshipView
+
+    val dialogInteraction = object :RelationshipDialogFragment.ItemDialogInteraction{
+        override fun deleteClicked(name: String) {
+            relationshipView.deleteClicked(name)
+        }
+
+
+        override fun saveClicked(name: String, frequency: Float) {
+            relationshipView.addClicked(name,frequency)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,23 +55,18 @@ class RelationshipListFragment :Fragment(){
 
         addFab.setOnClickListener {
 
-            RelationshipDialogFragment.newInstance().show(fragmentManager!!.beginTransaction(),"Dialog!")
+            RelationshipDialogFragment.newInstance(dialogInteraction).show(fragmentManager!!.beginTransaction(),"Dialog!")
         }
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
 
-        val list = ArrayList<RelationshipItemAdapter.RelationshipItem>()
-        for(i in 0..9){
-            list.add (RelationshipItemAdapter.RelationshipItem(
-                name = "name $i",
-                timeLastContacted = System.currentTimeMillis()
-            ))
-        }
         recyclerView.adapter =
-            RelationshipItemAdapter(
-                values = ArrayList()
-            )
+            RelationshipItemAdapter(values = ArrayList()){
+
+                RelationshipDialogFragment.newInstance(dialogInteraction, it.name,it.frequency).show(fragmentManager!!.beginTransaction(),"Dialog!")
+
+            }
     }
 
     public fun updateContent(list:List<RelationshipItemAdapter.RelationshipItem>){

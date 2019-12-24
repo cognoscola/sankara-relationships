@@ -6,4 +6,8 @@ interface RelationshipView {
 
     fun allRelationshipsClicked()
 
+    fun addClicked(name:String, frequency:Float)
+
+    fun deleteClicked(name:String)
+
 }

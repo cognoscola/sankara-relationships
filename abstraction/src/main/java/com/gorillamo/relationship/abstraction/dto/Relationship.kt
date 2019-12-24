@@ -4,5 +4,6 @@ interface Relationship{
 
     val name:String?
     val timeLastContacted:Long?
+    val frequency:Float?
 
 }

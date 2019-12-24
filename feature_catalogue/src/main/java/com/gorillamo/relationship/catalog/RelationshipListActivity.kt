@@ -54,7 +54,8 @@ private val tag:String = RelationshipListActivity::class.java.name
                     val items = it.map {
                         RelationshipItemAdapter.RelationshipItem(
                             name = it.name?:"",
-                            timeLastContacted = it.timeLastContacted?:0L
+                            timeLastContacted = it.timeLastContacted?:0L,
+                            frequency = 0F
                         )
                     }
                     (fragment as RelationshipListFragment).updateContent(items)

@@ -10,6 +10,7 @@ import java.util.ArrayList
 
 class CatalogueTestActivity : AppCompatActivity() {
 
+    //TODO when you come back we'll provide a modelview mockito with Koin
     lateinit var fragment:RelationshipListFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,27 @@ class CatalogueTestActivity : AppCompatActivity() {
         }
 
         override fun todayClicked() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        }
+
+        override fun addClicked(name: String, frequency: Float) {
+
+            val list = List<RelationshipItemAdapter.RelationshipItem>(1){
+                RelationshipItemAdapter.RelationshipItem(
+                    name,0,0F
+                )
+            }
+            fragment.updateContent(list)
+        }
+
+        override fun deleteClicked(name: String) {
+
+            val list = List<RelationshipItemAdapter.RelationshipItem>(1){
+                RelationshipItemAdapter.RelationshipItem(
+                    name+"1",0,0F
+                )
+            }
+            fragment.updateContent(list)
         }
     }
 }

@@ -34,15 +34,14 @@ internal class RelationshipDaoAdapter(
         return relationshipDao.getAllRelationship()
     }
 
-
     override fun getTodaysRelationshipLive(): LiveData<out List<Relationship>?> {
         return relationshipDao.getTodaysRelationship()
     }
 
     //TODO FIX THIS
-    override suspend fun deleteRelationship(relationship: Relationship):Int {
-        return relationship.name?.let {  relationshipDao.delete() }?:0
-//        relationship.name?.let {  relationshipDao.delete(relationship.name!!) }
+    override suspend fun deleteRelationship(name:String):Int {
+//        return relationship.name?.let {  relationshipDao.delete() }?:0
+        return relationshipDao.delete(name)
 
     }
 }

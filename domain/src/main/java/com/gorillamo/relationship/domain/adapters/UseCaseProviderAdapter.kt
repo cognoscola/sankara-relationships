@@ -27,7 +27,7 @@ internal class UseCaseProviderAdapter(
     override val loadRelationship: UseCaseSync<LiveData<out List<Relationship>>>
         get() = LoadRelationshipsUseCase(repository)
 
-    override val deleteRelationShip: UseCaseWithParams<Relationship, Int>
+    override val deleteRelationShip: UseCaseWithParams<String, Int>
         get() = DeleteRelationshipUseCase(repository)
 
 }

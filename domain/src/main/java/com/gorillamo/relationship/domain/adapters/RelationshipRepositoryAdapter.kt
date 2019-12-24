@@ -27,8 +27,7 @@ internal class RelationshipRepositoryAdapter(
         return relationshipDaoPort.getTodaysRelationshipLive()
     }
 
-    override suspend fun deleteRelationship(relationship: Relationship):Int {
-        return relationshipDaoPort.deleteRelationship(relationship)
+    override suspend fun deleteRelationship(name:String):Int {
+        return relationshipDaoPort.deleteRelationship(name)
     }
-
 }

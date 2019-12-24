@@ -10,5 +10,7 @@ data class  RelationshipDatabaseObject(
     @PrimaryKey(autoGenerate = true)
     var id:Int? = null,
     override val name: String = "",
-    override val timeLastContacted:Long = 0L
+    override val timeLastContacted:Long = 0L,
+    override val frequency: Float? = 0F
+
 ):Relationship

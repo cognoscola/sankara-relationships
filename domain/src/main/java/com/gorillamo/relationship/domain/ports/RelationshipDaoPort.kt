@@ -14,6 +14,6 @@ interface RelationshipDaoPort{
 
     suspend fun insertOrUpdate(relationship: Relationship):Long
 
-    suspend fun deleteRelationship(relationship: Relationship):Int
+    suspend fun deleteRelationship(name:String):Int
 
 }

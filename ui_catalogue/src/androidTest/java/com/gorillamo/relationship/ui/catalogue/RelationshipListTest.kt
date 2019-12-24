@@ -1,12 +1,13 @@
 package com.gorillamo.relationship.ui.catalogue
 
-import android.util.Log
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
+import org.hamcrest.CoreMatchers.not
 import org.hamcrest.CoreMatchers.startsWith
 //import androidx.test.rule.ActivityTestRule
 //import com.gorillamo.relationship.abstraction.dto.Relationship
@@ -25,10 +26,10 @@ import org.junit.runner.RunWith
 //import org.mockito.Mockito.mock
 
 @RunWith(AndroidJUnit4::class)
-class RelationshipItemTest {
+class RelationshipListTest {
 //class RelationshipTestWithMockViewModel: KoinTest {
     @Suppress("unused")
-    private val tag:String = RelationshipItemTest::class.java.name
+    private val tag:String = RelationshipListTest::class.java.name
 
     @Rule
     @JvmField
@@ -99,19 +100,45 @@ class RelationshipItemTest {
 
     @Test
     fun shows_dialog_fragment_when_new_item_clicked(){
-        val activity = rule.launchActivity(null)
+        rule.launchActivity(null)
         onView(withId(R.id.addFab)).perform(click())
         Thread.sleep(500)
         onView(withText(startsWith("How often"))).check(matches(isDisplayed()))
 
     }
 
+    @Test
+    fun adds_item_to_list_view_when_item_saved(){
+        val name = "Dr Amen"
+        rule.launchActivity(null)
+        onView(withId(R.id.addFab)).perform(click())
+        Thread.sleep(500)
 
+        onView(withId(R.id.nameEditText)).perform(ViewActions.typeText(name))
+        onView(withId(R.id.saveButton)).perform(click())
 
+        onView(withText(name)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun item_is_removed_from_list_when_delete_in_dialog_is_pressed(){
+
+        val activity = rule.launchActivity(null)
+
+        activity.replaceItems(generateRelationshipList())
+        Thread.sleep(500)
+
+        onView(withText("name 0")).perform(click())
+
+        Thread.sleep(200)
+
+        onView(withText("Delete")).perform(click())
+
+        onView(withText("name 0")).check(matches(not(isDisplayed())))
+
+    }
 
     private fun generateRelationshipList():List<RelationshipItemAdapter.RelationshipItem>{
-
-
         return List(5) { i ->
 
             val time = today() - days(i)

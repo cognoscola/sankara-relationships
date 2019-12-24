@@ -1,19 +1,24 @@
 package com.gorillamo.relationship.ui.catalogue
 
 
-
-
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
-
 import kotlinx.android.synthetic.main.fragment_relationship_dialog.*
 
 
 class RelationshipDialogFragment : DialogFragment() {
+
+    lateinit var interactionCallback:ItemDialogInteraction
+
+    //TODO app crashes on screen rotation of this view
+    private lateinit var name:String
+    private var frequency: Float = 0F
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -25,19 +30,64 @@ class RelationshipDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         nameEditText.hint = "John Snow "
+        nameEditText.setText(name)
+
+        //TODO write text for text change behaviour
+        nameEditText.addTextChangedListener(object:TextWatcher{
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.isNullOrEmpty()) {
+                    deleteButton.visibility = View.INVISIBLE
+                }else{
+                    deleteButton.visibility = View.VISIBLE
+                }
+            }
+
+        })
         daysEditText.hint = "3"
+        daysEditText.setText(frequency.toString())
+
         saveButton.setOnClickListener {
+            interactionCallback.saveClicked(nameEditText.text.toString(),0F)
             dismiss()
         }
         deleteButton.setOnClickListener {
+
+            interactionCallback.deleteClicked(nameEditText.text.toString())
             dismiss()
         }
 
     }
 
+
+
     companion object {
-        fun newInstance(): RelationshipDialogFragment {
-            return RelationshipDialogFragment()
+        fun newInstance(callback:ItemDialogInteraction): RelationshipDialogFragment {
+            return RelationshipDialogFragment().apply {
+                this.interactionCallback = callback
+            }
         }
+
+
+        fun newInstance(callback:ItemDialogInteraction,name:String,frequency: Float): RelationshipDialogFragment {
+            return RelationshipDialogFragment().apply {
+                this.interactionCallback = callback
+                this.name = name
+                this.frequency = frequency
+            }
+        }
+    }
+
+    interface ItemDialogInteraction{
+        fun saveClicked(name:String,frequency:Float)
+        fun deleteClicked(name:String)
     }
 }
