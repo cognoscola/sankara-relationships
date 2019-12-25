@@ -9,6 +9,7 @@ import com.gorillamo.relationship.domain.usecase.DeleteRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.LoadRelationshipsUseCase
 import com.gorillamo.relationship.domain.usecase.LoadTodaysRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.SaveRelationshipUseCase
+import com.gorillamo.scheduler.SchedulerPort
 import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -18,6 +19,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.spy
 import org.mockito.junit.MockitoJUnitRunner
@@ -33,6 +35,9 @@ class UsecasesTest {
     @Mock
     lateinit var repo:RelationshipRepository
 
+    @Mock
+    lateinit var schedulerPort: SchedulerPort
+
     lateinit var insert:SaveRelationshipUseCase
     lateinit var load:LoadRelationshipsUseCase
     lateinit var loadToday: LoadTodaysRelationshipUseCase
@@ -47,7 +52,8 @@ class UsecasesTest {
 
         insert = SaveRelationshipUseCase(repo)
         load = LoadRelationshipsUseCase(repo)
-        loadToday= LoadTodaysRelationshipUseCase(repo)
+        delete = DeleteRelationshipUseCase(repo)
+        loadToday= LoadTodaysRelationshipUseCase(repo,schedulerPort)
 
     }
 
@@ -60,10 +66,14 @@ class UsecasesTest {
     fun `add or replace a relationship`() = runBlockingTest{
 
         val data= object :Relationship{
+            override val id: Int
+                get() = 0
             override val name: String?
                 get() = "Hello"
             override val timeLastContacted: Long?
                 get() = System.currentTimeMillis()
+            override val frequency: Float?
+                get() = 1.0f
         }
 
         insert.execute(data)
@@ -92,40 +102,47 @@ class UsecasesTest {
     }
 
     @Test
-    fun `load todays Relationship`(){
+    fun `load todays Relationship`() = runBlockingTest{
 
         //GIVEN
-        val LIVE_DATA_MOCK = MutableLiveData<List<Relationship>>()
         val LIST_MOCK = generateRelationshipList()
-        LIVE_DATA_MOCK.value = LIST_MOCK
-        `when`(repo.getRelationshipsLive()).thenReturn(LIVE_DATA_MOCK)
+
+        val LIST_SCHEDULED_ITEMS_IDS = listOf(0,1,2,3,4)
+        `when`(repo.getRelationships()).thenReturn(LIST_MOCK)
+        `when`(schedulerPort.getDueItems(Mockito.anyList())).thenReturn(LIST_SCHEDULED_ITEMS_IDS)
 
         //WHEN
-        loadToday.execute()
+        val result = loadToday.execute()
 
         //THEN
-        verify(repo).getTodaysRelationship()
-        LIVE_DATA_MOCK.observeOnce {
-            assertEquals(LIST_MOCK,it)
-        }
+        verify(repo).getRelationships()
+        verify(schedulerPort).getDueItems(Mockito.anyList())
+
+        assertEquals(5,result.size)
+
+
     }
 
     @Test
     fun `delete a relationship`() = runBlockingTest{
 
         val data= generateOneRelationship()
-        delete.execute(data)
-        verify(repo).deleteRelationship(data)
+        delete.execute(data.name!!)
+        verify(repo).deleteRelationship(data.name!!)
     }
 
 
     private fun generateOneRelationship():Relationship{
 
         return   object :Relationship{
+            override val id: Int
+                get() = 0
             override val name: String?
                 get() = "Hello"
             override val timeLastContacted: Long?
                 get() = System.currentTimeMillis()
+            override val frequency: Float?
+                get() = 1.0f
         }
 
     }
@@ -134,10 +151,14 @@ class UsecasesTest {
         return List(5){
 
             object :Relationship{
+                override val id: Int
+                    get() = it
                 override val name: String?
                     get() = "name $it"
                 override val timeLastContacted: Long?
                     get() = System.currentTimeMillis()
+                override val frequency: Float?
+                    get() = 1.0f
             }
         }
 

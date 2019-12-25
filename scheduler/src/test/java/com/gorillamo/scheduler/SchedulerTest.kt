@@ -22,10 +22,9 @@ class SchedulerTest{
         val items = generateItems(5,ItemstoScheduleForToday)
 
         //when
-        val outList = scheduler.getItemsToday(items)
+        val outList = scheduler.getDueItems(items)
 
         assert(outList.size == ItemstoScheduleForToday)
-
     }
 
     @Test
@@ -35,42 +34,64 @@ class SchedulerTest{
         val items = generateItems(5,ItemstoScheduleForToday)
 
         //when
-        val outList = scheduler.getItemsToday(items)
+        val outList = scheduler.getDueItems(items)
 
         assert(outList.size == ItemstoScheduleForToday)
-        assert(outList[0].id.get() == 0)
-        assert(outList[1].id.get() == 1)
+        assert(outList[0] == 0)
+        assert(outList[1] == 1)
     }
 
-    /**
-     * Generates a list of SCheduling items of size @param total
-     * @param total
-     * @param today marks how many should be today
-     */
-    fun generateItems(total:Int, today:Int):List<SchedulingItem>{
+    @Test
+    fun `returns 5 items`(){
+        //Given items
+        val ItemstoScheduleForToday = 5
+        val items = generateItems(5,ItemstoScheduleForToday)
 
-        var todayRemainig = today
+        //when
+        val outList = scheduler.getDueItems(items)
 
-        return List(total){
+        assert(outList.size == ItemstoScheduleForToday)
+        assert(outList[0] == 0)
+        assert(outList[1] == 1)
+    }
 
-            if(todayRemainig > -1) todayRemainig--;
+    companion object{
 
-            SchedulingItem(
-                Identifier(it),
-                PointInTime(System.currentTimeMillis() - if(todayRemainig>-1){ oneDayInMillis()} else {0}),
-                Frequency(1.0f)
-            )
+        /**
+         * Generates a list of SCheduling items of size @param total
+         * @param total
+         * @param today marks how many should be today
+         */
+        fun generateItems(total:Int, today:Int):List<SchedulingItem>{
+
+            var todayRemainig = today
+
+            return List(total){
+
+                if(todayRemainig > -1) todayRemainig--;
+
+
+                SchedulingItem(
+                    Identifier(it),
+                    PointInTime(System.currentTimeMillis() - if(todayRemainig>-1){ oneDayInMillis()*(it+1)} else {0}),
+                    Frequency(1.0f/(it+1))
+                )
+            }
+
         }
 
+
+        private fun today() = System.currentTimeMillis()
+
+        private fun days(day:Int) = oneDayInMillis() * day
+
+        private fun oneDayInMillis():Long{
+            return 1000 * 60 * 60 * 24
+        }
+
+
     }
 
-    private fun today() = System.currentTimeMillis()
-
-    private fun days(day:Int) = oneDayInMillis() * day
-
-    private fun oneDayInMillis():Long{
-        return 1000 * 60 * 60 * 24
-    }
 
 
 }

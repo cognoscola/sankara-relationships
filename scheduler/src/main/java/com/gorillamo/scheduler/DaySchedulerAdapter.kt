@@ -10,14 +10,13 @@ class DaySchedulerAdapter:SchedulerPort{
 //    private var timeOfLastInteraction:LocalDateTime? = null
     private var zonedDateTime:ZonedDateTime? = null
     private var dayDiff = 0
-    private var outList= ArrayList<SchedulingItem>()
+    private var outList= ArrayList<Int>()
     private var period:Period? = null
-
 
     /**
      * Get the list of today's schedule
      */
-    override fun getItemsToday(input: List<SchedulingItem>): List<SchedulingItem> {
+    override fun getDueItems(input: List<SchedulingItem>): List<Int> {
 
         outList.clear()
 
@@ -35,7 +34,7 @@ class DaySchedulerAdapter:SchedulerPort{
                 val diff: Int = period!!.getDays()
 
                 if(diff*it.frequency.get() >= 1.0f)
-                    outList.add(it)
+                    outList.add(it.id.get())
             }
         }
 

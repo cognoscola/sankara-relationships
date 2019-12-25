@@ -12,7 +12,6 @@ interface RelationshipRepository {
 
     fun getRelationships():List<Relationship>
 
-    //fun getTodaysRelationship(): LiveData<out List<Relationship>?>
 
     suspend fun insertOrUpdateRelationship(relationship: Relationship):Long
 

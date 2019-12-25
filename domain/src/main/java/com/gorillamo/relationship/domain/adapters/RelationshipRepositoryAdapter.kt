@@ -23,7 +23,7 @@ internal class RelationshipRepositoryAdapter(
         return relationshipDaoPort.insertOrUpdate(relationship)
     }
 
-    override fun getTodaysRelationship(): LiveData<out List<Relationship>?> {
+    override fun getRelationships(): List<Relationship> {
         return relationshipDaoPort.getTodaysRelationshipLive()
     }
 

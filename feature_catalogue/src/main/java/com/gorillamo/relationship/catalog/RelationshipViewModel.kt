@@ -48,9 +48,7 @@ public class RelationshipViewModel(
                 }
             )
         }
-
     }
-
 
     private fun today() = System.currentTimeMillis()
 
