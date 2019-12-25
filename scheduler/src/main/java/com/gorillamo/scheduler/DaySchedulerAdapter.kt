@@ -22,20 +22,29 @@ class DaySchedulerAdapter:SchedulerPort{
 
         input.forEach {
 
-            zonedDateTime = Instant.ofEpochMilli(it.timeLastInteracted.get()).atZone(ZoneId.systemDefault())
+            if (it.timeLastInteracted.get() <= 0) {
+                outList.add(it.id.get())
+            }else if (it.timeLastInteracted.get() > System.currentTimeMillis()){
 
-            //For now we'll just go at most once per day
-            if(it.frequency.get() <= 1.0f){
+                //Do nothing
+            }else {
 
-                dayOfLastInteraction = zonedDateTime!!.toLocalDate()
+                zonedDateTime = Instant.ofEpochMilli(it.timeLastInteracted.get()).atZone(ZoneId.systemDefault())
 
-                //how many days since last interaction?
-                period = Period.between(dayOfLastInteraction, today)
-                val diff: Int = period!!.getDays()
+                //For now we'll just go at most once per day
+                if(it.frequency.get() <= 1.0f){
 
-                if(diff*it.frequency.get() >= 1.0f)
-                    outList.add(it.id.get())
+                    dayOfLastInteraction = zonedDateTime!!.toLocalDate()
+
+                    //how many days since last interaction?
+                    period = Period.between(dayOfLastInteraction, today)
+                    val diff: Int = period!!.getDays()
+
+                    if(diff*it.frequency.get() >= 1.0f)
+                        outList.add(it.id.get())
+                }
             }
+
         }
 
         return outList.toList()

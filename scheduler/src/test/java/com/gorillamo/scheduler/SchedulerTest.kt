@@ -55,6 +55,38 @@ class SchedulerTest{
         assert(outList[1] == 1)
     }
 
+    @Test
+    fun `handles new or unknown lastTimeContacted object`(){
+
+        val ZERO_TIME_ITEM = SchedulingItem(
+            id =Identifier(0),
+            timeLastInteracted = PointInTime(0),
+            frequency = Frequency(1.0f)
+        )
+
+        val NEGATIVE_TIME_ITEM  = SchedulingItem(
+            id =Identifier(1),
+            timeLastInteracted = PointInTime(-30),
+            frequency = Frequency(1.0f)
+        )
+
+        val FUTURE_ITEM = SchedulingItem(
+            id =Identifier(2),
+            timeLastInteracted = PointInTime(System.currentTimeMillis() + oneDayInMillis()),
+            frequency = Frequency(1.0f)
+        )
+
+        val input = listOf(ZERO_TIME_ITEM,NEGATIVE_TIME_ITEM,FUTURE_ITEM)
+
+        val scheduled = scheduler.getDueItems(input)
+
+        assert(scheduled.size == 2)
+        assert(scheduled[0] == 0)
+        assert(scheduled[1] == 1)
+
+
+    }
+
     companion object{
 
         /**
@@ -69,7 +101,6 @@ class SchedulerTest{
             return List(total){
 
                 if(todayRemainig > -1) todayRemainig--;
-
 
                 SchedulingItem(
                     Identifier(it),

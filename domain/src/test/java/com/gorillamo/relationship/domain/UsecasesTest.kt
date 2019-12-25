@@ -120,7 +120,6 @@ class UsecasesTest {
 
         assertEquals(5,result.size)
 
-
     }
 
     @Test
