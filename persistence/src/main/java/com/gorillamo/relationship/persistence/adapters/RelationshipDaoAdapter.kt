@@ -22,7 +22,7 @@ internal class RelationshipDaoAdapter(
         else
             relationshipDao.insertOrReplace(
                 RelationshipDatabaseObject(
-                    null,
+                    0,
                     relationship.name!!, relationship.timeLastContacted!!
                 )
             )
@@ -34,7 +34,8 @@ internal class RelationshipDaoAdapter(
         return relationshipDao.getAllRelationship()
     }
 
-    override fun getTodaysRelationshipLive(): LiveData<out List<Relationship>?> {
+
+    override fun getTodaysRelationshipLive():LiveData<out List<Relationship>?>{
         return relationshipDao.getTodaysRelationship()
     }
 

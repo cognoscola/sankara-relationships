@@ -11,7 +11,6 @@ import com.gorillamo.relationship.catalog.Coroutines.io
 import com.gorillamo.relationship.catalog.Coroutines.ioThenMain
 import com.gorillamo.relationship.ui.catalogue.RelationshipView
 
-
 public class RelationshipViewModel(
 
     val useCaseProvider: UseCaseProvider
@@ -26,7 +25,6 @@ public class RelationshipViewModel(
 
     fun insert(relationship: Relationship){
        io{
-           Log.d("Inserting","${relationship.name} @ ${relationship.timeLastContacted}")
            useCaseProvider.saveRelationship.execute(relationship)
         }
     }
@@ -39,16 +37,14 @@ public class RelationshipViewModel(
     }
 
     override fun allRelationshipsClicked() {
-        for(i in 0..10){
-            insert(
-                object: Relationship{
-                    override val name: String? get() = "name $i"
-                    override val timeLastContacted: Long? get() = today() - days(i)
-                    override val frequency: Float? get() = 0F
-                }
-            )
-        }
+
+
     }
+
+    override fun todayClicked() {
+
+    }
+
 
     private fun today() = System.currentTimeMillis()
 
@@ -58,19 +54,10 @@ public class RelationshipViewModel(
         return 1000 * 60 * 60 * 24
     }
 
-    override fun todayClicked() {
-        /*deleteRelationship(
-            object: Relationship{
-                override val name: String? get() = "name 0"
-                override val timeLastContacted: Long? get() = System.currentTimeMillis()
-                override val frequency: Float? get() = 0F
-            }
-        )*/
-    }
-
     override fun addClicked(name: String, frequency: Float) {
         insert(
             object: Relationship{
+                override val id: Int get() = 0
                 override val name: String? get() = name
                 override val timeLastContacted: Long? get() = 0
                 override val frequency: Float? get() = frequency

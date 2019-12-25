@@ -7,12 +7,13 @@ interface UseCaseProvider {
 
     val repository:RelationshipRepository
 
-    val saveRelationship:UseCaseWithParams<Relationship,Long>
 
     val loadRelationship:UseCaseSync<LiveData<out List<Relationship>>>
 
-    val deleteRelationShip:UseCaseWithParams<String,Int>
+    val getTodaysRelationship:UseCaseSync<LiveData<out List<Relationship>>>
 
-    val getTodaysRelationship:UseCase<List<Relationship>>
+    val saveRelationship:UseCaseWithParams<Relationship,Long>
+
+    val deleteRelationShip:UseCaseWithParams<String,Int>
 
 }

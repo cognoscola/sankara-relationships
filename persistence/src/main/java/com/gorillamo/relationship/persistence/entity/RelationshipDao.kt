@@ -16,7 +16,6 @@ interface RelationshipDao:
     /**
      * returns the number of rows affected by this delete
      */
-//    @Query("DELETE FROM RelationshipsTable")
     @Query("DELETE FROM RelationshipsTable WHERE name = :name")
     suspend fun delete(name:String): Int
 }

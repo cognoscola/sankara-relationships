@@ -23,11 +23,11 @@ internal class RelationshipRepositoryAdapter(
         return relationshipDaoPort.insertOrUpdate(relationship)
     }
 
-    override fun getRelationships(): List<Relationship> {
-        return relationshipDaoPort.getTodaysRelationshipLive()
+    override suspend fun deleteRelationship(name: String): Int {
+        return relationshipDaoPort.deleteRelationship(name)
     }
 
-    override suspend fun deleteRelationship(name:String):Int {
-        return relationshipDaoPort.deleteRelationship(name)
+    override fun getTodaysRelationships(): LiveData<out List<Relationship>?> {
+        return relationshipDaoPort.getTodaysRelationshipLive()
     }
 }

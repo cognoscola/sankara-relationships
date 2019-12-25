@@ -108,14 +108,14 @@ class UsecasesTest {
         val LIST_MOCK = generateRelationshipList()
 
         val LIST_SCHEDULED_ITEMS_IDS = listOf(0,1,2,3,4)
-        `when`(repo.getRelationships()).thenReturn(LIST_MOCK)
+        `when`(repo.getTodaysRelationships()).thenReturn(LIST_MOCK)
         `when`(schedulerPort.getDueItems(Mockito.anyList())).thenReturn(LIST_SCHEDULED_ITEMS_IDS)
 
         //WHEN
         val result = loadToday.execute()
 
         //THEN
-        verify(repo).getRelationships()
+        verify(repo).getTodaysRelationships()
         verify(schedulerPort).getDueItems(Mockito.anyList())
 
         assertEquals(5,result.size)

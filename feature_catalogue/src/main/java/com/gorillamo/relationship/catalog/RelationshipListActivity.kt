@@ -1,6 +1,7 @@
 package com.gorillamo.relationship.catalog
 
 import android.os.Bundle
+import android.util.Log
 
 import com.google.android.material.snackbar.Snackbar
 import androidx.lifecycle.Observer
@@ -33,7 +34,6 @@ private val tag:String = RelationshipListActivity::class.java.name
     private val relationshipViewModel: RelationshipViewModel by inject()
     private val FRAGMENT_TAG = "LIST_FRAGMENT"
 
-
     override fun loadModules() {
 
         CatalogueModule.load()
@@ -52,6 +52,8 @@ private val tag:String = RelationshipListActivity::class.java.name
                 supportFragmentManager.findFragmentByTag(FRAGMENT_TAG)?.let { fragment ->
 
                     val items = it.map {
+
+                        Log.d("$tag onCreate","Found Item with Id ${it.id}")
                         RelationshipItemAdapter.RelationshipItem(
                             name = it.name?:"",
                             timeLastContacted = it.timeLastContacted?:0L,

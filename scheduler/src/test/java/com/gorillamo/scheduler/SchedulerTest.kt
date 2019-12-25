@@ -108,9 +108,7 @@ class SchedulerTest{
                     Frequency(1.0f/(it+1))
                 )
             }
-
         }
-
 
         private fun today() = System.currentTimeMillis()
 
@@ -119,10 +117,5 @@ class SchedulerTest{
         private fun oneDayInMillis():Long{
             return 1000 * 60 * 60 * 24
         }
-
-
     }
-
-
-
 }

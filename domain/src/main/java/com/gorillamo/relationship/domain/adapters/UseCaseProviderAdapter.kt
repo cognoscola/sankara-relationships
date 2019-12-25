@@ -14,9 +14,8 @@ import com.gorillamo.scheduler.SchedulerPort
  */
 internal class UseCaseProviderAdapter(
 
-    override val repository: RelationshipRepository,
-
-    val schedulerPort: SchedulerPort
+    override val repository: RelationshipRepository
+//    val schedulerPort: SchedulerPort
 
 ):UseCaseProvider
 {
@@ -30,8 +29,6 @@ internal class UseCaseProviderAdapter(
     override val deleteRelationShip: UseCaseWithParams<String, Int>
         get() = DeleteRelationshipUseCase(repository)
 
-    override val getTodaysRelationship: UseCase<List<Relationship>>
-        get() = LoadTodaysRelationshipUseCase(repository,schedulerPort)
-
-
+    override val getTodaysRelationship: UseCaseSync<LiveData<out List<Relationship>>>
+        get() = LoadTodaysRelationshipUseCase(repository)
 }

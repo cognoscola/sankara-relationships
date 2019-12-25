@@ -24,7 +24,7 @@ object DomainModules {
         single<SchedulerPort>{ DaySchedulerAdapter()}
     }
     private val useCaseModule = module {
-        single<UseCaseProvider> { UseCaseProviderAdapter(get(),get())}
+        single<UseCaseProvider> { UseCaseProviderAdapter(get())}
     }
 
 

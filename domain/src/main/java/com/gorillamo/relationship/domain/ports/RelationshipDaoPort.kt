@@ -10,7 +10,7 @@ interface RelationshipDaoPort{
 
     fun getRelationshipsLive(): LiveData<out List<Relationship>?>
 
-    fun getTodaysRelationshipLive():List<Relationship>
+    fun getTodaysRelationshipLive():LiveData<out List<Relationship>?>
 
     suspend fun insertOrUpdate(relationship: Relationship):Long
 
