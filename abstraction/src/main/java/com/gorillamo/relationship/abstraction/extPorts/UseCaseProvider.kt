@@ -13,4 +13,6 @@ interface UseCaseProvider {
 
     val deleteRelationShip:UseCaseWithParams<String,Int>
 
+    val getTodaysRelationship:UseCase<List<Int>>
+
 }

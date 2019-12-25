@@ -17,7 +17,7 @@ class RelationshipDialogFragment : DialogFragment() {
     lateinit var interactionCallback:ItemDialogInteraction
 
     //TODO app crashes on screen rotation of this view
-    private lateinit var name:String
+    private var name:String = ""
     private var frequency: Float = 0F
 
     override fun onCreateView(
@@ -32,7 +32,7 @@ class RelationshipDialogFragment : DialogFragment() {
         nameEditText.hint = "John Snow "
         nameEditText.setText(name)
 
-        //TODO write text for text change behaviour
+        //TODO write test for text change behaviour
         nameEditText.addTextChangedListener(object:TextWatcher{
 
             override fun afterTextChanged(s: Editable?) {

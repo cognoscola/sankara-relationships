@@ -126,6 +126,7 @@ class RelationshipListTest {
         val activity = rule.launchActivity(null)
 
         activity.replaceItems(generateRelationshipList())
+
         Thread.sleep(500)
 
         onView(withText("name 0")).perform(click())
@@ -144,7 +145,8 @@ class RelationshipListTest {
             val time = today() - days(i)
             val item = RelationshipItemAdapter.RelationshipItem(
                 name = "name $i",
-                timeLastContacted = time
+                timeLastContacted = time,
+                frequency = 0f
             )
             System.out.println("Time is $time");
             item

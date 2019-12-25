@@ -3,20 +3,21 @@ package com.gorillamo.relationship.domain.adapters
 
 import androidx.lifecycle.LiveData
 import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
-import com.gorillamo.relationship.abstraction.extPorts.UseCaseProvider
-import com.gorillamo.relationship.abstraction.extPorts.UseCaseSync
-import com.gorillamo.relationship.abstraction.extPorts.UseCaseWithParams
+import com.gorillamo.relationship.abstraction.extPorts.*
 import com.gorillamo.relationship.domain.usecase.DeleteRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.LoadRelationshipsUseCase
+import com.gorillamo.relationship.domain.usecase.LoadTodaysRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.SaveRelationshipUseCase
+import com.gorillamo.scheduler.SchedulerPort
 
 /**
  * The use case layer
  */
 internal class UseCaseProviderAdapter(
 
-    override val repository: RelationshipRepository
+    override val repository: RelationshipRepository,
+
+    val schedulerPort: SchedulerPort
 
 ):UseCaseProvider
 {
@@ -29,5 +30,8 @@ internal class UseCaseProviderAdapter(
 
     override val deleteRelationShip: UseCaseWithParams<String, Int>
         get() = DeleteRelationshipUseCase(repository)
+
+    override val getTodaysRelationship: UseCase<List<Int>>
+        get() = LoadTodaysRelationshipUseCase(repository)
 
 }
