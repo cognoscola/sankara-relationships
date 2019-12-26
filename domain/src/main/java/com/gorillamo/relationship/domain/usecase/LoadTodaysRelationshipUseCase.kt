@@ -5,8 +5,7 @@ import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
 import com.gorillamo.relationship.abstraction.extPorts.UseCase
 import com.gorillamo.relationship.abstraction.extPorts.UseCaseSync
-import com.gorillamo.scheduler.DaySchedulerAdapter
-import com.gorillamo.scheduler.SchedulerPort
+
 
 class LoadTodaysRelationshipUseCase (
 

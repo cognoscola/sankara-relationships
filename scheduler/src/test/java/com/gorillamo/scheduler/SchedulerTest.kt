@@ -5,24 +5,35 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
+
+
 @RunWith(JUnit4::class)
 class SchedulerTest{
 
-    lateinit var scheduler:SchedulerPort
+    lateinit var scheduler:DaySchedulerAdapter<AGenericObject>
 
     @Before
-    fun setup(){
-        scheduler = DaySchedulerAdapter()
+    fun setup() {
+        scheduler = DaySchedulerAdapter {
+
+            SchedulingItem(
+                item = it,
+                timeLastInteracted = PointInTime(it.timeLastContacted!!),
+                frequency = Frequency(it.frequency!!)
+            )
+        }
     }
+
 
     @Test
     fun `returns no items`(){
         //Given items
         val ItemstoScheduleForToday = 0
-        val items = generateItems(5,ItemstoScheduleForToday)
+        val total = 5
+        val items = generateItems(total,ItemstoScheduleForToday)
 
         //when
-        val outList = scheduler.getDueItems(items)
+        val outList = scheduler.getItemsDue(items)
 
         assert(outList.size == ItemstoScheduleForToday)
     }
@@ -34,11 +45,11 @@ class SchedulerTest{
         val items = generateItems(5,ItemstoScheduleForToday)
 
         //when
-        val outList = scheduler.getDueItems(items)
+        val outList = scheduler.getItemsDue(items)
 
         assert(outList.size == ItemstoScheduleForToday)
-        assert(outList[0] == 0)
-        assert(outList[1] == 1)
+        assert(outList[0].name == "Name 0")
+        assert(outList[1].name == "Name 1")
     }
 
     @Test
@@ -48,53 +59,54 @@ class SchedulerTest{
         val items = generateItems(5,ItemstoScheduleForToday)
 
         //when
-        val outList = scheduler.getDueItems(items)
+        val outList = scheduler.getItemsDue(items)
 
         assert(outList.size == ItemstoScheduleForToday)
-        assert(outList[0] == 0)
-        assert(outList[1] == 1)
+        assert(outList[0].name == "Name 0")
+        assert(outList[1].name == "Name 1")
     }
 
     @Test
     fun `handles new or unknown lastTimeContacted object`(){
 
-        val ZERO_TIME_ITEM = SchedulingItem(
-            id =Identifier(0),
-            timeLastInteracted = PointInTime(0),
-            frequency = Frequency(1.0f)
+        val ZERO_TIME_ITEM = AGenericObject(
+            name = "Name 0",
+            timeLastContacted = 0,
+            frequency = 1.0f
         )
 
-        val NEGATIVE_TIME_ITEM  = SchedulingItem(
-            id =Identifier(1),
-            timeLastInteracted = PointInTime(-30),
-            frequency = Frequency(1.0f)
+        val NEGATIVE_TIME_ITEM  = AGenericObject(
+            name = "Name 1",
+            timeLastContacted = -1,
+            frequency = 1.0f
         )
 
-        val FUTURE_ITEM = SchedulingItem(
-            id =Identifier(2),
-            timeLastInteracted = PointInTime(System.currentTimeMillis() + oneDayInMillis()),
-            frequency = Frequency(1.0f)
+        val FUTURE_ITEM = AGenericObject(
+            name = "Name 2",
+            timeLastContacted = System.currentTimeMillis() + oneDayInMillis(),
+            frequency = 1.0f
         )
 
         val input = listOf(ZERO_TIME_ITEM,NEGATIVE_TIME_ITEM,FUTURE_ITEM)
 
-        val scheduled = scheduler.getDueItems(input)
+        val scheduled = scheduler.getItemsDue(input)
 
         assert(scheduled.size == 2)
-        assert(scheduled[0] == 0)
-        assert(scheduled[1] == 1)
+        assert(scheduled[0].name == "Name 0")
+        assert(scheduled[1].name == "Name 1")
 
 
     }
 
     companion object{
 
-        /**
+/**
          * Generates a list of SCheduling items of size @param total
          * @param total
          * @param today marks how many should be today
          */
-        fun generateItems(total:Int, today:Int):List<SchedulingItem>{
+
+        fun generateItems(total:Int, today:Int):List<AGenericObject>{
 
             var todayRemainig = today
 
@@ -102,11 +114,11 @@ class SchedulerTest{
 
                 if(todayRemainig > -1) todayRemainig--;
 
-                SchedulingItem(
-                    Identifier(it),
-                    PointInTime(System.currentTimeMillis() - if(todayRemainig>-1){ oneDayInMillis()*(it+1)} else {0}),
-                    Frequency(1.0f/(it+1))
-                )
+                    AGenericObject(
+                        "Name $it",
+                        System.currentTimeMillis() - if(todayRemainig>-1){ oneDayInMillis()*(it+1)} else {0},
+                        1.0f/(it+1)
+                    )
             }
         }
 
