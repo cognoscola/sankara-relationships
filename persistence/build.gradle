@@ -4,13 +4,13 @@ apply from: "$rootDir/buildsystem/template-android-library.gradle"
 dependencies {
     def applicationDependencies = rootProject.ext.mainApplication
     def unitTestDependencies = rootProject.ext.unitTesting
+    def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(":domain")
 
 
-    implementation applicationDependencies.kotlin
     implementation applicationDependencies.coreKtx
 
     implementation applicationDependencies.liveData
@@ -20,14 +20,11 @@ dependencies {
     implementation applicationDependencies.room
     implementation applicationDependencies.roomRuntime
     kapt applicationDependencies.roomCompiler
-//    annotationProcessor applicationDependencies.roomCompiler
 
-
-    testImplementation unitTestDependencies.junit
-    testImplementation unitTestDependencies.mockito
-    testImplementation unitTestDependencies.coreTesting
-    testImplementation unitTestDependencies.roomTesting
-
+    androidTestImplementation acceptanceTestDependencies.androidJUnit
+    androidTestImplementation acceptanceTestDependencies.runner
+    androidTestImplementation unitTestDependencies.coreTesting
+    androidTestImplementation unitTestDependencies.roomTesting
 
 
 }

@@ -1,2 +1,2 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gorillamo.relatioship.persistence" />
+    package="com.gorillamo.relationship.persistence" />

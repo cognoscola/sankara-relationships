@@ -10,7 +10,7 @@ interface RelationshipDao:
     @Query("SELECT * FROM RelationshipsTable")
     fun getAllRelationship(): LiveData<List<RelationshipDatabaseObject>>
 
-    @Query("SELECT * FROM RelationshipsTable")
+    @Query("SELECT * FROM RelationshipsTable WHERE ready = 1")
     fun getTodaysRelationship(): LiveData<List<RelationshipDatabaseObject>>
 
     /**

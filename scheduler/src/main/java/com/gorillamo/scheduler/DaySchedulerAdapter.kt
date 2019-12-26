@@ -15,7 +15,6 @@ private inline fun <T> T.then(name: T.() -> T): T {
     return name()
 }
 
-
 private inline fun <T,R> T.finish(name: T.()->R):R{
 
     return name()
@@ -26,7 +25,7 @@ private inline fun <T,R> T.first(generic: T.()->R): R {
 }
 
 
-class DaySchedulerAdapter<T>(val convert:(T)->SchedulingItem<T>):Scheduler<T> {
+internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Scheduler<T> {
 
     private var today = LocalDate.now()
     private var time = LocalDateTime.now()

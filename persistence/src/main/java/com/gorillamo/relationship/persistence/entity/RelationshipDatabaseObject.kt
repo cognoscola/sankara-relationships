@@ -8,9 +8,10 @@ import com.gorillamo.relationship.abstraction.dto.Relationship
 data class  RelationshipDatabaseObject(
 
     @PrimaryKey(autoGenerate = true)
-    override var id:Int,
+    var id:Int,
     override val name: String = "",
     override val timeLastContacted:Long = 0L,
-    override val frequency: Float? = 0F
+    override val frequency: Float? = 0F,
+    val ready:Boolean = false
 
 ):Relationship

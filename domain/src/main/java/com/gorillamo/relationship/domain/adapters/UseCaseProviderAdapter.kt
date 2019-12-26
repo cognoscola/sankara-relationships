@@ -7,7 +7,7 @@ import com.gorillamo.relationship.domain.usecase.DeleteRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.LoadRelationshipsUseCase
 import com.gorillamo.relationship.domain.usecase.LoadTodaysRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.SaveRelationshipUseCase
-import com.gorillamo.scheduler.SchedulerPort
+
 
 /**
  * The use case layer

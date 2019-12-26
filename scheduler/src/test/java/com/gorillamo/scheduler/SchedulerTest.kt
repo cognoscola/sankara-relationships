@@ -6,11 +6,10 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 
-
 @RunWith(JUnit4::class)
 class SchedulerTest{
 
-    lateinit var scheduler:DaySchedulerAdapter<AGenericObject>
+    lateinit var scheduler:Scheduler<AGenericObject>
 
     @Before
     fun setup() {

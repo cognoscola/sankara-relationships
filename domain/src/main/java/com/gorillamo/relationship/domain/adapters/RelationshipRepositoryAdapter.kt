@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
 import com.gorillamo.relationship.domain.ports.RelationshipDaoPort
+import com.gorillamo.scheduler.Scheduler
 
 /**
  * This is an implementation of the repository object
@@ -18,9 +19,10 @@ internal class RelationshipRepositoryAdapter(
 
     override fun getRelationshipsLive(): LiveData<out List<Relationship>?>  = relationshipDaoPort.getRelationshipsLive()
 
-
     override suspend fun insertOrUpdateRelationship(relationship: Relationship):Long{
+
         return relationshipDaoPort.insertOrUpdate(relationship)
+
     }
 
     override suspend fun deleteRelationship(name: String): Int {

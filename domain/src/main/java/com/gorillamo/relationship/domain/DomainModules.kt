@@ -1,11 +1,15 @@
 package com.gorillamo.relationship.domain
 
+import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
 import com.gorillamo.relationship.abstraction.extPorts.UseCaseProvider
 import com.gorillamo.relationship.domain.adapters.RelationshipRepositoryAdapter
 import com.gorillamo.relationship.domain.adapters.UseCaseProviderAdapter
-import com.gorillamo.scheduler.DaySchedulerAdapter
-import com.gorillamo.scheduler.SchedulerPort
+import com.gorillamo.scheduler.Frequency
+import com.gorillamo.scheduler.PointInTime
+import com.gorillamo.scheduler.Scheduler
+import com.gorillamo.scheduler.SchedulingItem
+
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -20,14 +24,19 @@ object DomainModules {
         single<RelationshipRepository>{ RelationshipRepositoryAdapter(get())}
     }
 
-    private val schedulerModule = module{
-        single<SchedulerPort>{ DaySchedulerAdapter()}
+    private val schedulerModule = module {
+        single<Scheduler<Relationship>> {
+            Scheduler.getInstance {
+                SchedulingItem(it, PointInTime(it.timeLastContacted!!), Frequency(it.frequency!!))
+            }
+        }
     }
+
     private val useCaseModule = module {
         single<UseCaseProvider> { UseCaseProviderAdapter(get())}
     }
 
 
-    val modules: List<Module> = listOf(repositoryModule, useCaseModule)
+    val modules: List<Module> = listOf(repositoryModule, schedulerModule, useCaseModule)
 
 }
