@@ -23,7 +23,10 @@ internal class RelationshipDaoAdapter(
             relationshipDao.insertOrReplace(
                 RelationshipDatabaseObject(
                     0,
-                    relationship.name, relationship.lastContacted
+                    relationship.name,
+                    relationship.lastContacted,
+                    relationship.frequency,
+                    relationship.ready
                 )
             )
     }

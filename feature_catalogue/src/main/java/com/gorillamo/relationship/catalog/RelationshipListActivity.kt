@@ -21,7 +21,7 @@ import org.koin.android.ext.android.inject
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class RelationshipListActivity : EntryActivity(),RelationshipView {
+class RelationshipListActivity : EntryActivity() {
 @Suppress("unused")
 private val tag:String = RelationshipListActivity::class.java.name
 
@@ -44,40 +44,13 @@ private val tag:String = RelationshipListActivity::class.java.name
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        relationshipViewModel.loadAllRelationships()?.observe(this, Observer { list -> updateIfPossible(list) })
+        relationshipViewModel.data()?.observe(this, Observer { list -> updateIfPossible(list) })
 
         //Set up the fragment
         supportFragmentManager.beginTransaction()
-               .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(this),FRAGMENT_TAG)
+               .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(relationshipViewModel),FRAGMENT_TAG)
             .commit()
 
-    }
-
-    override fun addClicked(name: String, frequency: Float) {
-
-        relationshipViewModel.insert(
-            object: Relationship {
-                override val name: String get() = name
-                override val lastContacted: Long get() = 0
-                override val ready: Boolean get() = true
-                override val frequency: Float get() = frequency
-            }
-        )
-    }
-
-    override fun allRelationshipsClicked() {
-
-    }
-
-    override fun deleteClicked(name: String) {
-        relationshipViewModel.deleteRelationship(name)
-    }
-
-    override fun todayClicked() {
-
-      /*  relationshipViewModel.laodTodaysRelationships()?.observe(this, Observer { list ->
-            updateIfPossible(list)
-        })*/
     }
 
     private fun updateIfPossible(input:List<Relationship>?){
