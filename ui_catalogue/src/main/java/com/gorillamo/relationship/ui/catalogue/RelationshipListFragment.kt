@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter.*
 import kotlinx.android.synthetic.main.relationship_list.*
 import kotlinx.android.synthetic.main.fragment_relationship_list.*
 import java.util.ArrayList
@@ -15,14 +16,17 @@ class RelationshipListFragment :Fragment(){
 
     lateinit var relationshipView:RelationshipView
 
+    val itemCheck:(RelationshipItem)->Any? ={
+        relationshipView.updateClicked(it)
+    }
 
     val dialogInteraction = object :RelationshipDialogFragment.ItemDialogInteraction{
         override fun deleteClicked(name: String) {
             relationshipView.deleteClicked(name)
         }
 
-        override fun saveClicked(name: String, frequency: Float) {
-            relationshipView.addClicked(name,frequency)
+        override fun saveClicked(item: RelationshipItem) {
+            relationshipView.addClicked(item)
         }
     }
 
@@ -54,22 +58,19 @@ class RelationshipListFragment :Fragment(){
         }
 
         addFab.setOnClickListener {
-
             RelationshipDialogFragment.newInstance(dialogInteraction).show(fragmentManager!!.beginTransaction(),"Dialog!")
         }
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-
         recyclerView.adapter =
-            RelationshipItemAdapter(values = ArrayList()){
-
-                RelationshipDialogFragment.newInstance(dialogInteraction, it.name,it.frequency).show(fragmentManager!!.beginTransaction(),"Dialog!")
+            RelationshipItemAdapter(ArrayList(),itemCheck){
+                RelationshipDialogFragment.newInstance(dialogInteraction,it).show(fragmentManager!!.beginTransaction(),"Dialog!")
 
             }
     }
 
-    public fun updateContent(list:List<RelationshipItemAdapter.RelationshipItem>){
+    public fun updateContent(list:List<RelationshipItem>){
         (relationship_list.adapter as RelationshipItemAdapter).replaceItems(list)
     }
 

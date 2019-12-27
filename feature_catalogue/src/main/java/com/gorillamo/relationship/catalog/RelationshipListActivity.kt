@@ -64,6 +64,7 @@ private val tag:String = RelationshipListActivity::class.java.name
     private fun convertToAdapterItem(input:List<Relationship>):List<RelationshipItemAdapter.RelationshipItem>{
       return input.map {
           RelationshipItemAdapter.RelationshipItem(
+              id = it.id,
               name = it.name,
               timeLastContacted = it.lastContacted,
               ready =  it.ready,

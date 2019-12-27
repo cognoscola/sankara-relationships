@@ -1,6 +1,5 @@
 package com.gorillamo.relationship.ui.catalogue
 
-
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import com.gorillamo.pickers.FrequencyPickerFragment
+import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter.*
 import kotlinx.android.synthetic.main.fragment_relationship_dialog.*
 
 
@@ -17,9 +17,7 @@ class RelationshipDialogFragment : DialogFragment() {
 
     lateinit var interactionCallback:ItemDialogInteraction
 
-    //TODO app crashes on screen rotation of this view
-    private var name:String = ""
-    private var frequency: Float = 0F
+    private lateinit var item: RelationshipItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -31,7 +29,7 @@ class RelationshipDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         nameEditText.hint = "John Snow "
-        nameEditText.setText(name)
+        nameEditText.setText(item.name)
 
         //TODO write test for text change behaviour
         nameEditText.addTextChangedListener(object:TextWatcher{
@@ -56,13 +54,13 @@ class RelationshipDialogFragment : DialogFragment() {
 
         childFragmentManager.beginTransaction()
             .add(R.id.frequencyPickerContainer,FrequencyPickerFragment.newInstance {
-                frequency = it
+                item.frequency = it
             })
             .commit()
 
-
         saveButton.setOnClickListener {
-            interactionCallback.saveClicked(nameEditText.text.toString(),frequency)
+            item.name = nameEditText.text.toString()
+            interactionCallback.saveClicked(item)
             dismiss()
         }
 
@@ -71,30 +69,28 @@ class RelationshipDialogFragment : DialogFragment() {
             interactionCallback.deleteClicked(nameEditText.text.toString())
             dismiss()
         }
-
     }
 
-
-
     companion object {
-        fun newInstance(callback:ItemDialogInteraction): RelationshipDialogFragment {
+        fun newInstance(
+            callback: ItemDialogInteraction, item: RelationshipItem =
+                RelationshipItem(
+                    id = 0,
+                    name = "",
+                    timeLastContacted = 0,
+                    frequency = 1.0f,
+                    ready = true
+                )
+        ): RelationshipDialogFragment {
             return RelationshipDialogFragment().apply {
                 this.interactionCallback = callback
-            }
-        }
-
-
-        fun newInstance(callback:ItemDialogInteraction,name:String,frequency: Float): RelationshipDialogFragment {
-            return RelationshipDialogFragment().apply {
-                this.interactionCallback = callback
-                this.name = name
-                this.frequency = frequency
+                this.item = item
             }
         }
     }
 
     interface ItemDialogInteraction{
-        fun saveClicked(name:String,frequency:Float)
+        fun saveClicked(item: RelationshipItem)
         fun deleteClicked(name:String)
     }
 }

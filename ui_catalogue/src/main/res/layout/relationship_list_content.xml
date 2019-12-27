@@ -16,6 +16,14 @@
 
     </data>-->
 
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:id="@+id/updateCheckBox"
+        android:layout_weight="1"
+        android:src="@drawable/ic_crop_square_black_24dp"
+        android:layout_gravity="center"/>
+
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="0dp"
@@ -30,5 +38,5 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:layout_weight="5"/>
+        android:layout_weight="4"/>
 </LinearLayout>

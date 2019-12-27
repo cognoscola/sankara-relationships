@@ -3,6 +3,7 @@ package com.gorillamo.relationship.ui.catalogue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.relationship_list_content.view.*
@@ -13,18 +14,23 @@ const val DAY_MILLIS = 86400000
 
 class RelationshipItemAdapter(
     private val values: ArrayList<RelationshipItem>,
+    private val onItemCheckedCallback:(RelationshipItem)->Any?,
     private val onItemClickCallback:(RelationshipItem)->Any?
 ) : RecyclerView.Adapter<RelationshipItemAdapter.ViewHolder>() {
     @Suppress("unused")
     private val tag:String = RelationshipItemAdapter::class.java.name
 
     private val onClickListener: View.OnClickListener
+    private val checkClickListener :View.OnClickListener
     private val cal = Calendar.getInstance()
 
 
     init {
         onClickListener = View.OnClickListener { v ->
             onItemClickCallback(v.tag as RelationshipItem)
+        }
+        checkClickListener = View.OnClickListener { v->
+            onItemCheckedCallback(v.tag as RelationshipItem)
         }
     }
 
@@ -38,6 +44,12 @@ class RelationshipItemAdapter(
         val item = values[position]
         holder.name.text = item.name
         holder.lastSeen.text = getTimeDifferenceString(item.timeLastContacted, item.ready)
+
+        with(holder.checked) {
+            visibility = if(item.ready) View.VISIBLE else View.INVISIBLE
+            tag = item
+            setOnClickListener(checkClickListener)
+        }
 
         with(holder.itemView) {
             tag = item
@@ -72,13 +84,15 @@ class RelationshipItemAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.nameTextView
         val lastSeen: TextView = view.lastContactTextView
+        val checked: ImageView = view.updateCheckBox
     }
 
     data class RelationshipItem(
-        val name: String,
-        val timeLastContacted: Long,
-        val ready:Boolean,
-        val frequency:Float
+        var id:Int,
+        var name: String,
+        var timeLastContacted: Long,
+        var ready:Boolean,
+        var frequency:Float
 
     )
 }

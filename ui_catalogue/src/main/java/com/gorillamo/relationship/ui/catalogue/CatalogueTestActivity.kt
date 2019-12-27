@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter.*
 import kotlinx.android.synthetic.main.activity_list_tester.*
 import kotlinx.android.synthetic.main.relationship_list.*
 import java.util.ArrayList
@@ -24,7 +25,7 @@ class CatalogueTestActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun replaceItems(inList:List<RelationshipItemAdapter.RelationshipItem>){
+    fun replaceItems(inList:List<RelationshipItem>){
         runOnUiThread {
             fragment.updateContent(inList)
         }
@@ -39,11 +40,15 @@ class CatalogueTestActivity : AppCompatActivity() {
 
         }
 
-        override fun addClicked(name: String, frequency: Float) {
+        override fun addClicked(item: RelationshipItem) {
 
-            val list = List<RelationshipItemAdapter.RelationshipItem>(1){
-                RelationshipItemAdapter.RelationshipItem(
-                    name,0,true,1.0f
+            val list = List<RelationshipItem>(1){
+                RelationshipItem(
+                    item.id,
+                    item.name,
+                    item.timeLastContacted,
+                    item.ready,
+                    item.frequency
                 )
             }
             fragment.updateContent(list)
@@ -51,12 +56,16 @@ class CatalogueTestActivity : AppCompatActivity() {
 
         override fun deleteClicked(name: String) {
 
-            val list = List<RelationshipItemAdapter.RelationshipItem>(1){
-                RelationshipItemAdapter.RelationshipItem(
+            val list = List<RelationshipItem>(1){
+                RelationshipItem(0,
                     name+"1",0,true,1.0f
                 )
             }
             fragment.updateContent(list)
+        }
+
+        override fun updateClicked(item: RelationshipItem) {
+
         }
     }
 }
