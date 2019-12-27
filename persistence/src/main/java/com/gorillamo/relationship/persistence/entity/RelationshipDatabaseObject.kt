@@ -10,8 +10,8 @@ data class  RelationshipDatabaseObject(
     @PrimaryKey(autoGenerate = true)
     var id:Int,
     override val name: String = "",
-    override val timeLastContacted:Long = 0L,
-    override val frequency: Float? = 0F,
-    val ready:Boolean = false
+    override val lastContacted:Long = 0L,
+    override val frequency: Float = 0F,
+    override val ready:Boolean = false
 
 ):Relationship

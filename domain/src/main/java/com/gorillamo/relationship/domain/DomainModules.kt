@@ -27,7 +27,7 @@ object DomainModules {
     private val schedulerModule = module {
         single<Scheduler<Relationship>> {
             Scheduler.getInstance {
-                SchedulingItem(it, PointInTime(it.timeLastContacted!!), Frequency(it.frequency!!))
+                SchedulingItem(it, PointInTime(it.lastContacted), Frequency(it.frequency))
             }
         }
     }

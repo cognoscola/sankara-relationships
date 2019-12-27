@@ -23,7 +23,7 @@ internal class RelationshipDaoAdapter(
             relationshipDao.insertOrReplace(
                 RelationshipDatabaseObject(
                     0,
-                    relationship.name!!, relationship.timeLastContacted!!
+                    relationship.name, relationship.lastContacted
                 )
             )
     }

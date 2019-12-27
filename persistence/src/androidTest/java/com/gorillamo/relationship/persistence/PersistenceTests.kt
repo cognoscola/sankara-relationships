@@ -108,7 +108,7 @@ class PersistenceTests {
             RelationshipDatabaseObject(
                 id = it+1,
                 name = "George",
-                timeLastContacted = System.currentTimeMillis() - 86400000,
+                lastContacted = System.currentTimeMillis() - 86400000,
                 frequency = 1.0f
             )
         }
@@ -127,7 +127,7 @@ class PersistenceTests {
             RelationshipDatabaseObject(
                 id = it+1,
                 name = "George",
-                timeLastContacted = System.currentTimeMillis() - 86400000,
+                lastContacted = System.currentTimeMillis() - 86400000,
                 frequency = 1.0f,
                 ready = remaining >= 0
             )

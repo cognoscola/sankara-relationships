@@ -70,7 +70,7 @@ class UsecasesTest {
                 get() = 0
             override val name: String?
                 get() = "Hello"
-            override val timeLastContacted: Long?
+            override val lastContacted: Long?
                 get() = System.currentTimeMillis()
             override val frequency: Float?
                 get() = 1.0f
@@ -138,7 +138,7 @@ class UsecasesTest {
                 get() = 0
             override val name: String?
                 get() = "Hello"
-            override val timeLastContacted: Long?
+            override val lastContacted: Long?
                 get() = System.currentTimeMillis()
             override val frequency: Float?
                 get() = 1.0f
@@ -154,7 +154,7 @@ class UsecasesTest {
                     get() = it
                 override val name: String?
                     get() = "name $it"
-                override val timeLastContacted: Long?
+                override val lastContacted: Long?
                     get() = System.currentTimeMillis()
                 override val frequency: Float?
                     get() = 1.0f

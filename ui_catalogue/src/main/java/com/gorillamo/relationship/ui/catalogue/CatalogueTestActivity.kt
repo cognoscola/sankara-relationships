@@ -43,7 +43,7 @@ class CatalogueTestActivity : AppCompatActivity() {
 
             val list = List<RelationshipItemAdapter.RelationshipItem>(1){
                 RelationshipItemAdapter.RelationshipItem(
-                    name,0,0F
+                    name,0,true,1.0f
                 )
             }
             fragment.updateContent(list)
@@ -53,7 +53,7 @@ class CatalogueTestActivity : AppCompatActivity() {
 
             val list = List<RelationshipItemAdapter.RelationshipItem>(1){
                 RelationshipItemAdapter.RelationshipItem(
-                    name+"1",0,0F
+                    name+"1",0,true,1.0f
                 )
             }
             fragment.updateContent(list)

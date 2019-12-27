@@ -1,11 +1,9 @@
 package com.gorillamo.relationship.ui.catalogue
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.math.MathUtils
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.relationship_list_content.view.*
 import java.util.*
@@ -38,9 +36,8 @@ class RelationshipItemAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.name
-        holder.contentView.text = getTimeDifferenceString(item.timeLastContacted)
-
+        holder.name.text = item.name
+        holder.lastSeen.text = getTimeDifferenceString(item.timeLastContacted, item.ready)
 
         with(holder.itemView) {
             tag = item
@@ -48,7 +45,11 @@ class RelationshipItemAdapter(
         }
     }
 
-    fun getTimeDifferenceString(time: Long):String{
+    fun getTimeDifferenceString(time: Long,ready:Boolean):String{
+
+        if ((time == 0L).or(ready) ) {
+            return "Catch up!"
+        }
 
         val diff = System.currentTimeMillis() - time
         val day = (diff / (DAY_MILLIS)).toInt()
@@ -69,13 +70,14 @@ class RelationshipItemAdapter(
     override fun getItemCount() = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.nameTextView
-        val contentView: TextView = view.lastContactTextView
+        val name: TextView = view.nameTextView
+        val lastSeen: TextView = view.lastContactTextView
     }
 
     data class RelationshipItem(
         val name: String,
         val timeLastContacted: Long,
+        val ready:Boolean,
         val frequency:Float
 
     )

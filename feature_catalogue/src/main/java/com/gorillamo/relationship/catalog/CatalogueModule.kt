@@ -10,7 +10,6 @@ object CatalogueModule {
         return load
     }
 
-
     val mockMode:Boolean = false
 
     val load by lazy{

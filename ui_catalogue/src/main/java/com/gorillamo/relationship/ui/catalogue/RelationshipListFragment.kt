@@ -15,11 +15,11 @@ class RelationshipListFragment :Fragment(){
 
     lateinit var relationshipView:RelationshipView
 
+
     val dialogInteraction = object :RelationshipDialogFragment.ItemDialogInteraction{
         override fun deleteClicked(name: String) {
             relationshipView.deleteClicked(name)
         }
-
 
         override fun saveClicked(name: String, frequency: Float) {
             relationshipView.addClicked(name,frequency)

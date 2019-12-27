@@ -60,7 +60,6 @@ dependencies {
     def unitTestDependencies = rootProject.ext.unitTesting
     def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
 
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation applicationDependencies.appCompat

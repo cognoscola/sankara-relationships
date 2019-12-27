@@ -15,8 +15,12 @@ public class RelationshipViewModel(
 
     val useCaseProvider: UseCaseProvider
 
-): ViewModel(),RelationshipView {
+): ViewModel() {
 
+
+    fun laodTodaysRelationships():LiveData<out List<Relationship>?>? {
+        return useCaseProvider.getTodaysRelationship.execute()
+    }
 
     fun loadAllRelationships(): LiveData<out List<Relationship>?>? {
 
@@ -34,39 +38,6 @@ public class RelationshipViewModel(
         io{
             useCaseProvider.deleteRelationShip.execute(name)
         }
-    }
-
-    override fun allRelationshipsClicked() {
-
-
-    }
-
-    override fun todayClicked() {
-
-    }
-
-
-    private fun today() = System.currentTimeMillis()
-
-    private fun days(day:Int) = oneDayInMillis() * day
-
-    private fun oneDayInMillis():Long{
-        return 1000 * 60 * 60 * 24
-    }
-
-    override fun addClicked(name: String, frequency: Float) {
-        insert(
-            object: Relationship{
-                override val id: Int get() = 0
-                override val name: String? get() = name
-                override val timeLastContacted: Long? get() = 0
-                override val frequency: Float? get() = frequency
-            }
-        )
-    }
-
-    override fun deleteClicked(name: String) {
-        deleteRelationship(name)
     }
 
 }

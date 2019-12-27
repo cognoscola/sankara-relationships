@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
+import com.gorillamo.pickers.FrequencyPickerFragment
 import kotlinx.android.synthetic.main.fragment_relationship_dialog.*
 
 
@@ -52,13 +53,19 @@ class RelationshipDialogFragment : DialogFragment() {
             }
 
         })
-        daysEditText.hint = "3"
-        daysEditText.setText(frequency.toString())
+
+        childFragmentManager.beginTransaction()
+            .add(R.id.frequencyPickerContainer,FrequencyPickerFragment.newInstance {
+                frequency = it
+            })
+            .commit()
+
 
         saveButton.setOnClickListener {
-            interactionCallback.saveClicked(nameEditText.text.toString(),0F)
+            interactionCallback.saveClicked(nameEditText.text.toString(),frequency)
             dismiss()
         }
+
         deleteButton.setOnClickListener {
 
             interactionCallback.deleteClicked(nameEditText.text.toString())
