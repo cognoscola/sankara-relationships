@@ -67,6 +67,7 @@ class RelationshipListTest {
 
         activity.replaceItems(generateRelationshipList())
 
+        onView(withId(R.id.relationship_list)).check(matches(isCompletelyDisplayed()))
         onView(withText("name 0")).check(matches(isDisplayed()))
     }
 
@@ -144,9 +145,14 @@ class RelationshipListTest {
 
             val time = today() - days(i)
             val item = RelationshipItemAdapter.RelationshipItem(
+                id = i,
                 name = "name $i",
                 timeLastContacted = time,
-                frequency = 0f
+                ready = true,
+                count = 1,
+                range = 1
+
+
             )
             System.out.println("Time is $time");
             item

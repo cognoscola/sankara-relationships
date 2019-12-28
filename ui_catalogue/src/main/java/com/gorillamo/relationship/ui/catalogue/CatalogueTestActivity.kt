@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter.*
 import kotlinx.android.synthetic.main.activity_list_tester.*
-import kotlinx.android.synthetic.main.relationship_list.*
+
 import java.util.ArrayList
 
 class CatalogueTestActivity : AppCompatActivity() {

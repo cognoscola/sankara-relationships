@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter.*
-import kotlinx.android.synthetic.main.relationship_list.*
 import kotlinx.android.synthetic.main.fragment_relationship_list.*
 import java.util.ArrayList
 
