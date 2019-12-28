@@ -79,7 +79,8 @@ public class RelationshipViewModel(
             override val name: String get() = item.name
             override val lastContacted: Long get() = item.timeLastContacted
             override val ready: Boolean get() = item.ready
-            override val frequency: Float get() = item.frequency
+            override val count: Int get() = item.count
+            override val range: Int get() = item.range
         }
     }
 }

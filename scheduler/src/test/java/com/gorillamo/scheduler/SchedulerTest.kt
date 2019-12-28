@@ -18,7 +18,7 @@ class SchedulerTest{
             SchedulingItem(
                 item = it,
                 timeLastInteracted = PointInTime(it.timeLastContacted!!),
-                frequency = Frequency(it.frequency!!)
+                frequency = Value(it.frequency!!)
             )
         }
     }

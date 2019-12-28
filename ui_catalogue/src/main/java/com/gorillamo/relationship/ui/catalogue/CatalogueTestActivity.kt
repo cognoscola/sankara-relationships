@@ -48,7 +48,8 @@ class CatalogueTestActivity : AppCompatActivity() {
                     item.name,
                     item.timeLastContacted,
                     item.ready,
-                    item.frequency
+                    item.count,
+                    item.range
                 )
             }
             fragment.updateContent(list)
@@ -58,7 +59,7 @@ class CatalogueTestActivity : AppCompatActivity() {
 
             val list = List<RelationshipItem>(1){
                 RelationshipItem(0,
-                    name+"1",0,true,1.0f
+                    name+"1",0,true,1,1
                 )
             }
             fragment.updateContent(list)

@@ -5,7 +5,8 @@ interface Relationship{
     val id:Int
     val name:String
     val lastContacted:Long
-    val frequency:Float
+    val count:Int
+    val range:Int
     val ready:Boolean
 
 }

@@ -30,7 +30,6 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
     private var today = LocalDate.now()
     private var time = LocalDateTime.now()
     private var dayOfLastInteraction: LocalDate? = null
-    //    private var timeOfLastInteraction:LocalDateTime? = null
     private var zonedDateTime: ZonedDateTime? = null
     private var dayDiff = 0
     private var outList = ArrayList<SchedulingItem<T>>()
@@ -85,7 +84,7 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
                     Instant.ofEpochMilli(it.timeLastInteracted.get()).atZone(ZoneId.systemDefault())
 
                 //For now we'll just go at most once per day
-                if (it.frequency.get() <= 1.0f) {
+                if (it.getFrequency() <= 1.0f) {
 
                     dayOfLastInteraction = zonedDateTime!!.toLocalDate()
 
@@ -93,7 +92,7 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
                     period = Period.between(dayOfLastInteraction, today)
                     val diff: Int = period!!.getDays()
 
-                    if (diff * it.frequency.get() >= 1.0f)
+                    if (diff * it.getFrequency() >= 1.0f)
                         outList.add(it)
                 }
             }
@@ -101,5 +100,7 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
 
         return outList.toList()
     }
+
+
 
 }

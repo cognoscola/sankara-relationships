@@ -8,7 +8,6 @@ import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.shared.EntryActivity
 import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter
 import com.gorillamo.relationship.ui.catalogue.RelationshipListFragment
-import com.gorillamo.relationship.ui.catalogue.RelationshipView
 
 import kotlinx.android.synthetic.main.activity_relationship_list.*
 import org.koin.android.ext.android.inject
@@ -68,7 +67,8 @@ private val tag:String = RelationshipListActivity::class.java.name
               name = it.name,
               timeLastContacted = it.lastContacted,
               ready =  it.ready,
-              frequency = it.frequency
+              count = it.count,
+              range = it.range
           )
       }
     }

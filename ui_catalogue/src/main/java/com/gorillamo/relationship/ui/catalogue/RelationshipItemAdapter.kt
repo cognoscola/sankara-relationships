@@ -46,7 +46,6 @@ class RelationshipItemAdapter(
         holder.lastSeen.text = getTimeDifferenceString(item.timeLastContacted, item.ready)
 
         with(holder.checked) {
-            visibility = if(item.ready) View.VISIBLE else View.INVISIBLE
             tag = item
             setOnClickListener(checkClickListener)
         }
@@ -92,7 +91,7 @@ class RelationshipItemAdapter(
         var name: String,
         var timeLastContacted: Long,
         var ready:Boolean,
-        var frequency:Float
-
+        var count:Int,
+        var range:Int
     )
 }

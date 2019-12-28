@@ -109,7 +109,7 @@ class PersistenceTests {
                 id = it+1,
                 name = "George",
                 lastContacted = System.currentTimeMillis() - 86400000,
-                frequency = 1.0f
+                count = 1.0f
             )
         }
         return items
@@ -128,7 +128,7 @@ class PersistenceTests {
                 id = it+1,
                 name = "George",
                 lastContacted = System.currentTimeMillis() - 86400000,
-                frequency = 1.0f,
+                count = 1.0f,
                 ready = remaining >= 0
             )
         }

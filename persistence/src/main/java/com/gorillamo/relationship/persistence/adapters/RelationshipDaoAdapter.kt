@@ -25,7 +25,8 @@ internal class RelationshipDaoAdapter(
                     relationship.id,
                     relationship.name,
                     relationship.lastContacted,
-                    relationship.frequency,
+                    relationship.count,
+                    relationship.range,
                     relationship.ready
                 )
             )
@@ -42,9 +43,7 @@ internal class RelationshipDaoAdapter(
         return relationshipDao.getTodaysRelationship()
     }
 
-    //TODO FIX THIS
     override suspend fun deleteRelationship(name:String):Int {
-//        return relationship.name?.let {  relationshipDao.delete() }?:0
         return relationshipDao.delete(name)
 
     }

@@ -11,7 +11,8 @@ data class  RelationshipDatabaseObject(
     override var id:Int,
     override val name: String = "",
     override val lastContacted:Long = 0L,
-    override val frequency: Float = 0F,
+    override val count: Int = 1,
+    override val range: Int = 1,
     override val ready:Boolean = false
 
 ):Relationship

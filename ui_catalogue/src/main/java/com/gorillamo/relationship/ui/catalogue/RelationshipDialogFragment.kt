@@ -49,12 +49,12 @@ class RelationshipDialogFragment : DialogFragment() {
                     deleteButton.visibility = View.VISIBLE
                 }
             }
-
         })
 
         childFragmentManager.beginTransaction()
-            .add(R.id.frequencyPickerContainer,FrequencyPickerFragment.newInstance {
-                item.frequency = it
+            .add(R.id.frequencyPickerContainer,FrequencyPickerFragment.newInstance(item.count,item.range) { count, range ->
+                item.count = count
+                item.range = range
             })
             .commit()
 
@@ -78,7 +78,8 @@ class RelationshipDialogFragment : DialogFragment() {
                     id = 0,
                     name = "",
                     timeLastContacted = 0,
-                    frequency = 1.0f,
+                    count =  1,
+                    range = 1,
                     ready = true
                 )
         ): RelationshipDialogFragment {
