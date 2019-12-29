@@ -5,7 +5,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-
 @RunWith(JUnit4::class)
 class SchedulerTest{
 
@@ -18,7 +17,8 @@ class SchedulerTest{
             SchedulingItem(
                 item = it,
                 timeLastInteracted = PointInTime(it.timeLastContacted!!),
-                frequency = Value(it.frequency!!)
+                count = Value(it.count),
+                range = Value(it.range)
             )
         }
     }
@@ -71,19 +71,22 @@ class SchedulerTest{
         val ZERO_TIME_ITEM = AGenericObject(
             name = "Name 0",
             timeLastContacted = 0,
-            frequency = 1.0f
+            count = 0,
+            range = 1
         )
 
         val NEGATIVE_TIME_ITEM  = AGenericObject(
             name = "Name 1",
             timeLastContacted = -1,
-            frequency = 1.0f
+            count = 1,
+            range = 1
         )
 
         val FUTURE_ITEM = AGenericObject(
             name = "Name 2",
             timeLastContacted = System.currentTimeMillis() + oneDayInMillis(),
-            frequency = 1.0f
+            count = 1,
+            range = 1
         )
 
         val input = listOf(ZERO_TIME_ITEM,NEGATIVE_TIME_ITEM,FUTURE_ITEM)
@@ -116,7 +119,8 @@ class SchedulerTest{
                     AGenericObject(
                         "Name $it",
                         System.currentTimeMillis() - if(todayRemainig>-1){ oneDayInMillis()*(it+1)} else {0},
-                        1.0f/(it+1)
+                        1,
+                        (it+1)
                     )
             }
         }

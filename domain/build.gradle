@@ -11,7 +11,7 @@ dependencies {
 
     //make sure we include abstraction layer
     api project(":abstraction")
-    implementation project(":scheduler")
+    api project(":scheduler")
 
     def applicationDependencies = rootProject.ext.mainApplication
     def unitTestDependencies = rootProject.ext.unitTesting
