@@ -2,6 +2,8 @@ package com.gorillamo.scheduler.alarm
 
 import android.app.AlarmManager
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import com.gorillamo.scheduler.Task
 import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_SLEEP
 import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_WAKEUP
@@ -14,6 +16,8 @@ import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.WAKE_UP_INTENT_CODE
 /**
  * Will enable the alarm to be set despite device shutdown
  */
+
+
 fun Context.alarmEnableWakeUpPersistent(task:Task){
 
     alarmEnableWakeUp(task)
@@ -34,7 +38,7 @@ fun Context.alarmEnableSleepPersistent(task: Task){
  * Disable persistent alarms
  * @receiver Context
  */
-fun Context.alarmDisableWakePersistent(){
+fun Context.alarmDisableWakePersistent(task:Task? = null){
     alarmDisableWakeUp()
     SimpleBootReceiver.disableBootReciver(this)
 }
@@ -43,8 +47,8 @@ fun Context.alarmDisableWakePersistent(){
  * disable persistent ability of alarm
  * @receiver Context
  */
-fun Context.alarmDisableSleepPersistent(){
-    alarmDisableSleep()
+fun Context.alarmDisableSleepPersistent(task:Task){
+    alarmDisableSleep(task)
     SimpleBootReceiver.disableBootReciver(this)
 }
 
@@ -54,13 +58,26 @@ fun Context.alarmDisableSleepPersistent(){
  * The time to set alarm will be fetched from preferences
  */
 fun Context.alarmEnableWakeUp(task:Task){
-    alarmSetRepeatWithCal(task,true)
+
+    if (!isAlarmWorking(task)) {
+        alarmSetRepeatWithCal(task,true)
+    }else{
+        Log.d("AlarmExtension alarmEnableWakeUp","Alarm Already Activity")
+        Toast.makeText(this,"Alarm Already active",Toast.LENGTH_SHORT).show()
+    }
 }
 
 fun Context.alarmEnableSleep(task:Task){
     alarmSetRepeatWithCal(task,false)
 }
 
+fun Context.isAlarmWorking(task:Task):Boolean {
+
+    return (createAlarmExistentPendingIntent(
+        createAlarmIntent(task.taskClass, EVENT_WAKEUP),
+        WAKE_UP_INTENT_CODE
+    ) != null).and(isWakeAlarmSet())
+}
 
 /**
  * Convenience disable the Wake up Alarm.
@@ -82,12 +99,12 @@ fun Context.alarmDisableWakeUp(){
  *
  * @receiver Context
  */
-fun Context.alarmDisableSleep() {
+fun Context.alarmDisableSleep(task:Task) {
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
     alarmManager.cancel(
         createAlarmPendingIntent(
             createAlarmIntent(
-                AlarmReceiver::class.java,
+                task.taskClass,
                 EVENT_SLEEP
             ), SLEEP_INTENT_CODE
         )
@@ -107,10 +124,8 @@ fun Context.alarmSetRepeatWithCal(task: Task, wakeUp:Boolean){
     alarmManager.setInexactRepeating(
         AlarmManager.RTC_WAKEUP,
         //Lets just test that it triggers
-        Calendar.getInstance().timeInMillis + 5000,
-//        task.time.toCalendar().timeInMillis,
-        1000*30,
-//        AlarmManager.INTERVAL_DAY,
+        task.time.toCalendar().timeInMillis,
+        AlarmManager.INTERVAL_DAY,
 
         createAlarmPendingIntent(createAlarmIntent(
             task.taskClass,

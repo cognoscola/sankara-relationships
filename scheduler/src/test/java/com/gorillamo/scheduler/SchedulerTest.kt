@@ -1,9 +1,17 @@
 package com.gorillamo.scheduler
 
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import com.gorillamo.scheduler.alarm.createAlarmPendingIntent
+import com.gorillamo.scheduler.alarm.isAlarmWorking
+import com.nhaarman.mockitokotlin2.atLeast
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.mockito.Mockito.*
+
 
 @RunWith(JUnit4::class)
 class SchedulerTest{
@@ -23,6 +31,10 @@ class SchedulerTest{
         }
     }
 
+
+    /****************************************************************
+     * RUNNING THE CONVERTER TEST
+     ************************************************************/
 
     @Test
     fun `returns no items`(){
@@ -96,9 +108,8 @@ class SchedulerTest{
         assert(scheduled.size == 2)
         assert(scheduled[0].name == "Name 0")
         assert(scheduled[1].name == "Name 1")
-
-
     }
+
 
     companion object{
 

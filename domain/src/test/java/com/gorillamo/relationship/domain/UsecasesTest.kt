@@ -35,8 +35,6 @@ class UsecasesTest {
     @Mock
     lateinit var repo:RelationshipRepository
 
-    @Mock
-    lateinit var schedulerPort: SchedulerPort
 
     lateinit var insert:SaveRelationshipUseCase
     lateinit var load:LoadRelationshipsUseCase
@@ -53,7 +51,7 @@ class UsecasesTest {
         insert = SaveRelationshipUseCase(repo)
         load = LoadRelationshipsUseCase(repo)
         delete = DeleteRelationshipUseCase(repo)
-        loadToday= LoadTodaysRelationshipUseCase(repo,schedulerPort)
+        loadToday= LoadTodaysRelationshipUseCase(repo)
 
     }
 

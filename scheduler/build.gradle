@@ -3,9 +3,13 @@ apply from: "$rootDir/buildsystem/template-android-library.gradle"
 dependencies {
     def unitTestDependencies = rootProject.ext.unitTesting
     def applicationDependencies = rootProject.ext.mainApplication
+    def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //We need this for java.Time
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
     testImplementation unitTestDependencies.junit
+    androidTestImplementation acceptanceTestDependencies.androidJUnit
+    androidTestImplementation acceptanceTestDependencies.runner
 }

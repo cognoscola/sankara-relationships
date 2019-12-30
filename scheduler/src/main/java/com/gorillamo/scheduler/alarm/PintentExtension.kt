@@ -20,15 +20,21 @@ fun Context.createAlarmPendingIntent(intent:Intent, code:Int):PendingIntent{
     return PendingIntent.getBroadcast(this,
             code,
             intent,
-//            0) //We don't care about extras right now
             PendingIntent.FLAG_UPDATE_CURRENT) //change if we are carrying extras
 }
 
 /**
- * Create an alarm intent for AlarmReceiverClass
+ * Check if an alarm exists
  * @receiver Context application context
  * @return Intent
  */
+fun Context.createAlarmExistentPendingIntent(intent: Intent,code: Int):PendingIntent?{
+    return PendingIntent.getBroadcast(this,
+        code,
+        intent,
+        PendingIntent.FLAG_NO_CREATE)
+}
+
 
 /**
  * Ation is  One of EVENT_WAKEUP, ACTION_SLEEP

@@ -30,6 +30,13 @@ class App :Application(){
             androidContext(this@App)
             modules(ModuleProvider.modules)
         }
+
+        scheduler.startScheduling(this,
+            listOf(
+                Task.newTask(Identifier(0))
+                    .run(AlarmReceiver::class.java)
+                    .at(Time(Identifier(0),Hour(8), Minute(0),Phase.AM)))
+        )
     }
 
     fun startScheduling(){
@@ -38,7 +45,7 @@ class App :Application(){
             listOf(
                 Task.newTask(Identifier(0))
                     .run(AlarmReceiver::class.java)
-                    .at(Time(Identifier(0),Hour(12), Minute(0),Phase.AM)))
+                    .at(Time(Identifier(0),Hour(8), Minute(0),Phase.AM)))
         )
     }
 
