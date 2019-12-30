@@ -5,6 +5,8 @@ import android.content.Context
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.scheduler.*
+import com.gorillamo.scheduler.alarm.AlarmReceiver
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -21,19 +23,29 @@ class App :Application(){
 
     override fun onCreate() {
         super.onCreate()
-
-
+        //For JakeWharton java.time library (below API 23
+        AndroidThreeTen.init(this);
         startKoin{
-
             printLogger()
             androidContext(this@App)
             modules(ModuleProvider.modules)
         }
-
-        //start scheduling
-        scheduler.startScheduling(applicationContext,
-            listOf(Time(Hour(12), Minute(0),Phase.AM))
-        )
-
     }
+
+    fun startScheduling(){
+        //start scheduling
+        scheduler.startScheduling(this,
+            listOf(
+                Task.newTask(Identifier(0))
+                    .run(AlarmReceiver::class.java)
+                    .at(Time(Identifier(0),Hour(12), Minute(0),Phase.AM)))
+        )
+    }
+
+    fun stopScheduling(){
+        scheduler.stopScheduling(this,
+            Identifier(0)
+        )
+    }
+
 }

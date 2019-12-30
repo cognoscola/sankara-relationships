@@ -52,6 +52,7 @@ ext {
     mainApplication = [
 
             kotlin:             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            kotlin8:             "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
             appCompat:          "androidx.appcompat:appcompat:$appCompat_version",
             coreKtx:            "androidx.core:core-ktx:$corektx_version",
             legacy:             "androidx.legacy:legacy-support-v4:$legacy_version",

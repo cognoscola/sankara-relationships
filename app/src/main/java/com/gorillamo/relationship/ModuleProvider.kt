@@ -11,7 +11,7 @@ object ModuleProvider {
 
 
     private val appModules = module {
-        single<Scheduler<Relationship>>{
+       /* single<Scheduler<Relationship>>{
 
             Scheduler.getInstance {
 
@@ -23,7 +23,7 @@ object ModuleProvider {
                     id = Identifier(it.id)
 
                 ) }
-        }
+        }*/
 //        single<ContentResolver> { androidContext().contentResolver }
     }
 

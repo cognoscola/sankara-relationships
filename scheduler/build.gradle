@@ -5,6 +5,7 @@ dependencies {
     def applicationDependencies = rootProject.ext.mainApplication
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
     testImplementation unitTestDependencies.junit
 }

@@ -2,18 +2,21 @@ package com.gorillamo.scheduler.alarm
 
 import android.app.AlarmManager
 import android.content.Context
+import com.gorillamo.scheduler.Task
+import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_SLEEP
+import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_WAKEUP
 import com.gorillamo.scheduler.receiver.SimpleBootReceiver
 import java.util.*
 
-
 //TODO Create a more general alarm scheduling system, not just wake up/sleep
-
+import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.SLEEP_INTENT_CODE
+import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.WAKE_UP_INTENT_CODE
 /**
  * Will enable the alarm to be set despite device shutdown
  */
-fun Context.alarmEnableWakeUpPersistent(cal:Calendar){
+fun Context.alarmEnableWakeUpPersistent(task:Task){
 
-    alarmEnableWakeUp(cal)
+    alarmEnableWakeUp(task)
     SimpleBootReceiver.enableBootReceiver(this)
 }
 
@@ -22,8 +25,8 @@ fun Context.alarmEnableWakeUpPersistent(cal:Calendar){
  * Enable sleep alarm to be set despite device shutdown
  * @receiver Context
  */
-fun Context.alarmEnableSleepPersistent(cal:Calendar){
-    alarmEnableSleep(cal)
+fun Context.alarmEnableSleepPersistent(task: Task){
+    alarmEnableSleep(task)
     SimpleBootReceiver.enableBootReceiver(this)
 }
 
@@ -50,12 +53,12 @@ fun Context.alarmDisableSleepPersistent(){
  * Convenience method to enable the alarm.
  * The time to set alarm will be fetched from preferences
  */
-fun Context.alarmEnableWakeUp(cal:Calendar){
-    alarmSetRepeatWithCal(cal,true)
+fun Context.alarmEnableWakeUp(task:Task){
+    alarmSetRepeatWithCal(task,true)
 }
 
-fun Context.alarmEnableSleep(cal:Calendar){
-    alarmSetRepeatWithCal(cal,false)
+fun Context.alarmEnableSleep(task:Task){
+    alarmSetRepeatWithCal(task,false)
 }
 
 
@@ -64,7 +67,14 @@ fun Context.alarmEnableSleep(cal:Calendar){
  */
 fun Context.alarmDisableWakeUp(){
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    alarmManager.cancel(createWakeUpAlarmPendingIntent())
+    alarmManager.cancel(
+        createAlarmPendingIntent(
+            createAlarmIntent(
+                AlarmReceiver::class.java,
+                EVENT_WAKEUP
+            ), WAKE_UP_INTENT_CODE
+        )
+    )
     saveAlarmWakeStatus(false)
 }
 
@@ -72,9 +82,16 @@ fun Context.alarmDisableWakeUp(){
  *
  * @receiver Context
  */
-fun Context.alarmDisableSleep(){
+fun Context.alarmDisableSleep() {
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    alarmManager.cancel(createWakeUpAlarmPendingIntent())
+    alarmManager.cancel(
+        createAlarmPendingIntent(
+            createAlarmIntent(
+                AlarmReceiver::class.java,
+                EVENT_SLEEP
+            ), SLEEP_INTENT_CODE
+        )
+    )
     saveAlarmSleepStatus(false)
 
 }
@@ -84,17 +101,23 @@ fun Context.alarmDisableSleep(){
  * @param cal is the calendar object containing information about when to set alarm
  * @param wakeUp determines if this alarm will be a wake up or a sleep notification
  */
-fun Context.alarmSetRepeatWithCal(cal:Calendar, wakeUp:Boolean){
+fun Context.alarmSetRepeatWithCal(task: Task, wakeUp:Boolean){
     val alarmManager = getAlarmService()
 
     alarmManager.setInexactRepeating(
         AlarmManager.RTC_WAKEUP,
-        cal.timeInMillis,
-        AlarmManager.INTERVAL_DAY,
-        if(wakeUp){
-            createWakeUpAlarmPendingIntent()} else{
-            createSleepAlarmPendingIntent()
-        }
+        //Lets just test that it triggers
+        Calendar.getInstance().timeInMillis + 5000,
+//        task.time.toCalendar().timeInMillis,
+        1000*30,
+//        AlarmManager.INTERVAL_DAY,
+
+        createAlarmPendingIntent(createAlarmIntent(
+            task.taskClass,
+            if(wakeUp) EVENT_WAKEUP else EVENT_SLEEP
+
+        ),if(wakeUp){ WAKE_UP_INTENT_CODE} else SLEEP_INTENT_CODE)
+
     )
 
     if(wakeUp)saveAlarmWakeStatus(true)else saveAlarmSleepStatus(true)

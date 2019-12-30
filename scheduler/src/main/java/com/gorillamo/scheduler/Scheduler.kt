@@ -8,7 +8,7 @@ interface  Scheduler<T>{
 
     fun getItemsDue(input: List<T>):List<T>
 
-    fun startScheduling(context: Context, times:List<Time>)
+    fun startScheduling(context: Context, tasks:List<Task>)
 
     fun stopScheduling(context: Context, identifier: Identifier)
 

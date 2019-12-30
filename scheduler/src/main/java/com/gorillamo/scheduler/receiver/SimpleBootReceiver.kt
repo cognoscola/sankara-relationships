@@ -13,13 +13,14 @@ class SimpleBootReceiver : BroadcastReceiver() {
         if (intent.action == "android.intent.action.BOOT_COMPLETED") {
             // Set the alarm here.
             context.apply {
-                if (isSleepAlarmSet()) {
+                //TODO figure out how to save tasks
+               /* if (isSleepAlarmSet()) {
                     alarmEnableSleep(getSavedSleepTime())
                 }
 
                 if (isWakeAlarmSet()) {
                     alarmEnableWakeUp(getSavedWakeUpTime())
-                }
+                }*/
             }
         }
     }
@@ -27,23 +28,23 @@ class SimpleBootReceiver : BroadcastReceiver() {
     companion object {
 
         fun enableBootReceiver(context: Context){
-            val receiver = ComponentName(context, SimpleBootReceiver::class.java)
+/*            val receiver = ComponentName(context, SimpleBootReceiver::class.java)
 
             context.packageManager.setComponentEnabledSetting(
                     receiver,
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                     PackageManager.DONT_KILL_APP
-            )
+            )*/
         }
 
         fun disableBootReciver(context: Context){
-            val receiver = ComponentName(context, SimpleBootReceiver::class.java)
+            /*val receiver = ComponentName(context, SimpleBootReceiver::class.java)
 
             context.packageManager.setComponentEnabledSetting(
                     receiver,
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                     PackageManager.DONT_KILL_APP
-            )
+            )*/
         }
     }
 }

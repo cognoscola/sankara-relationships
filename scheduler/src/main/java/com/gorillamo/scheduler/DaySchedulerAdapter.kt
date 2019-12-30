@@ -2,10 +2,14 @@ package com.gorillamo.scheduler
 
 import android.app.AlarmManager
 import android.app.Service
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.widget.Toast
 import com.gorillamo.scheduler.alarm.*
-import java.time.*
-import java.util.*
+import org.threeten.bp.*
+
+
 import kotlin.collections.ArrayList
 
 /**
@@ -109,15 +113,14 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
     /**
      * Start a set of repeating alarms with the Specified Time Objects
      */
-    override fun startScheduling(context: Context,  times:List<Time> ) {
+    override fun startScheduling(context: Context,  tasks:List<Task> ) {
 
-        times.forEachIndexed() { index, time ->
+        tasks.forEachIndexed() { index, task ->
 
             with(context) {
 
-                val cal =Calendar.getInstance()
-                setWakeTimeToCalendarAndStore(cal,time)
-                alarmEnableWakeUpPersistent(cal)
+                saveWakeTime(task.time)
+                alarmEnableWakeUpPersistent(task)
             }
         }
     }

@@ -3,6 +3,7 @@ package com.gorillamo.relationship.catalog
 import android.os.Bundle
 
 import androidx.lifecycle.Observer
+import com.gorillamo.relationship.App
 import com.gorillamo.relationship.abstraction.dto.Relationship
 
 import com.gorillamo.relationship.shared.EntryActivity
@@ -33,6 +34,7 @@ private val tag:String = RelationshipListActivity::class.java.name
 
     override fun loadModules() {
 
+
         CatalogueModule.load()
     }
 
@@ -49,6 +51,18 @@ private val tag:String = RelationshipListActivity::class.java.name
         supportFragmentManager.beginTransaction()
                .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(relationshipViewModel),FRAGMENT_TAG)
             .commit()
+
+
+        startFab.setOnClickListener{
+            var app = applicationContext as App
+            app.startScheduling()
+        }
+        endFab.setOnClickListener {
+            var app = applicationContext as App
+            app.stopScheduling()
+        }
+
+
 
     }
 

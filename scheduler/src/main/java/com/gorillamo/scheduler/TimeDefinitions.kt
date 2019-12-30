@@ -1,5 +1,6 @@
 package com.gorillamo.scheduler
 
+import com.gorillamo.scheduler.alarm.setTimeToCalendar
 import java.util.*
 
 
@@ -63,7 +64,31 @@ data class Time(
     val hour:Hour,
     val minute:Minute,
     val phase:Phase
-)
+){
+    //TODO make sure it is in the future! AKA, if time is specified before now, then increment day
+    fun toCalendar() = Calendar.getInstance().apply { setTimeToCalendar(this@Time,0) }
+
+}
+
+class Task private constructor(val id:Identifier) {
+     lateinit var time: Time
+     lateinit var taskClass: Class<*>
+
+    fun at(time: Time):Task{
+        this.time = time
+        return this
+    }
+    fun run(taskClass: Class<*>):Task{
+        this.taskClass = taskClass
+        return this
+    }
+
+    companion object{
+         fun newTask(id:Identifier) = Task(id)
+    }
+}
+
+
 
 
 data class SchedulingItem<T>(
@@ -76,7 +101,6 @@ data class SchedulingItem<T>(
     var id:Identifier = Identifier(0)
 
 ){
-
     fun getFrequency():Float{
         Calendar.AM
         return count.value.toFloat().div(range.value.toFloat())

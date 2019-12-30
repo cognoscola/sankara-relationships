@@ -58,7 +58,7 @@ fun Context.getLocalSettings():SharedPreferences{
 /**
  * Convenient method save into preferences the alarm time
  */
-//TODO Truncate these 2 methods below
+//TODO Truncate these 2 methods below, and use identifier to specify the saving name
 fun Context.saveWakeTime(time:Time){
     val prefs= getLocalSettings()
     prefs

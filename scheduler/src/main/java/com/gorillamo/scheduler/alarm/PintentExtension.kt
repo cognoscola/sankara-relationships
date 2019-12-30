@@ -3,8 +3,7 @@ package com.gorillamo.scheduler.alarm
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.util.Log
-import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.ACTION_SLEEP
+import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_SLEEP
 import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_WAKEUP
 import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.SLEEP_INTENT_CODE
 import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.WAKE_UP_INTENT_CODE
@@ -25,26 +24,20 @@ fun Context.createAlarmPendingIntent(intent:Intent, code:Int):PendingIntent{
             PendingIntent.FLAG_UPDATE_CURRENT) //change if we are carrying extras
 }
 
-fun Context.createWakeUpAlarmPendingIntent():PendingIntent{
-
-    return createAlarmPendingIntent(createAlarmIntent()
-            .apply { action = EVENT_WAKEUP }, WAKE_UP_INTENT_CODE)
-}
-
-
-fun Context.createSleepAlarmPendingIntent():PendingIntent{
-    return createAlarmPendingIntent(createAlarmIntent()
-            .apply { action = ACTION_SLEEP }, SLEEP_INTENT_CODE)
-}
-
 /**
  * Create an alarm intent for AlarmReceiverClass
  * @receiver Context application context
  * @return Intent
  */
-fun Context.createAlarmIntent():Intent{
-    return Intent(this, AlarmReceiver::class.java).apply {
+
+/**
+ * Ation is  One of EVENT_WAKEUP, ACTION_SLEEP
+ *
+ */
+fun Context.createAlarmIntent(cls:Class<*>, action: String):Intent{
+    return Intent(this, cls).apply {
         addFlags(Intent.FLAG_RECEIVER_FOREGROUND) //to give forground priority
-            putExtra(AlarmReceiver.KEY_ALARM,true)
+        putExtra(AlarmReceiver.KEY_ALARM, true)
+        this.action = action
     }
 }

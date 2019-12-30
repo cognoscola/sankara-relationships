@@ -38,7 +38,7 @@ class AlarmReceiver:BroadcastReceiver(){
          */
         const val EVENT_WAKEUP  = "com.gorillamoa.routines.event.wakeup"
 
-        const val ACTION_SLEEP = "com.gorillamoa.routines.event.sleep"
+        const val EVENT_SLEEP = "com.gorillamoa.routines.event.sleep"
 
         /**
          * Rest from whatever activity the user is curerntly undertaking
@@ -71,11 +71,11 @@ class AlarmReceiver:BroadcastReceiver(){
             when (it.action) {
                 EVENT_WAKEUP ->{
 
+                    Toast.makeText(context,"BOOM",Toast.LENGTH_SHORT).show()
+
                     //When you get back...
                     //Specify a bunch of functions to run when this alarm sounds.. BUT
                     //the functions need to be specified in the other library...
-
-
                 }
             }
 
