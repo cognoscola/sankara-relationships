@@ -44,6 +44,39 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
     private var outList = ArrayList<SchedulingItem<T>>()
     private var period: Period? = null
 
+    companion object {
+
+        /**
+         * When this receiver has an intent with a type ACTION_ONBOARD
+         * it means that it should execute in a manner in line with on-boarding
+         * the user. That is, generate a notification with the user's first task
+         */
+        const val ACTION_ONBOARD = "com.gorillamoa.routines.event.onboard"
+
+        /**
+         * When the receiver has an intent with a type EVENT_WAKEUP, it
+         * means that the receiver should process the intent normally.
+         * I.e. schedule tasks as normal
+         */
+        const val EVENT_WAKEUP  = "com.gorillamoa.routines.event.wakeup"
+
+        const val EVENT_SLEEP = "com.gorillamoa.routines.event.sleep"
+
+        /**
+         * Rest from whatever activity the user is curerntly undertaking
+         */
+        const val ACTION_REST = "R"
+
+        const val ACTION_TIMER = "T"
+
+        const val KEY_ALARM = "A"
+
+        const val WAKE_UP_INTENT_CODE = 1
+        const val SLEEP_INTENT_CODE =2
+        
+    }
+
+
     /**
      * Takes a list of genetic items and must return a new list
      * of the same items, but with the condition that they are due

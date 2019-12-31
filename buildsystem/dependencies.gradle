@@ -23,8 +23,8 @@ ext {
     constraints_version ="2.0.0-beta3"
     retrofit_version = "2.6.0"
     coroutines_version ="1.3.2"
-    lifecycle_version = '2.2.0-rc03'
-    lifecycleTest_version = '2.1.0'
+    lifecycle_version = '2.1.0'
+    lifecycle_runtime_version = '2.0.0'
     gson_version ="2.8.6"
     room_version ="2.2.1"
     koin_version = "2.0.1"
@@ -78,7 +78,7 @@ ext {
             liveData:           "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
             lifecycleExtensions:"androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
             lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
-            lifecycleRuntime:   "androidx.lifecycle:lifecycle-runtime:$lifecycle_version",
+            lifecycleRuntime:   "androidx.lifecycle:lifecycle-runtime:$lifecycle_runtime_version",
 
             roomRuntime:        "androidx.room:room-runtime:$room_version",
             room:               "androidx.room:room-ktx:$room_version",
@@ -99,15 +99,14 @@ ext {
     ]
 
     unitTesting = [
-            junit:              "junit:junit:$junit_version",
-            mockito:            "org.mockito:mockito-core:$mockito_version",
+            junit:               "junit:junit:$junit_version",
+            mockito:             "org.mockito:mockito-core:$mockito_version",
             mockitoBinding:      "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoBinding_version",
-            coroutinesTest:     "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
-            mockwebserver:      "com.squareup.okhttp3:mockwebserver:$server_version",
+            coroutinesTest:      "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
+            mockwebserver:       "com.squareup.okhttp3:mockwebserver:$server_version",
             coreTesting:         "androidx.arch.core:core-testing:$coreTesting_version",
-            roomTesting:        "androidx.room:room-testing:$room_version",
+            roomTesting:         "androidx.room:room-testing:$room_version",
             koinTest:            "org.koin:koin-test:$koin_version",
-            lifeCycleTest:      "androidx.arch.core:core-testing:$lifecycleTest_version"
 
     ]
 

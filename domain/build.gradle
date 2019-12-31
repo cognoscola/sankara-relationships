@@ -1,4 +1,26 @@
-apply from: "$rootDir/buildsystem/template-android-library.gradle"
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "com.gorillamo.relationship.domain.TestAppJunitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+        }
+    }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -15,11 +37,33 @@ dependencies {
 
     def applicationDependencies = rootProject.ext.mainApplication
     def unitTestDependencies = rootProject.ext.unitTesting
+    def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
 
-
+    implementation applicationDependencies.kotlin
+    implementation applicationDependencies.koinCore
+    implementation applicationDependencies.koinScope
+    implementation applicationDependencies.koinViewModel
     implementation applicationDependencies.liveData
 
+    implementation applicationDependencies.coroutines
+    implementation applicationDependencies.coroutinesCore
+
     testImplementation applicationDependencies.lifecycleRuntime
-    testImplementation unitTestDependencies.lifeCycleTest
+    testImplementation unitTestDependencies.coreTesting
+    testImplementation unitTestDependencies.coroutinesTest
+    testImplementation unitTestDependencies.junit
+
+    androidTestImplementation applicationDependencies.lifecycleRuntime
+    androidTestImplementation unitTestDependencies.koinTest
+    androidTestImplementation unitTestDependencies.coreTesting
+    /**
+     * mockk v1.9.3 doesn't work well below Android 26, so we need to include a lower version of objenesis
+     */
+    androidTestImplementation ("io.mockk:mockk-android:1.9.3.kotlin12"){ exclude module: 'objenesis' }
+    androidTestImplementation 'org.objenesis:objenesis:2.6'
+    androidTestImplementation acceptanceTestDependencies.androidJUnit
+    androidTestImplementation acceptanceTestDependencies.rules
+    androidTestImplementation acceptanceTestDependencies.runner
+
 
 }

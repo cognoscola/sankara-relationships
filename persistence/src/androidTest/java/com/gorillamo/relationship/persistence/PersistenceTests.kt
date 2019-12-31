@@ -109,7 +109,9 @@ class PersistenceTests {
                 id = it+1,
                 name = "George",
                 lastContacted = System.currentTimeMillis() - 86400000,
-                count = 1.0f
+                count = 1,
+                range = 1,
+                ready = true
             )
         }
         return items
@@ -128,7 +130,8 @@ class PersistenceTests {
                 id = it+1,
                 name = "George",
                 lastContacted = System.currentTimeMillis() - 86400000,
-                count = 1.0f,
+                count = 1,
+                range = 1,
                 ready = remaining >= 0
             )
         }

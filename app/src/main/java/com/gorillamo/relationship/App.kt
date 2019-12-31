@@ -5,7 +5,7 @@ import android.content.Context
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.scheduler.*
-import com.gorillamo.scheduler.alarm.AlarmReceiver
+import com.gorillamo.relationship.domain.receivers.AlarmReceiver
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -38,21 +38,4 @@ class App :Application(){
                     .at(Time(Identifier(0),Hour(8), Minute(0),Phase.AM)))
         )
     }
-
-    fun startScheduling(){
-        //start scheduling
-        scheduler.startScheduling(this,
-            listOf(
-                Task.newTask(Identifier(0))
-                    .run(AlarmReceiver::class.java)
-                    .at(Time(Identifier(0),Hour(8), Minute(0),Phase.AM)))
-        )
-    }
-
-    fun stopScheduling(){
-        scheduler.stopScheduling(this,
-            Identifier(0)
-        )
-    }
-
 }

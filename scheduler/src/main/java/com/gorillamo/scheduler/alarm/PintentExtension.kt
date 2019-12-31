@@ -3,10 +3,8 @@ package com.gorillamo.scheduler.alarm
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_SLEEP
-import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_WAKEUP
-import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.SLEEP_INTENT_CODE
-import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.WAKE_UP_INTENT_CODE
+
+import com.gorillamo.scheduler.DaySchedulerAdapter.Companion.KEY_ALARM
 
 
 public const val TASK_ID ="TaskId"
@@ -43,7 +41,7 @@ fun Context.createAlarmExistentPendingIntent(intent: Intent,code: Int):PendingIn
 fun Context.createAlarmIntent(cls:Class<*>, action: String):Intent{
     return Intent(this, cls).apply {
         addFlags(Intent.FLAG_RECEIVER_FOREGROUND) //to give forground priority
-        putExtra(AlarmReceiver.KEY_ALARM, true)
+        putExtra(KEY_ALARM, true)
         this.action = action
     }
 }

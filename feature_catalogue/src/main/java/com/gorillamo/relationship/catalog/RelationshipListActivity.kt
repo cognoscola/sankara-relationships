@@ -51,19 +51,6 @@ private val tag:String = RelationshipListActivity::class.java.name
         supportFragmentManager.beginTransaction()
                .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(relationshipViewModel),FRAGMENT_TAG)
             .commit()
-
-
-        startFab.setOnClickListener{
-            var app = applicationContext as App
-            app.startScheduling()
-        }
-        endFab.setOnClickListener {
-            var app = applicationContext as App
-            app.stopScheduling()
-        }
-
-
-
     }
 
     private fun updateIfPossible(input:List<Relationship>?){

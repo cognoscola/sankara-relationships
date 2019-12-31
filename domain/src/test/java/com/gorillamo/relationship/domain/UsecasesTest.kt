@@ -9,7 +9,6 @@ import com.gorillamo.relationship.domain.usecase.DeleteRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.LoadRelationshipsUseCase
 import com.gorillamo.relationship.domain.usecase.LoadTodaysRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.SaveRelationshipUseCase
-import com.gorillamo.scheduler.SchedulerPort
 import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -64,14 +63,12 @@ class UsecasesTest {
     fun `add or replace a relationship`() = runBlockingTest{
 
         val data= object :Relationship{
-            override val id: Int
-                get() = 0
-            override val name: String?
-                get() = "Hello"
-            override val lastContacted: Long?
-                get() = System.currentTimeMillis()
-            override val count: Float?
-                get() = 1.0f
+            override val id: Int get() = 0
+            override val name: String get() = "Hello"
+            override val lastContacted: Long get() = System.currentTimeMillis()
+            override val count: Int get() = 1
+            override val range: Int get() = 1
+            override val ready: Boolean get() = false
         }
 
         insert.execute(data)
@@ -104,19 +101,23 @@ class UsecasesTest {
 
         //GIVEN
         val LIST_MOCK = generateRelationshipList()
-
+        val LIVE_DATA_MOCK = MutableLiveData<List<Relationship>>()
         val LIST_SCHEDULED_ITEMS_IDS = listOf(0,1,2,3,4)
-        `when`(repo.getTodaysRelationships()).thenReturn(LIST_MOCK)
-        `when`(schedulerPort.getDueItems(Mockito.anyList())).thenReturn(LIST_SCHEDULED_ITEMS_IDS)
+
+        `when`(repo.getTodaysRelationships()).thenReturn(LIVE_DATA_MOCK)
+//        `when`(schedulerPort.getDueItems(Mockito.anyList())).thenReturn(LIST_SCHEDULED_ITEMS_IDS)
 
         //WHEN
         val result = loadToday.execute()
 
         //THEN
         verify(repo).getTodaysRelationships()
-        verify(schedulerPort).getDueItems(Mockito.anyList())
+//        verify(schedulerPort).getDueItems(Mockito.anyList())
 
-        assertEquals(5,result.size)
+        LIVE_DATA_MOCK.observeOnce {
+
+            assertEquals(5,LIST_SCHEDULED_ITEMS_IDS)
+        }
 
     }
 
@@ -132,14 +133,12 @@ class UsecasesTest {
     private fun generateOneRelationship():Relationship{
 
         return   object :Relationship{
-            override val id: Int
-                get() = 0
-            override val name: String?
-                get() = "Hello"
-            override val lastContacted: Long?
-                get() = System.currentTimeMillis()
-            override val count: Float?
-                get() = 1.0f
+            override val id: Int get() = 0
+            override val name: String get() = "Hello"
+            override val lastContacted: Long get() = System.currentTimeMillis()
+            override val count: Int get() = 1
+            override val range: Int get() = 1
+            override val ready: Boolean get() = false
         }
 
     }
@@ -148,14 +147,12 @@ class UsecasesTest {
         return List(5){
 
             object :Relationship{
-                override val id: Int
-                    get() = it
-                override val name: String?
-                    get() = "name $it"
-                override val lastContacted: Long?
-                    get() = System.currentTimeMillis()
-                override val count: Float?
-                    get() = 1.0f
+                override val id: Int get() = it
+                override val name: String get() = "name $it"
+                override val lastContacted: Long get() = System.currentTimeMillis()
+                override val count: Int get() = 1
+                override val range: Int get() = 1
+                override val ready: Boolean get() = false
             }
         }
 

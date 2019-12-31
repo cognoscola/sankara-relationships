@@ -1,10 +1,17 @@
-package com.gorillamo.scheduler.alarm
+package com.gorillamo.relationship.domain.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
+import com.gorillamo.relationship.abstraction.dto.Relationship
+import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
+import com.gorillamo.relationship.domain.Coroutines.io
+import com.gorillamo.scheduler.Scheduler
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
+import org.koin.core.get
 import java.util.*
 
 /**
@@ -18,7 +25,7 @@ import java.util.*
  * ACTION_WAKEUP - fires every morning at the specified time
  *
  */
-class AlarmReceiver:BroadcastReceiver(){
+class AlarmReceiver:BroadcastReceiver(),KoinComponent{
 
     @Suppress("unused")
     private val tag:String = AlarmReceiver::class.java.name
@@ -52,12 +59,15 @@ class AlarmReceiver:BroadcastReceiver(){
         const val WAKE_UP_INTENT_CODE = 1
         const val SLEEP_INTENT_CODE =2
 
-        private var callback:AlarmReceiverApi? = null
+        private var callback: AlarmReceiverApi? = null
 
-        fun setAlarmEventCallbacks(callbacks:AlarmReceiverApi){
-            this.callback = callbacks
+        fun setAlarmEventCallbacks(callbacks: AlarmReceiverApi){
+            callback = callbacks
         }
     }
+
+    val relationshipRepo:RelationshipRepository = get()
+    val scheduler:Scheduler<Relationship> = get()
 
     override fun onReceive(context: Context, intent: Intent?) {
         Log.d("$tag onReceive","${intent?.action}")
@@ -65,17 +75,28 @@ class AlarmReceiver:BroadcastReceiver(){
         intent?.let {
 
             if (intent.hasExtra(KEY_ALARM)) {
-                Log.d("onReceive","By Alarm")
             }
 
             when (it.action) {
-                EVENT_WAKEUP ->{
+                EVENT_WAKEUP -> {
 
-                    Toast.makeText(context,"BOOM",Toast.LENGTH_SHORT).show()
+                    relationshipRepo.getRelationshipsLive().value?.let {
+                        val readyList = scheduler.getItemsDue(it)
+                      /*  readyList.forEach {
+                            io{
+                                relationshipRepo.insertOrUpdateRelationship(it)
+                            }
+                        }*/
+                    } ?: run {
+                        Log.d(
+                            "$tag onReceive",
+                            "Receiver was unable to fetch data for some reason."
+                        )
+                    }
 
-                    //When you get back...
-                    //Specify a bunch of functions to run when this alarm sounds.. BUT
-                    //the functions need to be specified in the other library...
+                }
+                else -> {
+
                 }
             }
 

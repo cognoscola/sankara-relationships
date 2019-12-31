@@ -8,7 +8,7 @@ class SaveRelationshipUseCase(
     private val repository: RelationshipRepository
 ): UseCaseWithParams<Relationship, Long>()
 {
-    override suspend fun buildUseCase(relation: Relationship): Long{
-        return repository.insertOrUpdateRelationship(relation)
+    override suspend fun buildUseCase(params: Relationship): Long{
+        return repository.insertOrUpdateRelationship(params)
     }
 }

@@ -17,9 +17,19 @@ class SchedulerAlarmTests{
 
     }
 
+    @Test
+    fun `verify specified receiver is called at provided time`(){
+
+
+
+    }
+
 
     @Test
-    fun verifyTaskIsOnlyScheduledOnce(){
+    fun `verity task with same Id is only scheduled once`(){
+
+
+
         /*     val mockContext = mock(Context::class.java)
              val pi = PendingIntent.getBroadcast(mockContext, 0, Intent("DoNothing"), 0)
              val tasks = listOf(
@@ -40,6 +50,15 @@ class SchedulerAlarmTests{
              `verify`(mockContext.isAlarmWorking(), atLeast(2)).*/
 
     }
+
+    @Test
+    fun `able to cancel task with Identifier`(){
+
+    }
+
+
+
+
 
 
 }

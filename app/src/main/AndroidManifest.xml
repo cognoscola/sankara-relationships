@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.gorillamo.scheduler.alarm.AlarmReceiver"
+        <receiver android:name=".domain.receivers.AlarmReceiver"
             android:exported="false"/>
 
     </application>

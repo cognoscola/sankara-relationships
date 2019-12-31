@@ -5,14 +5,15 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.gorillamo.scheduler.Task
-import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_SLEEP
-import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.EVENT_WAKEUP
+
 import com.gorillamo.scheduler.receiver.SimpleBootReceiver
-import java.util.*
 
 //TODO Create a more general alarm scheduling system, not just wake up/sleep
-import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.SLEEP_INTENT_CODE
-import com.gorillamo.scheduler.alarm.AlarmReceiver.Companion.WAKE_UP_INTENT_CODE
+import com.gorillamo.scheduler.DaySchedulerAdapter.Companion.EVENT_SLEEP
+import com.gorillamo.scheduler.DaySchedulerAdapter.Companion.EVENT_WAKEUP
+import com.gorillamo.scheduler.DaySchedulerAdapter.Companion.SLEEP_INTENT_CODE
+import com.gorillamo.scheduler.DaySchedulerAdapter.Companion.WAKE_UP_INTENT_CODE
+
 /**
  * Will enable the alarm to be set despite device shutdown
  */
@@ -84,7 +85,8 @@ fun Context.isAlarmWorking(task:Task):Boolean {
  */
 fun Context.alarmDisableWakeUp(){
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    alarmManager.cancel(
+    //TODO
+    /*alarmManager.cancel(
         createAlarmPendingIntent(
             createAlarmIntent(
                 AlarmReceiver::class.java,
@@ -92,7 +94,7 @@ fun Context.alarmDisableWakeUp(){
             ), WAKE_UP_INTENT_CODE
         )
     )
-    saveAlarmWakeStatus(false)
+    saveAlarmWakeStatus(false)*/
 }
 
 /**
