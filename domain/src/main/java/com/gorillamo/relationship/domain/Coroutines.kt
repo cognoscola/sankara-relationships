@@ -4,6 +4,12 @@ import kotlinx.coroutines.*
 
 object Coroutines{
 
+    fun <T: Any> ioGivenDispatch(dispatcher:CoroutineDispatcher,work:suspend (() -> T?)): Job =
+        CoroutineScope(dispatcher).launch {
+            work()
+        }
+
+
     fun <T: Any> io(work:suspend (() -> T?)): Job =
         CoroutineScope(Dispatchers.IO).launch {
             work()

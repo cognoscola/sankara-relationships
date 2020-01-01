@@ -20,6 +20,7 @@ class SchedulerTest{
 
     @Before
     fun setup() {
+
         scheduler = DaySchedulerAdapter {
 
             SchedulingItem(

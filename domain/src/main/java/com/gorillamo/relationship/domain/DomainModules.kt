@@ -6,6 +6,8 @@ import com.gorillamo.relationship.abstraction.extPorts.UseCaseProvider
 import com.gorillamo.relationship.domain.adapters.RelationshipRepositoryAdapter
 import com.gorillamo.relationship.domain.adapters.UseCaseProviderAdapter
 import com.gorillamo.scheduler.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -32,6 +34,8 @@ object DomainModules {
                 )
             }
         }
+
+        single<CoroutineDispatcher>{ Dispatchers.IO }
     }
 
     private val useCaseModule = module {
