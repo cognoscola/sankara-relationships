@@ -2,44 +2,32 @@ package com.gorillamo.relationship.domain
 
 import android.content.Context
 import android.content.Intent
+import android.test.mock.MockContext
 import androidx.annotation.Nullable
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
+import com.gorillamo.relationship.domain.classes.MockRepo
+import com.gorillamo.relationship.domain.classes.MockScheduler
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver.Companion.EVENT_WAKEUP
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver.Companion.KEY_ALARM
 import com.gorillamo.scheduler.Scheduler
-import com.nhaarman.mockitokotlin2.atLeast
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 import org.koin.core.context.loadKoinModules
-import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.core.get
-import org.koin.core.inject
-import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.koin.test.KoinTest
-import org.mockito.ArgumentMatchers
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.any
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
@@ -59,17 +47,19 @@ class AlarmReceiverTest: KoinTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
+
+
     @Before
     fun setUp(){
 //        context = ApplicationProvider.getApplicationContext<Context>()
 
         loadKoinModules(module{
-            single{ Mockito.mock(RelationshipRepository::class.java) }
-            single{ Mockito.mock(Scheduler::class.java)}
+            single<RelationshipRepository>{ MockRepo() }
+            single<Scheduler<Relationship>>{ MockScheduler()}
             single{ Dispatchers.Unconfined }
         })
 
-        context = Mockito.mock(Context::class.java)
+        context = MockContext()
         alarmReceiver = AlarmReceiver()
     }
 
@@ -77,7 +67,6 @@ class AlarmReceiverTest: KoinTest {
     fun cleanUp() {
         stopKoin()
     }
-
 
     @Test
     fun `verify_task_were_scheduled_during_OnReceive`()= runBlocking {
@@ -89,43 +78,23 @@ class AlarmReceiverTest: KoinTest {
         val repo:RelationshipRepository = get()
         val scheduler:Scheduler<Relationship> = get()
 
-        `when`(repo.getRelationshipsLive()).thenReturn(getMockLiveData())
-        `when`(scheduler.getItemsDue(ArgumentMatchers.any())).thenReturn( generateReadyRelationshipList(5))
-        `when`(repo.insertOrUpdateRelationship(ArgumentMatchers.any())).thenReturn(3)
-
         alarmReceiver.onReceive(context,intent)
 
-        verify {
-            repo.getRelationshipsLive()
-            scheduler.getItemsDue(any())
-        }
-        verify(repo, atLeast(5)).insertOrUpdateRelationship(ArgumentMatchers.any())
+        //check starting state is sane
+        //require arguments are sane
+        //assert that results are sane
 
+//            repo.getRelationshipsLive()
+//            scheduler.getItemsDue(any())
+//        verify(repo, atLeast(5)).insertOrUpdateRelationship(ArgumentMatchers.any())
 
-    }
-
-     private fun getMockLiveData():LiveData<List<Relationship>> {
-         val MOCK_LISt = generateRelationshipList()
-         val mockLiveData = MutableLiveData<List<Relationship>>()
-         mockLiveData.value = MOCK_LISt
-        return mockLiveData
-     }
-
-    private fun generateRelationshipList():List<Relationship>{
-
-        return List(5){
-
-            object :Relationship{
-                override val id: Int get() = it
-                override val name: String get() = "name $it"
-                override val lastContacted: Long get() = System.currentTimeMillis()
-                override val count: Int get() = 1
-                override val range: Int get() = 1
-                override val ready: Boolean get() = false
-            }
-        }
+        assert((repo as MockRepo).insertOrUpdateRelationshipCallCount == 5)
 
     }
+
+
+
+
 
     @Throws(InterruptedException::class)
     fun <T> getValue(liveData: LiveData<T>): T? {
@@ -145,23 +114,6 @@ class AlarmReceiverTest: KoinTest {
         return data[0] as T?
     }
 
-    private fun generateReadyRelationshipList(count:Int):List<Relationship>{
 
-        return List(count){
 
-            object :Relationship{
-                override val id: Int get() = it
-                override val name: String get() = "name $it"
-                override val lastContacted: Long get() = System.currentTimeMillis()
-                override val count: Int get() = 1
-                override val range: Int get() = 1
-                override val ready: Boolean get() = true
-            }
-        }
-
-    }
-
-    private fun prepareSchedulingResponse(){
-
-    }
 }

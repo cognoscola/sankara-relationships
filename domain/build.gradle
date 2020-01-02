@@ -20,7 +20,7 @@ android {
             minifyEnabled true
         }
     }
-
+    useLibrary 'android.test.mock'
 }
 
 
@@ -61,16 +61,16 @@ dependencies {
     testImplementation unitTestDependencies.junit
 
     androidTestImplementation applicationDependencies.lifecycleRuntime
-    androidTestImplementation unitTestDependencies.koinTest
-    androidTestImplementation unitTestDependencies.coreTesting
+    androidTestImplementation (unitTestDependencies.koinTest) {exclude group: 'org.mockito'}
+    androidTestImplementation (unitTestDependencies.coreTesting) {exclude group: 'org.mockito'}
     androidTestImplementation applicationDependencies.coroutinesCore
     androidTestImplementation unitTestDependencies.coroutinesTest
+
     /**
      * mockk v1.9.3 doesn't work well below Android 26, so we need to include a lower version of objenesis
      */
-
-    androidTestImplementation unitTestDependencies.mockito
-    androidTestImplementation unitTestDependencies.mockitoBinding
+//    androidTestImplementation ("io.mockk:mockk-android:1.9.3.kotlin12"){ exclude module: 'objenesis' }
+//    androidTestImplementation 'org.objenesis:objenesis:2.6'
     androidTestImplementation acceptanceTestDependencies.androidJUnit
     androidTestImplementation acceptanceTestDependencies.rules
     androidTestImplementation acceptanceTestDependencies.runner

@@ -107,7 +107,6 @@ ext {
             coreTesting:         "androidx.arch.core:core-testing:$coreTesting_version",
             roomTesting:         "androidx.room:room-testing:$room_version",
             koinTest:            "org.koin:koin-test:$koin_version",
-
     ]
 
     compilers = [

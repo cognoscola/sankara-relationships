@@ -36,8 +36,6 @@ dependencies {
 
     testImplementation unitTestDependencies.coroutinesTest
     testImplementation unitTestDependencies.junit
-    testImplementation unitTestDependencies.koinTest
-    testImplementation unitTestDependencies.mockito
-    testImplementation unitTestDependencies.mockitoBinding
+    testImplementation (unitTestDependencies.koinTest) {exclude group: 'mockito.org' }
 
 }
