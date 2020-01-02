@@ -75,6 +75,8 @@ dependencies {
     implementation applicationDependencies.koinCore
     implementation applicationDependencies.koinScope
     implementation applicationDependencies.koinViewModel
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
 }
 
 

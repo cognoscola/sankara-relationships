@@ -10,8 +10,12 @@ interface RelationshipDao:
     @Query("SELECT * FROM RelationshipsTable")
     fun getAllRelationship(): LiveData<List<RelationshipDatabaseObject>>
 
+    @Query("SELECT * FROM RelationshipsTable")
+    fun getAllRelationshipList(): List<RelationshipDatabaseObject>
+
     @Query("SELECT * FROM RelationshipsTable WHERE ready = 1")
     fun getTodaysRelationship(): LiveData<List<RelationshipDatabaseObject>>
+
 
     /**
      * returns the number of rows affected by this delete

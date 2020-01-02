@@ -48,10 +48,8 @@ class AlarmReceiverTest: KoinTest {
     val instantExecutorRule = InstantTaskExecutorRule()
 
 
-
     @Before
     fun setUp(){
-//        context = ApplicationProvider.getApplicationContext<Context>()
 
         loadKoinModules(module{
             single<RelationshipRepository>{ MockRepo() }
@@ -83,16 +81,9 @@ class AlarmReceiverTest: KoinTest {
         //check starting state is sane
         //require arguments are sane
         //assert that results are sane
-
-//            repo.getRelationshipsLive()
-//            scheduler.getItemsDue(any())
-//        verify(repo, atLeast(5)).insertOrUpdateRelationship(ArgumentMatchers.any())
-
         assert((repo as MockRepo).insertOrUpdateRelationshipCallCount == 5)
 
     }
-
-
 
 
 

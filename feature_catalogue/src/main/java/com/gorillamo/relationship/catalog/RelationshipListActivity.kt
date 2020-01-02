@@ -1,5 +1,6 @@
 package com.gorillamo.relationship.catalog
 
+import android.app.PendingIntent
 import android.os.Bundle
 
 import androidx.lifecycle.Observer
@@ -33,8 +34,6 @@ private val tag:String = RelationshipListActivity::class.java.name
     private val FRAGMENT_TAG = "LIST_FRAGMENT"
 
     override fun loadModules() {
-
-
         CatalogueModule.load()
     }
 
@@ -51,6 +50,7 @@ private val tag:String = RelationshipListActivity::class.java.name
         supportFragmentManager.beginTransaction()
                .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(relationshipViewModel),FRAGMENT_TAG)
             .commit()
+
     }
 
     private fun updateIfPossible(input:List<Relationship>?){

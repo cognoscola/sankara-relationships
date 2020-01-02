@@ -4,12 +4,14 @@ import android.app.Application
 import android.content.Context
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.scheduler.*
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver
+import com.gorillamo.scheduler.*
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import timber.log.Timber
+
 
 class App :Application(){
 
@@ -25,6 +27,7 @@ class App :Application(){
         super.onCreate()
         //For JakeWharton java.time library (below API 23
         AndroidThreeTen.init(this);
+        Timber.plant(Timber.DebugTree())
         startKoin{
             printLogger()
             androidContext(this@App)

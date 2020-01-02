@@ -12,6 +12,8 @@ interface RelationshipDaoPort{
 
     fun getTodaysRelationshipLive():LiveData<out List<Relationship>?>
 
+    suspend fun getRelationshipAsync():List<Relationship>
+
     suspend fun insertOrUpdate(relationship: Relationship):Long
 
     suspend fun deleteRelationship(name:String):Int

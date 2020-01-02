@@ -4,18 +4,19 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
-import com.gorillamo.relationship.domain.Coroutines.io
 import com.gorillamo.relationship.domain.Coroutines.ioGivenDispatch
 import com.gorillamo.scheduler.Scheduler
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.get
-import java.util.*
+import timber.log.Timber
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 class AlarmReceiver:BroadcastReceiver(),KoinComponent{
 
@@ -28,12 +29,14 @@ class AlarmReceiver:BroadcastReceiver(),KoinComponent{
         const val KEY_ALARM = "A"
         const val WAKE_UP_INTENT_CODE = 1
         const val SLEEP_INTENT_CODE =2
-
     }
 
     val relationshipRepo:RelationshipRepository = get()
     val scheduler:Scheduler<Relationship> = get()
     val coroutineDispatcher:CoroutineDispatcher = get()
+
+    var df: DateFormat = SimpleDateFormat("dd:MM:yy:HH:mm:ss")
+
 
     override fun onReceive(context: Context, intent: Intent?) {
         Log.d("$tag onReceive","${intent?.action}")
@@ -46,11 +49,28 @@ class AlarmReceiver:BroadcastReceiver(),KoinComponent{
             when (it.action) {
                 EVENT_WAKEUP -> {
 
-                    relationshipRepo.getRelationshipsLive().value?.let {
-                        val readyList = scheduler.getItemsDue(it)
-                        ioGivenDispatch(coroutineDispatcher) {
-                            readyList.forEach {
-                                relationshipRepo.insertOrUpdateRelationship(it)
+                    ioGivenDispatch(coroutineDispatcher) {
+                        with(relationshipRepo.getRelationshipAsync()){
+
+                            Timber.i("Filtering Items: ")
+                            this.forEach { relationship ->
+                                Timber.i(
+                                    "(${relationship.id})${relationship.name} Last: ${df.format(
+                                        relationship.lastContacted
+                                    )}"
+                                )
+                            }
+                            val list =scheduler.getItemsDue(this)
+                            list.forEach{ item ->
+
+                                relationshipRepo.insertOrUpdateRelationship(object :Relationship{
+                                    override val count: Int get() = item.count
+                                    override val id: Int get() = item.id
+                                    override val lastContacted: Long get() = item.lastContacted
+                                    override val name: String get() = item.name
+                                    override val range: Int get() = item.range
+                                    override val ready: Boolean get() = true
+                                })
                             }
                         }
                     }

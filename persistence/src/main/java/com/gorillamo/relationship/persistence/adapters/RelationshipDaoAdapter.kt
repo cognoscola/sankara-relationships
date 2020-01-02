@@ -34,7 +34,8 @@ internal class RelationshipDaoAdapter(
 
     override fun getRelationshipsLive():LiveData<out List<Relationship>?>{
 
-        Log.d("$tag getBooksLive","DaoAdapter received fetch command")
+
+        Log.d("$tag getLive","DaoAdapter received fetch command")
         return relationshipDao.getAllRelationship()
     }
 
@@ -46,5 +47,9 @@ internal class RelationshipDaoAdapter(
     override suspend fun deleteRelationship(name:String):Int {
         return relationshipDao.delete(name)
 
+    }
+
+    override suspend fun getRelationshipAsync(): List<Relationship> {
+        return relationshipDao.getAllRelationshipList()
     }
 }

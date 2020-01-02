@@ -17,8 +17,6 @@ import com.gorillamo.scheduler.DaySchedulerAdapter.Companion.WAKE_UP_INTENT_CODE
 /**
  * Will enable the alarm to be set despite device shutdown
  */
-
-
 fun Context.alarmEnableWakeUpPersistent(task:Task){
 
     alarmEnableWakeUp(task)
@@ -132,7 +130,6 @@ fun Context.alarmSetRepeatWithCal(task: Task, wakeUp:Boolean){
         createAlarmPendingIntent(createAlarmIntent(
             task.taskClass,
             if(wakeUp) EVENT_WAKEUP else EVENT_SLEEP
-
         ),if(wakeUp){ WAKE_UP_INTENT_CODE} else SLEEP_INTENT_CODE)
 
     )

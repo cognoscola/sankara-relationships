@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import com.gorillamo.scheduler.alarm.createAlarmPendingIntent
 import com.gorillamo.scheduler.alarm.isAlarmWorking
-import com.nhaarman.mockitokotlin2.atLeast
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

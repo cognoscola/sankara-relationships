@@ -8,6 +8,7 @@ import android.content.Intent
 import android.widget.Toast
 import com.gorillamo.scheduler.alarm.*
 import org.threeten.bp.*
+import timber.log.Timber
 
 
 import kotlin.collections.ArrayList
@@ -44,6 +45,9 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
     private var outList = ArrayList<SchedulingItem<T>>()
     private var period: Period? = null
 
+    init{
+        Timber.tag("DaySchedulerAdapter")
+    }
     companion object {
 
         /**
@@ -111,6 +115,7 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
      */
     private fun filterByItemDue(input: List<SchedulingItem<T>>): List<SchedulingItem<T>> {
 
+
         outList.clear()
 
         input.forEach {
@@ -125,6 +130,8 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
                 zonedDateTime =
                     Instant.ofEpochMilli(it.timeLastInteracted.get()).atZone(ZoneId.systemDefault())
 
+                Timber.i("For ID:${it.id.id} ${it.getFrequency()} Frequency")
+
                 //For now we'll just go at most once per day
                 if (it.getFrequency() <= 1.0f) {
 
@@ -133,12 +140,15 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
                     //how many days since last interaction?
                     period = Period.between(dayOfLastInteraction, today)
                     val diff: Int = period!!.getDays()
+//                    Timber.i("For ID:${it.id.id} ${diff} days between now")
 
                     if (diff * it.getFrequency() >= 1.0f)
                         outList.add(it)
                 }
             }
         }
+
+
 
         return outList.toList()
     }

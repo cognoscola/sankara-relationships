@@ -32,4 +32,9 @@ internal class RelationshipRepositoryAdapter(
     override fun getTodaysRelationships(): LiveData<out List<Relationship>?> {
         return relationshipDaoPort.getTodaysRelationshipLive()
     }
+
+
+    override suspend fun getRelationshipAsync(): List<Relationship> {
+        return relationshipDaoPort.getRelationshipAsync()
+    }
 }

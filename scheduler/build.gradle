@@ -16,4 +16,5 @@ dependencies {
     testImplementation unitTestDependencies.junit
     androidTestImplementation acceptanceTestDependencies.androidJUnit
     androidTestImplementation acceptanceTestDependencies.runner
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
