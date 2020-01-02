@@ -69,8 +69,8 @@ dependencies {
     /**
      * mockk v1.9.3 doesn't work well below Android 26, so we need to include a lower version of objenesis
      */
-//    androidTestImplementation ("io.mockk:mockk-android:1.9.3.kotlin12"){ exclude module: 'objenesis' }
-//    androidTestImplementation 'org.objenesis:objenesis:2.6'
+    androidTestImplementation ("io.mockk:mockk-android:1.9.3.kotlin12"){ exclude module: 'objenesis' }
+    androidTestImplementation 'org.objenesis:objenesis:2.6'
     androidTestImplementation acceptanceTestDependencies.androidJUnit
     androidTestImplementation acceptanceTestDependencies.rules
     androidTestImplementation acceptanceTestDependencies.runner

@@ -16,6 +16,7 @@ import com.gorillamo.relationship.domain.receivers.AlarmReceiver
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver.Companion.EVENT_WAKEUP
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver.Companion.KEY_ALARM
 import com.gorillamo.scheduler.Scheduler
+import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -38,7 +39,6 @@ class AlarmReceiverTest: KoinTest {
     lateinit var alarmReceiver: AlarmReceiver
 
     val dispatcher = Dispatchers.Unconfined
-
 
     /**
      * We need this executor rule here because the LiveData Object requires it
@@ -73,6 +73,7 @@ class AlarmReceiverTest: KoinTest {
             putExtra(KEY_ALARM,true)
             action = EVENT_WAKEUP
         }
+
         val repo:RelationshipRepository = get()
         val scheduler:Scheduler<Relationship> = get()
 
@@ -81,10 +82,9 @@ class AlarmReceiverTest: KoinTest {
         //check starting state is sane
         //require arguments are sane
         //assert that results are sane
+
         assert((repo as MockRepo).insertOrUpdateRelationshipCallCount == 5)
-
     }
-
 
 
     @Throws(InterruptedException::class)

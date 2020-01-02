@@ -29,14 +29,6 @@ class MockRepo:RelationshipRepository{
     }
 
 
-    /*class HomeMadeMock private constructor(){
-        companion object {
-            operator fun <T> invoke(): Function =
-                Function()
-        }
-    }*/
-
-
     private fun getMockLiveData():LiveData<List<Relationship>> {
         val MOCK_LISt = generateRelationshipList()
         val mockLiveData = MutableLiveData<List<Relationship>>()
