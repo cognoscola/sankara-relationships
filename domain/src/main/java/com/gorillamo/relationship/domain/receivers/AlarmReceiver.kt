@@ -1,5 +1,8 @@
 package com.gorillamo.relationship.domain.receivers
 
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,6 +13,8 @@ import androidx.lifecycle.Observer
 import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
 import com.gorillamo.relationship.domain.Coroutines.ioGivenDispatch
+import com.gorillamo.relationship.domain.R
+
 import com.gorillamo.scheduler.Scheduler
 import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.core.KoinComponent
@@ -73,6 +78,17 @@ class AlarmReceiver:BroadcastReceiver(),KoinComponent{
                                 })
                             }
                         }
+                    }
+
+                    //We're going to run a notification just to visually verify that
+                    //this went off .
+                    with(context.getSystemService(Service.NOTIFICATION_SERVICE) as NotificationManager){
+
+                        val builder = Notification.Builder(context)
+                        builder.setContentTitle("Recent: ${df.format(System.currentTimeMillis())}")
+                        builder.setSmallIcon(R.drawable.ic_crop_square_black_24dp)
+                        notify("Tag",0,builder.build())
+
                     }
                 }
                 else -> {

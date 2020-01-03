@@ -16,7 +16,6 @@ import com.gorillamo.relationship.domain.receivers.AlarmReceiver
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver.Companion.EVENT_WAKEUP
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver.Companion.KEY_ALARM
 import com.gorillamo.scheduler.Scheduler
-import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.After

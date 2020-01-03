@@ -1,6 +1,7 @@
 package com.gorillamo.relationship.catalog
 
 import android.app.PendingIntent
+import android.content.Intent
 import android.os.Bundle
 
 import androidx.lifecycle.Observer
@@ -50,6 +51,13 @@ private val tag:String = RelationshipListActivity::class.java.name
         supportFragmentManager.beginTransaction()
                .add(R.id.fragmentContainer, RelationshipListFragment.newInstance(relationshipViewModel),FRAGMENT_TAG)
             .commit()
+
+        startFab.setOnClickListener {
+            val className = Class.forName("com.gorillamo.relationship.domain.receivers.AlarmReceiver")
+            val intent = Intent().setClass(this,className)
+            intent.action = "com.gorillamoa.routines.event.wakeup"
+            sendBroadcast(intent)
+        }
 
     }
 
