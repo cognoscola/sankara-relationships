@@ -41,4 +41,9 @@ class App :Application(){
                     .at(Time(Identifier(0),Hour(8), Minute(0),Phase.AM)))
         )
     }
+
+    fun stopScheduling(){
+
+        scheduler.stopScheduling(this,Identifier(0))
+    }
 }

@@ -59,6 +59,10 @@ private val tag:String = RelationshipListActivity::class.java.name
             sendBroadcast(intent)
         }
 
+        endFab.setOnClickListener {
+            (applicationContext as App).stopScheduling()
+        }
+
     }
 
     private fun updateIfPossible(input:List<Relationship>?){

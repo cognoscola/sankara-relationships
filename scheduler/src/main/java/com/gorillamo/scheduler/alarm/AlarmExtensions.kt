@@ -83,16 +83,16 @@ fun Context.isAlarmWorking(task:Task):Boolean {
  */
 fun Context.alarmDisableWakeUp(){
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    //TODO
-    /*alarmManager.cancel(
+
+    alarmManager.cancel(
         createAlarmPendingIntent(
             createAlarmIntent(
-                AlarmReceiver::class.java,
+                Class.forName("com.gorillamo.relationship.domain.receivers.AlarmReceiver"),
                 EVENT_WAKEUP
             ), WAKE_UP_INTENT_CODE
         )
     )
-    saveAlarmWakeStatus(false)*/
+    saveAlarmWakeStatus(false)
 }
 
 /**

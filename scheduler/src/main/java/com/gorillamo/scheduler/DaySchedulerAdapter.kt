@@ -34,11 +34,10 @@ private inline fun <T,R> T.first(generic: T.()->R): R {
     return generic()
 }
 
-
 internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Scheduler<T> {
 
     private var today = LocalDate.now()
-    private var time = LocalDateTime.now()
+    private var now = LocalDateTime.now()
     private var dayOfLastInteraction: LocalDate? = null
     private var zonedDateTime: ZonedDateTime? = null
     private var dayDiff = 0
@@ -115,11 +114,12 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
      */
     private fun filterByItemDue(input: List<SchedulingItem<T>>): List<SchedulingItem<T>> {
 
-
+        today = LocalDate.now()
         outList.clear()
 
         input.forEach {
 
+            Timber.i("For ID:${it.id.id} ${it.getFrequency()} Frequency")
             if (it.timeLastInteracted.get() <= 0) {
                 outList.add(it)
             } else if (it.timeLastInteracted.get() > System.currentTimeMillis()) {
@@ -130,7 +130,6 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
                 zonedDateTime =
                     Instant.ofEpochMilli(it.timeLastInteracted.get()).atZone(ZoneId.systemDefault())
 
-                Timber.i("For ID:${it.id.id} ${it.getFrequency()} Frequency")
 
                 //For now we'll just go at most once per day
                 if (it.getFrequency() <= 1.0f) {
@@ -140,7 +139,6 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
                     //how many days since last interaction?
                     period = Period.between(dayOfLastInteraction, today)
                     val diff: Int = period!!.getDays()
-//                    Timber.i("For ID:${it.id.id} ${diff} days between now")
 
                     if (diff * it.getFrequency() >= 1.0f)
                         outList.add(it)

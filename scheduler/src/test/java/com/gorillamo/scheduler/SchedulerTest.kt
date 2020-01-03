@@ -1,15 +1,10 @@
 package com.gorillamo.scheduler
 
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import com.gorillamo.scheduler.alarm.createAlarmPendingIntent
-import com.gorillamo.scheduler.alarm.isAlarmWorking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mockito.Mockito.*
+import java.util.*
 
 
 @RunWith(JUnit4::class)
@@ -110,8 +105,53 @@ class SchedulerTest{
         assert(scheduled[1].name == "Name 1")
     }
 
+    /**
+     * Items should be scheduled  IF LastContacted time lands on a day different than today
+     * even if the difference between timeLastContacted and Today is less than 24 hours
+     */
+    @Test
+    fun verify_objects_are_scheduled_when_it_is_a_new_day(){
+
+        val objectToSchedule = AGenericObject(
+            name = "Name 0",
+            timeLastContacted = System.currentTimeMillis() - oneDayInMillis() + getTimeFromNowUntilMidgnightMinus10Minutes() ,
+            count = 1,
+            range = 1
+        )
+
+        val objectToSchedule2 = AGenericObject(
+            name = "Name 0",
+            timeLastContacted = System.currentTimeMillis() - oneDayInMillis() + getTimeFromNowUntilMidgnightMinus10Minutes() ,
+            count = 1,
+            range = 2
+        )
+
+        val objectToSchedule3 = AGenericObject(
+            name = "Name 0",
+            timeLastContacted = System.currentTimeMillis() - 3*oneDayInMillis() + getTimeFromNowUntilMidgnightMinus10Minutes() ,
+            count = 1,
+            range = 3
+        )
+        val scheduled = scheduler.getItemsDue(listOf(objectToSchedule,objectToSchedule2,objectToSchedule3))
+
+        assert(scheduled.size == 2)
+
+    }
+
 
     companion object{
+
+        fun getTimeFromNowUntilMidgnightMinus10Minutes():Long{
+
+            val c: Calendar = Calendar.getInstance()
+            c.add(Calendar.DAY_OF_MONTH, 1)
+            c.set(Calendar.HOUR_OF_DAY, 0)
+            c.set(Calendar.MINUTE, 0)
+            c.set(Calendar.SECOND, 0)
+            c.set(Calendar.MILLISECOND, 0)
+            val howMany: Long = c.getTimeInMillis() - System.currentTimeMillis()
+            return howMany - (60*1000*10)
+        }
 
 /**
          * Generates a list of SCheduling items of size @param total
