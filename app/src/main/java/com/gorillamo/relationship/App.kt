@@ -2,6 +2,9 @@ package com.gorillamo.relationship
 
 import android.app.Application
 import android.content.Context
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver
@@ -11,10 +14,12 @@ import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 
 class App :Application(){
 
+    val WORK_TAG = "relationshipUpdater"
 
     private val scheduler: Scheduler<Relationship> by inject()
 
@@ -34,16 +39,21 @@ class App :Application(){
             modules(ModuleProvider.modules)
         }
 
-        scheduler.startScheduling(this,
+        /*scheduler.startScheduling(this,
             listOf(
                 Task.newTask(Identifier(0))
                     .run(AlarmReceiver::class.java)
                     .at(Time(Identifier(0),Hour(8), Minute(0),Phase.AM)))
-        )
+        )*/
 
-        //lets schedul
+        //lets schedule via the Work Manager
+        val workManager = WorkManager.getInstance(this)
 
-
+        //now lets schedule it
+        val workBuilder = PeriodicWorkRequestBuilder<RelationshipScheduler>(1, TimeUnit.DAYS)
+        workBuilder.addTag(WORK_TAG)
+        val work = workBuilder.build()
+        workManager.enqueueUniquePeriodicWork(WORK_TAG,ExistingPeriodicWorkPolicy.KEEP,work)
     }
 
     fun stopScheduling(){
