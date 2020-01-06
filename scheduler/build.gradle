@@ -13,8 +13,11 @@ dependencies {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 
-////implementation "androidx.work:work-runtime:$work_version"
-//    implementation "androidx.work:work-runtime-ktx:2.3.0-beta02"
+    androidTestImplementation acceptanceTestDependencies.workTest
+    androidTestImplementation applicationDependencies.workRuntimeKtx
+    implementation applicationDependencies.workRuntimeKtx
+    implementation applicationDependencies.work
+
 
     testImplementation unitTestDependencies.junit
     androidTestImplementation acceptanceTestDependencies.androidJUnit

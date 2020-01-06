@@ -4,8 +4,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 
-import com.gorillamo.scheduler.DaySchedulerAdapter.Companion.KEY_ALARM
-
 
 public const val TASK_ID ="TaskId"
 /**
@@ -36,12 +34,12 @@ fun Context.createAlarmExistentPendingIntent(intent: Intent,code: Int):PendingIn
 
 /**
  * Ation is  One of EVENT_WAKEUP, ACTION_SLEEP
- *
  */
+//TODO save this for something else
 fun Context.createAlarmIntent(cls:Class<*>, action: String):Intent{
     return Intent(this, cls).apply {
         addFlags(Intent.FLAG_RECEIVER_FOREGROUND) //to give forground priority
-        putExtra(KEY_ALARM, true)
+//        putExtra(KEY_ALARM, true)
         this.action = action
     }
 }

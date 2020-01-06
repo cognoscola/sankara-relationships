@@ -9,7 +9,7 @@ import com.gorillamo.relationship.domain.usecase.DeleteRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.LoadRelationshipsUseCase
 import com.gorillamo.relationship.domain.usecase.LoadTodaysRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.SaveRelationshipUseCase
-import com.nhaarman.mockitokotlin2.verify
+//import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 
@@ -19,8 +19,7 @@ import org.junit.Rule
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.spy
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
 /**

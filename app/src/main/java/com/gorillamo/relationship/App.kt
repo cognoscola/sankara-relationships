@@ -21,7 +21,6 @@ class App :Application(){
 
     val WORK_TAG = "relationshipUpdater"
 
-    private val scheduler: Scheduler<Relationship> by inject()
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
@@ -39,12 +38,6 @@ class App :Application(){
             modules(ModuleProvider.modules)
         }
 
-        /*scheduler.startScheduling(this,
-            listOf(
-                Task.newTask(Identifier(0))
-                    .run(AlarmReceiver::class.java)
-                    .at(Time(Identifier(0),Hour(8), Minute(0),Phase.AM)))
-        )*/
 
         //lets schedule via the Work Manager
         val workManager = WorkManager.getInstance(this)
@@ -56,8 +49,4 @@ class App :Application(){
         workManager.enqueueUniquePeriodicWork(WORK_TAG,ExistingPeriodicWorkPolicy.KEEP,work)
     }
 
-    fun stopScheduling(){
-
-        scheduler.stopScheduling(this,Identifier(0))
-    }
 }
