@@ -146,8 +146,6 @@ internal class DaySchedulerAdapter<T> (val convert:(T)->SchedulingItem<T>):Sched
             }
         }
 
-
-
         return outList.toList()
     }
 

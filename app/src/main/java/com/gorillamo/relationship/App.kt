@@ -40,6 +40,10 @@ class App :Application(){
                     .run(AlarmReceiver::class.java)
                     .at(Time(Identifier(0),Hour(8), Minute(0),Phase.AM)))
         )
+
+        //lets schedul
+
+
     }
 
     fun stopScheduling(){

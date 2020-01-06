@@ -19,4 +19,8 @@ dependencies {
     api applicationDependencies.recycler
     implementation applicationDependencies.lifecycleExtensions
 
+
+    //Have to add this here because if we don't android will complain.. even though we aren't using it in this module
+    androidTestImplementation "androidx.work:work-runtime-ktx:2.2.0"
+
 }

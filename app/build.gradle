@@ -7,6 +7,16 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
+    // WE use VERSION 1.8 so that we can run tests for CoroutineWorker
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     defaultConfig {
 
         applicationId "com.gorillamo.relationship"
@@ -76,6 +86,15 @@ dependencies {
     implementation applicationDependencies.koinScope
     implementation applicationDependencies.koinViewModel
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    implementation acceptanceTestDependencies.androidJUnit
+    implementation acceptanceTestDependencies.runner
+
+
+    androidTestImplementation "androidx.work:work-testing:2.2.0"
+    androidTestImplementation "androidx.work:work-runtime-ktx:2.2.0"
+    implementation "androidx.work:work-runtime-ktx:2.2.0"
+    implementation "androidx.work:work-runtime:2.2.0"
 
 }
 

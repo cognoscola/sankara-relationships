@@ -9,9 +9,12 @@ dependencies {
     //We need this for java.Time
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
-    testCompile ('org.threeten:threetenbp:1.3.2'){
+    testImplementation ('org.threeten:threetenbp:1.3.2'){
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
+
+////implementation "androidx.work:work-runtime:$work_version"
+//    implementation "androidx.work:work-runtime-ktx:2.3.0-beta02"
 
     testImplementation unitTestDependencies.junit
     androidTestImplementation acceptanceTestDependencies.androidJUnit
