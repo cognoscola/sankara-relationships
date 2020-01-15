@@ -85,6 +85,9 @@ class RelationshipListTest {
         onView(withText("4 days ago")).check(matches(isDisplayed()))
     }
 
+
+
+
     @Test
     fun should_show_bottom_navigation_with_two_tabs(){
         val activity = rule.launchActivity(null)

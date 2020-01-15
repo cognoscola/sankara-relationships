@@ -60,7 +60,7 @@ private val tag:String = RelationshipListActivity::class.java.name
         }
 
         endFab.setOnClickListener {
-            (applicationContext as App).stopScheduling()
+//            (applicationContext as App).stopScheduling()
         }
 
     }
