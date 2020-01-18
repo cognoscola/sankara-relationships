@@ -1,10 +1,11 @@
 package com.gorillamo.relationship.domain.adapters
 
 import androidx.lifecycle.LiveData
-import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
+import com.gorillamo.details.Detail
+import com.gorillamo.details.DetailsRepository
+import com.gorillamo.relationship.domain.dto.Relationship
+import com.gorillamo.relationship.domain.extPorts.RelationshipRepository
 import com.gorillamo.relationship.domain.ports.RelationshipDaoPort
-import com.gorillamo.scheduler.Scheduler
 
 /**
  * This is an implementation of the repository object
@@ -37,4 +38,6 @@ internal class RelationshipRepositoryAdapter(
     override suspend fun getRelationshipAsync(): List<Relationship> {
         return relationshipDaoPort.getRelationshipAsync()
     }
+
+
 }

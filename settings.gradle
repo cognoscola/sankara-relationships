@@ -1,2 +1,2 @@
-include ':app', ':persistence', ':domain', ':abstraction', ':navigation', ':shared', ':feature_catalogue', ':ui_catalogue', ':scheduler'
+include ':app', ':persistence', ':domain', ':navigation', ':shared', ':feature_catalogue', ':ui_catalogue', ':scheduler', ':honeycomb', ':details'
 rootProject.name='Relationships'

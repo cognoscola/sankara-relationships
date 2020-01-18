@@ -6,10 +6,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.google.android.play.core.splitcompat.SplitCompat
-import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.scheduler.*
 import com.jakewharton.threetenabp.AndroidThreeTen
-import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber

@@ -1,12 +1,10 @@
 package com.gorillamo.relationship.catalog
 
-import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
 
 import androidx.lifecycle.Observer
-import com.gorillamo.relationship.App
-import com.gorillamo.relationship.abstraction.dto.Relationship
+import com.gorillamo.relationship.domain.dto.Relationship
 
 import com.gorillamo.relationship.shared.EntryActivity
 import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter

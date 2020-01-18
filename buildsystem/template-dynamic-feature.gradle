@@ -27,7 +27,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':app')
-    implementation project(':abstraction')
+    implementation project(':domain')
     implementation project(':shared')
 
     implementation applicationDependencies.appCompat

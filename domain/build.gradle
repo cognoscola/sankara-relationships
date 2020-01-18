@@ -39,8 +39,10 @@ dependencies {
     //of the other modules, which those other ports will inherit
 
     //make sure we include abstraction layer
-    api project(":abstraction")
     api project(":scheduler")
+
+    implementation project(":honeycomb")
+    implementation project(":details")
 
     def applicationDependencies = rootProject.ext.mainApplication
     def unitTestDependencies = rootProject.ext.unitTesting

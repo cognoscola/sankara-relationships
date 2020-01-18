@@ -2,7 +2,7 @@ package com.gorillamo.relationship.persistence.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.gorillamo.relationship.abstraction.dto.Relationship
+import com.gorillamo.relationship.domain.dto.Relationship
 
 @Entity(tableName = "RelationshipsTable")
 data class  RelationshipDatabaseObject(

@@ -3,10 +3,9 @@ package com.gorillamo.relationship.catalog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.relationship.abstraction.extPorts.UseCaseProvider
+import com.gorillamo.relationship.domain.dto.Relationship
+import com.gorillamo.relationship.domain.extPorts.UseCaseProvider
 import com.gorillamo.relationship.catalog.Coroutines.io
-import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter
 import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter.*
 import com.gorillamo.relationship.ui.catalogue.RelationshipView
 

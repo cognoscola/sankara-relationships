@@ -6,12 +6,10 @@ import android.app.Service
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
-import com.gorillamo.relationship.domain.Coroutines
+import com.gorillamo.relationship.domain.dto.Relationship
+import com.gorillamo.relationship.domain.extPorts.RelationshipRepository
 import com.gorillamo.relationship.domain.R
 import com.gorillamo.scheduler.Scheduler
-import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import java.text.DateFormat

@@ -1,7 +1,7 @@
 package com.gorillamo.relationship.domain.classes
 
 import android.content.Context
-import com.gorillamo.relationship.abstraction.dto.Relationship
+import com.gorillamo.relationship.domain.dto.Relationship
 import com.gorillamo.scheduler.Identifier
 import com.gorillamo.scheduler.Scheduler
 import com.gorillamo.scheduler.Task

@@ -40,6 +40,7 @@ dependencies {
     def applicationDependencies = rootProject.ext.mainApplication
     def unitTestDependencies = rootProject.ext.unitTesting
     def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
+    def gorillamoDependencies = rootProject.ext.gorillamo
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -51,7 +52,7 @@ dependencies {
     implementation applicationDependencies.constraintLayout
     implementation applicationDependencies.material
 
-    implementation 'com.gorillamo.pickers:pickers:0.1.1'
+    implementation gorillamoDependencies.pickers
 
     implementation 'androidx.navigation:navigation-fragment:2.0.0'
     implementation 'androidx.navigation:navigation-ui:2.0.0'

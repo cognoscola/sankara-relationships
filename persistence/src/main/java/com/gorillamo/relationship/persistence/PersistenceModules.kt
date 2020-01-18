@@ -27,7 +27,7 @@ object PersistenceModules {
     private val portsModule = module {
         single<RelationshipDaoPort> {
             RelationshipDaoAdapter(
-                get()
+                get() //Dao
             )
         }
 //        single<BookDaoPort> { BookDaoAdapter(get()) }

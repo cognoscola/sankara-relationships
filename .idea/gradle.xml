@@ -8,10 +8,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/abstraction" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/details" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feature_catalogue" />
+            <option value="$PROJECT_DIR$/honeycomb" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/persistence" />
             <option value="$PROJECT_DIR$/scheduler" />

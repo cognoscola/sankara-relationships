@@ -1,9 +1,7 @@
 package com.gorillamo.relationship
 
-import com.gorillamo.relationship.abstraction.dto.Relationship
 import com.gorillamo.relationship.domain.DomainModules
 import com.gorillamo.relationship.persistence.PersistenceModules
-import com.gorillamo.scheduler.*
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

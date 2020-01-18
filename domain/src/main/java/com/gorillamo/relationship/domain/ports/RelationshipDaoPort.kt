@@ -1,7 +1,7 @@
 package com.gorillamo.relationship.domain.ports
 
 import androidx.lifecycle.LiveData
-import com.gorillamo.relationship.abstraction.dto.Relationship
+import com.gorillamo.relationship.domain.dto.Relationship
 
 /**
  * This is a port available to the outside world

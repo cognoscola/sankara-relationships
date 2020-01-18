@@ -2,7 +2,7 @@ package com.gorillamo.relationship.persistence.adapters
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.gorillamo.relationship.abstraction.dto.Relationship
+import com.gorillamo.relationship.domain.dto.Relationship
 import com.gorillamo.relationship.domain.ports.RelationshipDaoPort
 import com.gorillamo.relationship.persistence.entity.RelationshipDao
 import com.gorillamo.relationship.persistence.entity.RelationshipDatabaseObject

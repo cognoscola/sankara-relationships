@@ -3,8 +3,8 @@ package com.gorillamo.relationship.domain
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
+import com.gorillamo.relationship.domain.dto.Relationship
+import com.gorillamo.relationship.domain.extPorts.RelationshipRepository
 import com.gorillamo.relationship.domain.usecase.DeleteRelationshipUseCase
 import com.gorillamo.relationship.domain.usecase.LoadRelationshipsUseCase
 import com.gorillamo.relationship.domain.usecase.LoadTodaysRelationshipUseCase
@@ -18,7 +18,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 

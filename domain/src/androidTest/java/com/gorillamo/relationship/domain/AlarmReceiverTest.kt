@@ -8,8 +8,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
+import com.gorillamo.relationship.domain.dto.Relationship
+import com.gorillamo.relationship.domain.extPorts.RelationshipRepository
 import com.gorillamo.relationship.domain.classes.MockRepo
 import com.gorillamo.relationship.domain.classes.MockScheduler
 import com.gorillamo.relationship.domain.receivers.AlarmReceiver

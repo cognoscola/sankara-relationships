@@ -1,8 +1,7 @@
 package com.gorillamo.relationship.domain.usecase
 
-import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
-import com.gorillamo.relationship.abstraction.extPorts.UseCaseWithParams
+import com.gorillamo.relationship.domain.extPorts.RelationshipRepository
+import com.gorillamo.relationship.domain.extPorts.UseCaseWithParams
 
 class DeleteRelationshipUseCase (
     val repository: RelationshipRepository

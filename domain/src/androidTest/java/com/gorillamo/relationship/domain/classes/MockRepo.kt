@@ -2,10 +2,8 @@ package com.gorillamo.relationship.domain.classes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
-import com.gorillamo.scheduler.Minute
-import com.gorillamo.scheduler.TimeValue
+import com.gorillamo.relationship.domain.dto.Relationship
+import com.gorillamo.relationship.domain.extPorts.RelationshipRepository
 
 class MockRepo:RelationshipRepository{
 

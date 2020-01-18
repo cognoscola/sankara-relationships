@@ -10,7 +10,7 @@ import androidx.test.rule.ActivityTestRule
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.CoreMatchers.startsWith
 //import androidx.test.rule.ActivityTestRule
-//import com.gorillamo.relationship.abstraction.dto.Relationship
+//import com.gorillamo.relationship.domain.dto.Relationship
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule

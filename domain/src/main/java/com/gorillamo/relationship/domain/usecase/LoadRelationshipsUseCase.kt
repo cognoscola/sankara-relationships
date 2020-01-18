@@ -1,9 +1,9 @@
 package com.gorillamo.relationship.domain.usecase
 
 import androidx.lifecycle.LiveData
-import com.gorillamo.relationship.abstraction.dto.Relationship
-import com.gorillamo.relationship.abstraction.extPorts.RelationshipRepository
-import com.gorillamo.relationship.abstraction.extPorts.UseCaseSync
+import com.gorillamo.relationship.domain.dto.Relationship
+import com.gorillamo.relationship.domain.extPorts.RelationshipRepository
+import com.gorillamo.relationship.domain.extPorts.UseCaseSync
 
 class LoadRelationshipsUseCase (
     private val repository: RelationshipRepository
