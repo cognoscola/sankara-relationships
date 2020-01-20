@@ -1,11 +1,9 @@
 package com.gorillamo.relationship.domain
 
-import com.gorillamo.details.DetailsRepository
 import com.gorillamo.honeycomb.Hive
 import com.gorillamo.relationship.domain.dto.Relationship
 import com.gorillamo.relationship.domain.extPorts.RelationshipRepository
 import com.gorillamo.relationship.domain.extPorts.UseCaseProvider
-import com.gorillamo.relationship.domain.adapters.RelationshipRepositoryAdapter
 import com.gorillamo.relationship.domain.adapters.UseCaseProviderAdapter
 import com.gorillamo.scheduler.*
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,22 +14,6 @@ import org.koin.dsl.module
 
 object DomainModules {
 
-    /**
-     * This module contains an instance of RelationshipRepository,
-     * which will be provided to RelationshipViewModel by Koin
-     */
-    private val repositoryModule = module{
-        single<RelationshipRepository>{ RelationshipRepositoryAdapter(
-            get()) //is a DaoAdapter, Koin will provide it from Persistence.
-        }
-    }
-
-    private val detailsModule = module{
-
-        single<DetailsRepository<Relationship>>{
-            DetailsRepository.getInstance<Relationship>()
-        }
-    }
 
     private val schedulerModule = module {
         single<Scheduler<Relationship>> {
@@ -64,6 +46,6 @@ object DomainModules {
         }
     }
 
-    val modules: List<Module> = listOf(repositoryModule, schedulerModule,detailsModule, useCaseModule, hiveModule)
+    val modules: List<Module> = listOf(schedulerModule, useCaseModule, hiveModule)
 
 }

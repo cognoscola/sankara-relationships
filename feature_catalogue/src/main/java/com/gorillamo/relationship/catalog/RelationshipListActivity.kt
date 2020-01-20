@@ -51,10 +51,13 @@ private val tag:String = RelationshipListActivity::class.java.name
             .commit()
 
         startFab.setOnClickListener {
-            val className = Class.forName("com.gorillamo.relationship.domain.receivers.AlarmReceiver")
+
+            relationshipViewModel.click()
+
+            /*val className = Class.forName("com.gorillamo.relationship.domain.receivers.AlarmReceiver")
             val intent = Intent().setClass(this,className)
             intent.action = "com.gorillamoa.routines.event.wakeup"
-            sendBroadcast(intent)
+            sendBroadcast(intent)*/
         }
 
         endFab.setOnClickListener {

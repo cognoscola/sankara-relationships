@@ -1,5 +1,7 @@
 package com.gorillamo.details
 
+import com.gorillamo.details.data.DetailDao
+
 /**
  * An interface that marks the functions of a details repository
  */
@@ -25,6 +27,8 @@ interface DetailsRepository <T> {
     companion object{
 
         fun <T> getInstance():DetailsRepository<T>{
+
+
            return  DetailsRepositoryImpl<T>()
         }
     }

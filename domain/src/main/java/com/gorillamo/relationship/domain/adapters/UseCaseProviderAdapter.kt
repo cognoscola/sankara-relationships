@@ -1,7 +1,7 @@
 package com.gorillamo.relationship.domain.adapters
 
 import androidx.lifecycle.LiveData
-import com.gorillamo.details.DetailsRepository
+//import com.gorillamo.details.DetailsRepository
 import com.gorillamo.relationship.domain.dto.Relationship
 import com.gorillamo.relationship.domain.extPorts.*
 import com.gorillamo.relationship.domain.usecase.DeleteRelationshipUseCase
@@ -16,7 +16,7 @@ import com.gorillamo.relationship.domain.usecase.SaveRelationshipUseCase
 internal class UseCaseProviderAdapter(
 
     override val repository: RelationshipRepository,
-    override val detailsRelationship: DetailsRepository<Relationship>
+    override val detailRepository: DetailRepository<Relationship>
 
 ):UseCaseProvider
 {
@@ -32,5 +32,7 @@ internal class UseCaseProviderAdapter(
 
     override val getTodaysRelationship: UseCaseSync<LiveData<out List<Relationship>>>
         get() = LoadTodaysRelationshipUseCase(repository)
+
+
 
 }

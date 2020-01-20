@@ -7,8 +7,6 @@ interface Hive{
 
     fun addProperty(system:()->Any):Hive
 
-
-
     companion object{
         fun <T> defineInstance():Hive{
             return HiveImpl()

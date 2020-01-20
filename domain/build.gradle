@@ -42,7 +42,6 @@ dependencies {
     api project(":scheduler")
 
     implementation project(":honeycomb")
-    implementation project(":details")
 
     def applicationDependencies = rootProject.ext.mainApplication
     def unitTestDependencies = rootProject.ext.unitTesting

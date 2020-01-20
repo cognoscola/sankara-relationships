@@ -1,6 +1,6 @@
 package com.gorillamo.relationship.domain.dto
 
-import com.gorillamo.details.Detail
+//import com.gorillamo.details.Detail
 
 //@Entity
 interface Relationship{

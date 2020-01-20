@@ -1,7 +1,7 @@
 package com.gorillamo.relationship.domain.extPorts
 
 import androidx.lifecycle.LiveData
-import com.gorillamo.details.DetailsRepository
+import com.gorillamo.relationship.domain.dto.Detail
 import com.gorillamo.relationship.domain.dto.Relationship
 
 /**

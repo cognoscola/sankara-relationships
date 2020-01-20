@@ -9,6 +9,10 @@ import com.gorillamo.relationship.catalog.Coroutines.io
 import com.gorillamo.relationship.ui.catalogue.RelationshipItemAdapter.*
 import com.gorillamo.relationship.ui.catalogue.RelationshipView
 
+
+//TODO create a seperate viewmodel for the Details
+//TODO set a new way to pass usecases
+
 public class RelationshipViewModel(
 
     val useCaseProvider: UseCaseProvider
@@ -81,5 +85,9 @@ public class RelationshipViewModel(
             override val count: Int get() = item.count
             override val range: Int get() = item.range
         }
+    }
+
+    fun click() {
+
     }
 }
