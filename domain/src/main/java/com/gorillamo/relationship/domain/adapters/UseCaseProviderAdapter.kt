@@ -14,8 +14,8 @@ import com.gorillamo.scheduler.SchedulerPort
  */
 internal class UseCaseProviderAdapter(
 
-    override val repository: RelationshipRepository
-//    val schedulerPort: SchedulerPort
+    override val repository: RelationshipRepository,
+    override val detailRepository: DetailRepository<Relationship>
 
 ):UseCaseProvider
 {

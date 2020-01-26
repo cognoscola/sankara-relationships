@@ -2,7 +2,10 @@ package com.gorillamo.relationship.persistence
 
 import android.app.Application
 import androidx.room.Room
+import com.gorillamo.relationship.abstraction.dto.Relationship
+import com.gorillamo.relationship.abstraction.extPorts.DetailRepository
 import com.gorillamo.relationship.domain.ports.RelationshipDaoPort
+import com.gorillamo.relationship.persistence.adapters.DetailRepositoryAdapter
 import com.gorillamo.relationship.persistence.adapters.RelationshipDaoAdapter
 import com.gorillamo.relationship.persistence.entity.ApplicationDatabase
 import com.gorillamo.relationship.persistence.entity.DatabaseMetaData.NAME
@@ -20,8 +23,15 @@ object PersistenceModules {
         }
     }
 
+    private val detailModule = module {
+        single<DetailRepository<Relationship>> {
+            DetailRepositoryAdapter(get())
+        }
+    }
+
     private val daoModules = module {
         single { get<ApplicationDatabase>().relationshipDao() }
+        single { get<ApplicationDatabase>().detailDao()}
     }
 
     private val portsModule = module {
@@ -36,6 +46,7 @@ object PersistenceModules {
 
     val modules: List<Module> = listOf(
         databaseModule,
+        detailModule ,
         daoModules,
         portsModule
     )

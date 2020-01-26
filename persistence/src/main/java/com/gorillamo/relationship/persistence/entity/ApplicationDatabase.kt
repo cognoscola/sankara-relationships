@@ -12,10 +12,11 @@ object DatabaseMetaData {
     const val VERSION = 1
 }
 
-@Database(entities = [RelationshipDatabaseObject::class], version = 1, exportSchema = false)
+@Database(entities = [RelationshipDatabaseObject::class, DetailDatabaseObject::class], version = 1, exportSchema = false)
 abstract class ApplicationDatabase :RoomDatabase() {
 
     abstract fun relationshipDao(): RelationshipDao
+    abstract fun detailDao(): DetailDao
 
     companion object {
 

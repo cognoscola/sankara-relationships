@@ -7,6 +7,8 @@ interface UseCaseProvider {
 
     val repository:RelationshipRepository
 
+    val detailRepository:DetailRepository<Relationship>
+
 
     val loadRelationship:UseCaseSync<LiveData<out List<Relationship>>>
 
